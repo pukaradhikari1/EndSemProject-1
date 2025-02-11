@@ -12,8 +12,8 @@
 #include<string>
 
 
-
-
+//Global Variables
+int loggedInUserID;
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -52,7 +52,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->btnSignUpSave, &QPushButton::clicked, this, &MainWindow::on_btnSignUpSave_clicked);
     connect(ui->btnSignUpPrev, &QPushButton::clicked, this, &MainWindow::on_btnSignUpPrev_clicked);
     connect(ui->btnPrevExpenseWelcomeUser, &QPushButton::clicked, this, &MainWindow::on_btnPrevExpenseWelcomeUser_clicked);
-
+    connect(ui->btnLogout,&PushButton::clicked, this,&MainWindow:: on_btnLogout_clicked);
+    connect(ui->btnGraph,&PushButton::clicked, this,&MainWindow:: on_Graph_clicked);
+    connect(ui->btnStats,&PushButton::clicked, this,&MainWindow:: on_btnStats_clicked);
 
 
 }
@@ -111,7 +113,7 @@ void MainWindow::on_btnLogin_clicked()
         }
 
         if (query.next()) {
-            loggedInUserID = query.value("UserID").toInt();  // Assume loggedInUserID is globally defined
+            loggedInUserID = query.value("UserID").toInt();  // loggedInUserID is globally defined
             QString firstName = query.value("FirstName").toString();
             QString lastName = query.value("LastName").toString();
 
@@ -156,8 +158,20 @@ void MainWindow::on_btnHome_clicked()
     ui->stackedWidget->setCurrentIndex(0);
 }
 
+void MainWindow::on_btnLogout_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+    //more code to do here
+}
 
-
+void MainWindow::on_btnGraph_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(6);
+}
+void MainWindow::on_btnStats_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(7);
+}
 
 void MainWindow::on_btnReset_clicked()
 {
@@ -290,3 +304,10 @@ void MainWindow::on_btnSignUpSave_clicked()
         QMessageBox::critical(this, "Database Error", "Failed to register user: " + qry.lastError().text());
     }
 }
+
+
+
+
+
+
+

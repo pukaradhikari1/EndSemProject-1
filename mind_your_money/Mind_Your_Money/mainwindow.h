@@ -35,6 +35,8 @@ private slots:
     void on_btnSignUpPrev_clicked();
     void on_btnPrevExpenseWelcomeUser_clicked();
     void on_btnSaveExpense_clicked();
+    void on_BtnWelcomToHome_clicked();
+
 
 private:
     int currentUserID = -1;
