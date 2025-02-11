@@ -52,9 +52,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->btnSignUpSave, &QPushButton::clicked, this, &MainWindow::on_btnSignUpSave_clicked);
     connect(ui->btnSignUpPrev, &QPushButton::clicked, this, &MainWindow::on_btnSignUpPrev_clicked);
     connect(ui->btnPrevExpenseWelcomeUser, &QPushButton::clicked, this, &MainWindow::on_btnPrevExpenseWelcomeUser_clicked);
-    connect(ui->btnLogout,&PushButton::clicked, this,&MainWindow:: on_btnLogout_clicked);
-    connect(ui->btnGraph,&PushButton::clicked, this,&MainWindow:: on_Graph_clicked);
-    connect(ui->btnStats,&PushButton::clicked, this,&MainWindow:: on_btnStats_clicked);
+    connect(ui->btnLogout,&QPushButton::clicked, this,&MainWindow:: on_btnLogout_clicked);
+    connect(ui->btnGraph,&QPushButton::clicked, this,&MainWindow:: on_btnGraph_clicked);
+    connect(ui->btnStats,&QPushButton::clicked, this,&MainWindow:: on_btnStats_clicked);
 
 
 }
