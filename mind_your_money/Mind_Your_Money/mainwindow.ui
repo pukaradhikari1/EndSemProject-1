@@ -32,7 +32,7 @@
      <enum>Qt::LayoutDirection::LeftToRight</enum>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QLabel" name="label">
@@ -628,7 +628,7 @@ color:red;
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="lblDateTime">
+        <widget class="QLabel" name="date">
          <property name="font">
           <font>
            <pointsize>16</pointsize>

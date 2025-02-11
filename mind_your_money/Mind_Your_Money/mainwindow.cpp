@@ -22,6 +22,11 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    if (!openDatabase()) {
+        QMessageBox::critical(this, "Database Error", "Failed to connect to the database. Please check the connection settings.");
+        return;  // Exit if the database connection fails
+    }
+
     // Create a QTimer to update the date and time
     QTimer *timer = new QTimer(this);
 
@@ -53,16 +58,20 @@ MainWindow::MainWindow(QWidget *parent)
 }
 bool MainWindow::openDatabase()
 {
+    // Add the SQLite database driver
     db = QSqlDatabase::addDatabase("QSQLITE");  // Using SQLite in this example
-    db.setDatabaseName("F:/Startingqt/mind_your_money/database_Mind_your_Money");
 
+    // Set the path to your SQLite database file
+    db.setDatabaseName("F:/Startingqt/Second sem project/EndSemProject-1/mind_your_money/database_Mind_your_Money.db");  // Ensure the file has a .db extension
+
+    // Attempt to open the database
     if (!db.open()) {
-        qDebug() << "Error while connecting: " << db.lastError().text();
-        return false;
+        qDebug() << "Error while connecting to the database: " << db.lastError().text();
+        return false;  // Return false if the connection fails
     }
 
-    qDebug() << "Database Is Connected";
-    return true;
+    qDebug() << "Database is connected successfully!";
+    return true;  // Return true if the connection is successful
 }
 
 MainWindow::~MainWindow()
@@ -76,7 +85,7 @@ void MainWindow::updateDateTime()
     QString currentDateTime = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
 
     // Display it in the QLabel (assuming QLabel is named lblDateTime in your UI)
-    ui->lblDateTime->setText(currentDateTime);
+    ui->date->setText(currentDateTime);
 }
 
 //Button Login Logic
@@ -112,6 +121,7 @@ void MainWindow::on_btnLogin_clicked()
         } else {
             QMessageBox::warning(this, "Login Failed", "Invalid Email or Password.");
         }
+
     }
 
 
@@ -140,11 +150,6 @@ void MainWindow::on_btnPrevExpenseWelcomeUser_clicked()
 {
     ui->stackedWidget->setCurrentIndex(4);
 }
-
-
-
-
-
 
 void MainWindow::on_btnHome_clicked()
 {
@@ -214,6 +219,11 @@ void MainWindow::on_btnSaveExpense_clicked()
 //Button SignUP
 void MainWindow::on_btnSignUpSave_clicked()
 {
+    if (!db.isOpen()) {
+        QMessageBox::critical(this, "Database Error", "Database is not open. Please check the connection.");
+        return;
+    }
+
     QString FirstName = ui->txtFirstName->text();
     QString MiddleName = ui->txtMiddle->text();
     QString LastName = ui->txtLastName->text();
