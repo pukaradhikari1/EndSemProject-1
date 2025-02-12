@@ -17,8 +17,8 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>0</y>
+      <x>20</x>
+      <y>20</y>
       <width>911</width>
       <height>651</height>
      </rect>
@@ -26,6 +26,7 @@
     <property name="font">
      <font>
       <pointsize>20</pointsize>
+      <bold>true</bold>
      </font>
     </property>
     <property name="layoutDirection">
@@ -47,6 +48,7 @@
       <property name="font">
        <font>
         <pointsize>25</pointsize>
+        <bold>true</bold>
        </font>
       </property>
       <property name="text">
@@ -68,6 +70,7 @@
          <property name="font">
           <font>
            <pointsize>15</pointsize>
+           <bold>true</bold>
           </font>
          </property>
          <property name="text">
@@ -80,6 +83,7 @@
          <property name="font">
           <font>
            <pointsize>15</pointsize>
+           <bold>true</bold>
           </font>
          </property>
         </widget>
@@ -89,6 +93,7 @@
          <property name="font">
           <font>
            <pointsize>15</pointsize>
+           <bold>true</bold>
           </font>
          </property>
          <property name="text">
@@ -101,6 +106,7 @@
          <property name="font">
           <font>
            <pointsize>15</pointsize>
+           <bold>true</bold>
           </font>
          </property>
         </widget>
@@ -119,6 +125,12 @@
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QPushButton" name="btnSignup">
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
           <string>SignUp</string>
          </property>
@@ -126,6 +138,12 @@
        </item>
        <item>
         <widget class="QPushButton" name="btnLogin">
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
           <string>Login</string>
          </property>
@@ -133,6 +151,12 @@
        </item>
        <item>
         <widget class="QPushButton" name="btnForgot">
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
           <string>ForgotPassword</string>
          </property>
@@ -148,7 +172,7 @@
         <x>200</x>
         <y>120</y>
         <width>671</width>
-        <height>401</height>
+        <height>408</height>
        </rect>
       </property>
       <layout class="QFormLayout" name="formLayout_2">
@@ -157,6 +181,7 @@
          <property name="font">
           <font>
            <pointsize>15</pointsize>
+           <bold>true</bold>
           </font>
          </property>
          <property name="text">
@@ -176,6 +201,7 @@
          <property name="font">
           <font>
            <pointsize>15</pointsize>
+           <bold>true</bold>
           </font>
          </property>
          <property name="text">
@@ -195,6 +221,7 @@
          <property name="font">
           <font>
            <pointsize>15</pointsize>
+           <bold>true</bold>
           </font>
          </property>
          <property name="text">
@@ -214,6 +241,7 @@
          <property name="font">
           <font>
            <pointsize>15</pointsize>
+           <bold>true</bold>
           </font>
          </property>
          <property name="text">
@@ -233,6 +261,7 @@
          <property name="font">
           <font>
            <pointsize>15</pointsize>
+           <bold>true</bold>
           </font>
          </property>
          <property name="text">
@@ -252,6 +281,7 @@
          <property name="font">
           <font>
            <pointsize>15</pointsize>
+           <bold>true</bold>
           </font>
          </property>
          <property name="text">
@@ -271,10 +301,11 @@
          <property name="font">
           <font>
            <pointsize>15</pointsize>
+           <bold>true</bold>
           </font>
          </property>
          <property name="text">
-          <string>Monthly_Budget</string>
+          <string>Monthly Budget</string>
          </property>
         </widget>
        </item>
@@ -292,13 +323,14 @@
        <rect>
         <x>420</x>
         <y>0</y>
-        <width>241</width>
+        <width>261</width>
         <height>81</height>
        </rect>
       </property>
       <property name="font">
        <font>
         <pointsize>25</pointsize>
+        <bold>true</bold>
        </font>
       </property>
       <property name="text">
@@ -314,6 +346,12 @@
         <height>53</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
        <string>Reset</string>
       </property>
@@ -327,6 +365,12 @@
         <height>53</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
        <string>Save</string>
       </property>
@@ -339,6 +383,12 @@
         <width>201</width>
         <height>53</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+        <bold>true</bold>
+       </font>
       </property>
       <property name="text">
        <string>Previous</string>
@@ -378,6 +428,7 @@
          <property name="font">
           <font>
            <pointsize>15</pointsize>
+           <bold>true</bold>
           </font>
          </property>
          <property name="text">
@@ -390,6 +441,7 @@
          <property name="font">
           <font>
            <pointsize>15</pointsize>
+           <bold>true</bold>
           </font>
          </property>
          <property name="text">
@@ -404,13 +456,14 @@
        <rect>
         <x>370</x>
         <y>10</y>
-        <width>321</width>
+        <width>331</width>
         <height>81</height>
        </rect>
       </property>
       <property name="font">
        <font>
         <pointsize>25</pointsize>
+        <bold>true</bold>
        </font>
       </property>
       <property name="text">
@@ -429,6 +482,12 @@
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
         <widget class="QPushButton" name="btnPrevForgot">
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
           <string>Prev</string>
          </property>
@@ -436,6 +495,12 @@
        </item>
        <item>
         <widget class="QPushButton" name="btnNextForgot">
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
           <string>Next</string>
          </property>
@@ -457,6 +522,12 @@
       <layout class="QFormLayout" name="formLayout_5">
        <item row="0" column="0">
         <widget class="QLabel" name="label_20">
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
           <string>New Password</string>
          </property>
@@ -464,6 +535,12 @@
        </item>
        <item row="1" column="0">
         <widget class="QLabel" name="label_21">
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
           <string>Confirm Password</string>
          </property>
@@ -486,6 +563,12 @@
         <height>61</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
        <string>Change Password</string>
       </property>
@@ -495,13 +578,14 @@
        <rect>
         <x>700</x>
         <y>310</y>
-        <width>83</width>
+        <width>101</width>
         <height>29</height>
        </rect>
       </property>
       <property name="font">
        <font>
         <pointsize>15</pointsize>
+        <bold>true</bold>
        </font>
       </property>
       <property name="text">
@@ -520,6 +604,7 @@
       <property name="font">
        <font>
         <pointsize>15</pointsize>
+        <bold>true</bold>
        </font>
       </property>
       <property name="text">
@@ -531,15 +616,15 @@
      <widget class="QLabel" name="label_10">
       <property name="geometry">
        <rect>
-        <x>110</x>
-        <y>-10</y>
-        <width>171</width>
+        <x>40</x>
+        <y>0</y>
+        <width>181</width>
         <height>121</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>20</pointsize>
+        <pointsize>24</pointsize>
         <bold>true</bold>
        </font>
       </property>
@@ -552,7 +637,7 @@
        <rect>
         <x>30</x>
         <y>140</y>
-        <width>241</width>
+        <width>255</width>
         <height>421</height>
        </rect>
       </property>
@@ -562,6 +647,12 @@
        </property>
        <item>
         <widget class="QPushButton" name="btnEnterExpense">
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
           <string>Enter Expense</string>
          </property>
@@ -569,6 +660,12 @@
        </item>
        <item>
         <widget class="QPushButton" name="btnGraph">
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
           <string>Generate Graph</string>
          </property>
@@ -576,6 +673,12 @@
        </item>
        <item>
         <widget class="QPushButton" name="btnStats">
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
           <string>Stats</string>
          </property>
@@ -583,6 +686,12 @@
        </item>
        <item>
         <widget class="QPushButton" name="btnEditExpense">
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
           <string>Edit Expense</string>
          </property>
@@ -614,6 +723,7 @@
          <property name="font">
           <font>
            <pointsize>15</pointsize>
+           <bold>true</bold>
           </font>
          </property>
          <property name="styleSheet">
@@ -632,6 +742,7 @@ color:red;
          <property name="font">
           <font>
            <pointsize>16</pointsize>
+           <bold>true</bold>
           </font>
          </property>
          <property name="styleSheet">
@@ -675,8 +786,27 @@ color:red;
         <height>51</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
        <string>Log out</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="name">
+      <property name="geometry">
+       <rect>
+        <x>240</x>
+        <y>30</y>
+        <width>151</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
       </property>
      </widget>
     </widget>
@@ -686,13 +816,14 @@ color:red;
        <rect>
         <x>370</x>
         <y>10</y>
-        <width>231</width>
+        <width>241</width>
         <height>81</height>
        </rect>
       </property>
       <property name="font">
        <font>
         <pointsize>25</pointsize>
+        <bold>true</bold>
        </font>
       </property>
       <property name="text">
@@ -714,6 +845,7 @@ color:red;
          <property name="font">
           <font>
            <pointsize>20</pointsize>
+           <bold>true</bold>
           </font>
          </property>
          <property name="text">
@@ -723,6 +855,12 @@ color:red;
        </item>
        <item row="1" column="0">
         <widget class="QLabel" name="label_18">
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
           <string>Reason</string>
          </property>
@@ -779,6 +917,12 @@ color:red;
        </property>
        <item>
         <widget class="QPushButton" name="btnPrevExpenseWelcomeUser">
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
           <string>Prev</string>
          </property>
@@ -786,6 +930,12 @@ color:red;
        </item>
        <item>
         <widget class="QPushButton" name="btnSaveExpense">
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
           <string>Save</string>
          </property>
@@ -808,19 +958,45 @@ color:red;
        <string>Graph</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>760</x>
+        <y>490</y>
+        <width>101</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Prev</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="page_8">
      <widget class="QLabel" name="label_23">
       <property name="geometry">
        <rect>
-        <x>370</x>
-        <y>60</y>
-        <width>221</width>
+        <x>350</x>
+        <y>30</y>
+        <width>241</width>
         <height>51</height>
        </rect>
       </property>
       <property name="text">
        <string>Expense Report</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnEPush">
+      <property name="geometry">
+       <rect>
+        <x>770</x>
+        <y>560</y>
+        <width>101</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Prev</string>
       </property>
      </widget>
     </widget>
@@ -832,7 +1008,7 @@ color:red;
      <x>0</x>
      <y>0</y>
      <width>945</width>
-     <height>26</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHome_Page">

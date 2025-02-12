@@ -61,10 +61,10 @@ MainWindow::MainWindow(QWidget *parent)
 bool MainWindow::openDatabase()
 {
     // Add the SQLite database driver
-    db = QSqlDatabase::addDatabase("QSQLITE");  // Using SQLite in this example
+    db = QSqlDatabase::addDatabase("QSQLITE");
 
     // Set the path to your SQLite database file
-    db.setDatabaseName("F:/Startingqt/Second sem project/EndSemProject-1/mind_your_money/database_Mind_your_Money.db");  // Ensure the file has a .db extension
+    db.setDatabaseName("C:/Users/Hp Victus/Desktop/End sem project/mind_your_money/database_Mind_your_Money.db");
 
     // Attempt to open the database
     if (!db.open()) {
@@ -310,4 +310,72 @@ void MainWindow::on_btnSignUpSave_clicked()
 
 
 
+
+
+void MainWindow::on_btnChangePassword_clicked()
+{
+
+}
+
+
+void MainWindow::on_btnNextForgot_clicked()
+{
+    QString Email = ui->txtFEmail->text();
+    QString Phone = ui->txtFPhone->text();
+
+
+    if (Email.isEmpty() || Phone.isEmpty()) {
+        QMessageBox::warning(this, "Login Error", "Please enter both Email and Phone Number.");
+        return;
+    }
+
+    // Prepare the SQL query to check credentials
+    QSqlQuery query(db);
+    query.prepare("SELECT UserID, FirstName, LastName FROM User WHERE Email = :Email AND Phone = :Phone");
+    query.bindValue(":Email", Email);
+    query.bindValue(":Phone", Phone);
+
+    // Execute the query
+    if (!query.exec()) {
+        QMessageBox::critical(this, "Database Error", "Failed to execute query: " + query.lastError().text());
+        return;
+    }
+
+    // If a matching record is found, login the user
+    if (query.next()) {
+        loggedInUserID = query.value("UserID").toInt();  // Store logged-in user's ID
+        QString firstName = query.value("FirstName").toString();
+        QString lastName = query.value("LastName").toString();
+
+        // Display a welcome message
+        QMessageBox::information(this, "Change your password", "Welcome, " + firstName + " " + lastName + "!");
+
+        // Navigate to the next page (Assuming index 4 is the Dashboard/Home)
+        ui->stackedWidget->setCurrentIndex(3);
+
+        // Set user's name on the dashboard (if applicable)
+        ui->labelUserName->setText(firstName);
+    }
+    else {
+        QMessageBox::warning(this, "Login Failed", "Invalid Email or Password.");
+    }
+}
+
+
+void MainWindow::on_btnPrevForgot_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(1);
+}
+
+
+void MainWindow::on_pushButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(4);
+}
+
+
+void MainWindow::on_btnEPush_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(4);
+}
 
