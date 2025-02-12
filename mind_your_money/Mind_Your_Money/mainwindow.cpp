@@ -13,7 +13,7 @@
 
 
 //Global Variables
-int loggedInUserID;
+int loggedInUserID=-1;
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -55,6 +55,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->btnLogout,&QPushButton::clicked, this,&MainWindow:: on_btnLogout_clicked);
     connect(ui->btnGraph,&QPushButton::clicked, this,&MainWindow:: on_btnGraph_clicked);
     connect(ui->btnStats,&QPushButton::clicked, this,&MainWindow:: on_btnStats_clicked);
+     connect(ui->btnPrevGraphToWelcome,&QPushButton::clicked, this,&MainWindow:: on_btnPrevGraphToWelcome_clicked);
 
 
 }
@@ -90,7 +91,7 @@ void MainWindow::updateDateTime()
     ui->date->setText(currentDateTime);
 }
 
-//Button Login Logic
+//Login
 void MainWindow::on_btnLogin_clicked()
 {
 
@@ -126,23 +127,15 @@ void MainWindow::on_btnLogin_clicked()
 
     }
 
-
-
-
-
+//Navigation buttons:
 void MainWindow::on_btnSignup_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
 }
-
-
 void MainWindow::on_btnForgot_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
 }
-
-
-//Navigation buttons:
 void MainWindow::on_btnSignUpPrev_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
@@ -164,10 +157,105 @@ void MainWindow::on_btnLogout_clicked()
     //more code to do here
 }
 
+//Code for Bar Graph
 void MainWindow::on_btnGraph_clicked()
 {
     ui->stackedWidget->setCurrentIndex(6);
+
+    // Step 1: Ensure a user is logged in
+    if (loggedInUserID == -1) {
+        QMessageBox::warning(this, "Error", "No user is logged in.");
+        return;
+    }
+
+    // Step 2: Define fixed categories and initialize their amounts to zero
+    QMap<QString, float> expenseMap;
+    QStringList categories = {"Food", "Rent", "Utilities", "Stationary"};  // Fixed categories
+    for (const QString &category : categories) {
+        expenseMap[category] = 0.0;  // Initialize all to zero
+    }
+
+    // Step 3: Query the database to sum expenses per category
+    QSqlQuery query(db);
+    query.prepare("SELECT Category, SUM(Amount) FROM Expenses WHERE UserID = :UserID GROUP BY Category");
+    query.bindValue(":UserID", loggedInUserID);
+
+    if (!query.exec()) {
+        QMessageBox::critical(this, "Database Error", "Failed to retrieve expenses: " + query.lastError().text());
+        return;
+    }
+
+    // Step 4: Store summed amounts in expenseMap
+    while (query.next()) {
+        QString category = query.value(0).toString();
+        float totalAmount = query.value(1).toFloat();
+
+        if (expenseMap.contains(category)) {  // Update only if category exists
+            expenseMap[category] = totalAmount;
+        }
+    }
+
+    // Step 5: Create a Bar Set for the Chart
+    QBarSet *barSet = new QBarSet("Expenses");
+    for (const QString &category : categories) {
+        *barSet << expenseMap[category];  // Insert summed values
+    }
+
+    // Step 6: Create and Configure the Bar Chart
+    QBarSeries *series = new QBarSeries();
+    series->append(barSet);
+
+    // Enable labels on the bars
+    series->setLabelsVisible(true); // Show labels
+    series->setLabelsFormat("Rs @value"); // Format labels to show the amount with "Rs"
+    series->setLabelsPosition(QAbstractBarSeries::LabelsCenter); // Position labels at the center of the bars
+
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    chart->setTitle("Expense Breakdown");
+    chart->setAnimationOptions(QChart::SeriesAnimations);
+
+    // Step 7: Configure the X-axis (Fixed Categories)
+    QBarCategoryAxis *axisX = new QBarCategoryAxis();
+    axisX->append(categories);
+    chart->addAxis(axisX, Qt::AlignBottom);
+    series->attachAxis(axisX);
+
+    // Step 8: Configure the Y-axis (Expense Amounts)
+    QValueAxis *axisY = new QValueAxis();
+    axisY->setTitleText("Amount Spent in Rs");
+    chart->addAxis(axisY, Qt::AlignLeft);
+    qreal maxExpense = *std::max_element(expenseMap.begin(), expenseMap.end());
+    qreal minExpense = 0; // Start from zero
+    axisY->setRange(minExpense, maxExpense + (maxExpense * 0.2)); // Add extra space for labels
+    axisY->setTickCount(5);  // Adjust number of grid lines
+    axisY->setMinorTickCount(2);
+    series->attachAxis(axisY);
+
+    // Step 9: Display the Chart in UI
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+
+    // Step 10: Clear previous chart and add new one
+    QLayout *layout = ui->bargraph->layout(); // Get the existing layout
+
+    if (!layout) {  // If there's no layout, create one
+        layout = new QVBoxLayout(ui->bargraph);
+        ui->bargraph->setLayout(layout);
+    }
+
+    // Remove any previous widgets inside the frame
+    QLayoutItem *item;
+    while ((item = layout->takeAt(0)) != nullptr) {
+        delete item->widget();
+        delete item;
+    }
+
+
+    ui->bargraph->layout()->addWidget(chartView);
 }
+
+//Code For monthly report
 void MainWindow::on_btnStats_clicked()
 {
     ui->stackedWidget->setCurrentIndex(7);
@@ -186,13 +274,18 @@ void MainWindow::on_btnReset_clicked()
 
 }
 
+void MainWindow::on_btnPrevGraphToWelcome_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(4);
+}
+
 void MainWindow::on_btnEnterExpense_clicked()
 {
     ui->stackedWidget->setCurrentIndex(5);
 
 }
 
-//Button Save Expense
+// Save Expense
 void MainWindow::on_btnSaveExpense_clicked()
 {
     if (loggedInUserID == -1) {  // Ensure a user is logged in
@@ -312,6 +405,7 @@ void MainWindow::on_btnSignUpSave_clicked()
 
 
 
+
 void MainWindow::on_btnChangePassword_clicked()
 {
 
@@ -378,4 +472,7 @@ void MainWindow::on_btnEPush_clicked()
 {
     ui->stackedWidget->setCurrentIndex(4);
 }
+
+
+
 

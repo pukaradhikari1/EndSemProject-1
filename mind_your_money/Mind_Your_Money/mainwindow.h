@@ -6,6 +6,13 @@
 #include <QSqlQuery>
 #include <QSqlError>
 
+//header files for graph
+#include <QtCharts/QChartView>
+#include <QtCharts/QBarSeries>
+#include <QtCharts/QBarSet>
+#include <QtCharts/QBarCategoryAxis>
+#include <QtCharts/QValueAxis>
+//-----------------------------
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -44,6 +51,7 @@ private slots:
 
     void on_btnLogout_clicked();
 
+
     void on_btnChangePassword_clicked();
 
     void on_btnNextForgot_clicked();
@@ -53,6 +61,9 @@ private slots:
     void on_pushButton_clicked();
 
     void on_btnEPush_clicked();
+
+    void on_btnPrevGraphToWelcome_clicked();
+
 
 private:
     int currentUserID = -1;
