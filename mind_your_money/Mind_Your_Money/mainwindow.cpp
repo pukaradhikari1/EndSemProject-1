@@ -266,7 +266,7 @@ void MainWindow::on_btnReset_clicked()
     ui->txtFirstName->clear();
     ui->txtLastName->clear();
     ui->txtPhone->clear();
-    ui->txtMiddle->clear();
+
     ui->txtPasswords->clear();
     ui->txtEmailA->clear();
     ui->txtMonthlyBudget->clear();
@@ -329,58 +329,76 @@ void MainWindow::on_btnSignUpSave_clicked()
     if (!db.isOpen()) {
         QMessageBox::critical(this, "Database Error", "Database is not open. Please check the connection.");
         return;
+    }    if (loggedInUserID == -1) {  // Ensure a user is logged in
+        QMessageBox::critical(this, "Error", "No user is currently logged in.");
+        return;
     }
 
-    QString FirstName = ui->txtFirstName->text();
-    QString MiddleName = ui->txtMiddle->text();
-    QString LastName = ui->txtLastName->text();
-    QString Email = ui->txtEmailA->text();
-    QString Phone = ui->txtPhone->text();  // Phone as QString
-    QString Password = ui->txtPasswords->text();
-    float MonthlyBudget = ui->txtMonthlyBudget->text().toFloat();
 
-    if (FirstName.isEmpty() || LastName.isEmpty() || Email.isEmpty() || Password.isEmpty() || MonthlyBudget <= 0) {
-        QMessageBox::warning(this, "Invalid Input", "Please fill in all required fields and ensure Monthly Budget is greater than 0.");
+
+    float MonthlyBudget = ui->txtMonthlyBudget->text().toFloat();
+    float PFood=ui->txtPFood->text().toFloat();
+    float PRent=ui->txtPRent->text().toFloat();
+    float PUtilities=ui->txtPUtilities->text().toFloat();
+    float PStationary=ui->txtPstationary->text().toFloat();
+    float POthers=100-(PStationary+PRent+PFood+PUtilities);
+    float UFood=MonthlyBudget*PFood/100;
+    float URent=MonthlyBudget*PRent/100;
+    float UUtilities=(MonthlyBudget*PUtilities)/100;
+    float UStationary=MonthlyBudget*PStationary/100;
+    float UOthers=MonthlyBudget*POthers/100;
+
+
+
+
+    if ( MonthlyBudget<=0 || PFood<=0 || PRent<=0 ||  PUtilities<= 0 || PStationary<=0) {
+        QMessageBox::warning(this, "Invalid Input", "Ensure Every member is filled.");
         return;
+    }
+    if((POthers+PStationary+PRent+PFood+PUtilities)!=100)
+    {
+        QMessageBox::warning(this, "Invalid Input", "Please Enter the budgt less than 100%");
+
     }
 
     // Prepare the query
     QSqlQuery qry(db);
+
     qry.prepare(R"(
-        INSERT INTO User (FirstName, MiddleName, LastName, Email, Phone, Password, MonthlyBudget)
-        VALUES (:FirstName, :MiddleName, :LastName, :Email, :Phone, :Password, :MonthlyBudget)
+        INSERT INTO Expense1 (Food, Stationary, Rent, Utilities ,Others,MonthlyBudget,UserID )
+        VALUES ( :UFood, :UStationary,   :URent, :UUtilities,  :UOthers, :MonthlyBudget, :UserID)
     )");
 
     // Bind values to the placeholders
-    qry.bindValue(":FirstName", FirstName);
-    qry.bindValue(":MiddleName", MiddleName.isEmpty() ? QVariant() : MiddleName); // Handle optional MiddleName as NULL if empty
-    qry.bindValue(":LastName", LastName);
-    qry.bindValue(":Email", Email);
-    qry.bindValue(":Phone", Phone.isEmpty() ? QVariant() : Phone); // Handle optional Phone as NULL if empty
-    qry.bindValue(":Password", Password);
-    qry.bindValue(":MonthlyBudget", MonthlyBudget);
 
+
+    qry.bindValue(":UserID", loggedInUserID);
+    qry.bindValue(":UFood",UFood);
+     qry.bindValue(":UStationary",UStationary);
+    qry.bindValue(":URent",URent);
+     qry.bindValue(":UUtilities",UUtilities);
+    qry.bindValue(":UOthers",UOthers);
+    qry.bindValue(":MonthlyBudget",MonthlyBudget);
     // Debugging: Log the prepared query and bound values
+
     qDebug() << "Prepared query: " << qry.lastQuery();
     qDebug() << "Bound values:";
-    qDebug() << "FirstName: " << FirstName;
-    qDebug() << "MiddleName: " << MiddleName;
-    qDebug() << "LastName: " << LastName;
-    qDebug() << "Email: " << Email;
-    qDebug() << "Phone: " << Phone;
-    qDebug() << "Password: " << Password;
+    qDebug() << "Food: " << UFood;
+    qDebug() << "Rent: " << URent;
+    qDebug() << "Stationary: " << UStationary;
+    qDebug() << "Utilities: " << UUtilities;
+    qDebug() << "Others: " << UOthers;
     qDebug() << "MonthlyBudget: " << MonthlyBudget;
 
     // Execute the query
     if (qry.exec()) {
         QMessageBox::information(this, "Success", "User registered successfully!");
         // Clear the input fields
-        ui->txtFirstName->clear();
-        ui->txtMiddle->clear();
-        ui->txtLastName->clear();
-        ui->txtEmailA->clear();
-        ui->txtPhone->clear();
-        ui->txtPasswords->clear();
+        ui->txtPFood->clear();
+        ui->txtPRent->clear();
+        ui->txtPUtilities->clear();
+        ui->txtPstationary->clear();
+        ui->txtPstationary->clear();
         ui->txtMonthlyBudget->clear();
 
         // Retrieve the UserID of the newly added user
@@ -396,6 +414,7 @@ void MainWindow::on_btnSignUpSave_clicked()
     } else {
         QMessageBox::critical(this, "Database Error", "Failed to register user: " + qry.lastError().text());
     }
+
 }
 
 
@@ -408,7 +427,7 @@ void MainWindow::on_btnSignUpSave_clicked()
 
 void MainWindow::on_btnChangePassword_clicked()
 {
-
+   QString Password=ui->txtCPassword->text();
 }
 
 
@@ -475,4 +494,87 @@ void MainWindow::on_btnEPush_clicked()
 
 
 
+
+
+
+
+
+void MainWindow::on_btnNext_clicked()
+{
+    if (!db.isOpen()) {
+        QMessageBox::critical(this, "Database Error", "Database is not open. Please check the connection.");
+        return;
+    }
+
+    QString FirstName = ui->txtFirstName->text();
+    QString LastName = ui->txtLastName->text();
+    QString Email = ui->txtEmailA->text();
+    QString Phone = ui->txtPhone->text();  // Phone as QString
+    QString Password = ui->txtPasswords->text();
+
+    if (FirstName.isEmpty() || LastName.isEmpty() || Email.isEmpty() || Password.isEmpty() ) {
+        QMessageBox::warning(this, "Invalid Input", "Please fill in all required fields.");
+        return;
+    }
+
+
+     QSqlQuery qry(db);
+    qry.prepare(R"(
+        INSERT INTO User (FirstName, LastName, Email, Phone, Password)
+        VALUES (:FirstName, :LastName, :Email, :Phone, :Password)
+    )");
+
+
+
+
+    qry.bindValue(":FirstName", FirstName);
+    qry.bindValue(":LastName", LastName);
+    qry.bindValue(":Email", Email);
+    qry.bindValue(":Phone", Phone.isEmpty() ? QVariant() : Phone); // Handle optional Phone as NULL if empty
+    qry.bindValue(":Password", Password);
+
+
+
+    qDebug() << "Prepared query: " << qry.lastQuery();
+    qDebug() << "Bound values:";
+    qDebug() << "FirstName: " << FirstName;
+    qDebug() << "LastName: " << LastName;
+    qDebug() << "Email: " << Email;
+    qDebug() << "Phone: " << Phone;
+    qDebug() << "Password: " << Password;
+
+    if (qry.exec()) {
+        QMessageBox::information(this, "Success", "User registered successfully!");
+        // Clear the input fields
+        ui->txtFirstName->clear();
+        ui->txtLastName->clear();
+        ui->txtEmailA->clear();
+        ui->txtPhone->clear();
+        ui->txtPasswords->clear();
+        ui->txtMonthlyBudget->clear();
+
+        // Retrieve the UserID of the newly added user
+        QSqlQuery getUserIdQuery(db);
+        if (getUserIdQuery.exec("SELECT last_insert_rowid()")) {
+            if (getUserIdQuery.next()) {
+                int userID = getUserIdQuery.value(0).toInt();
+                qDebug() << "New UserID:" << userID;
+            }
+        } else {
+            qDebug() << "Failed to retrieve UserID:" << getUserIdQuery.lastError().text();
+        }
+    } else {
+        QMessageBox::critical(this, "Database Error", "Failed to register user: " + qry.lastError().text());
+    }
+
+
+
+    ui->stackedWidget->setCurrentIndex(2);
+}
+
+
+void MainWindow::on_btnBack_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(1);
+}
 
