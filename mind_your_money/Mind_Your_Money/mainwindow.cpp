@@ -65,7 +65,8 @@ bool MainWindow::openDatabase()
     db = QSqlDatabase::addDatabase("QSQLITE");
 
     // Set the path to your SQLite database file
-    db.setDatabaseName("C:/Users/Hp Victus/Desktop/End sem project/mind_your_money/database_Mind_your_Money.db");
+    db.setDatabaseName("F:/Startingqt/Second sem project/EndSemProject-1/mind_your_money/database_Mind_your_Money.db");
+    //F:\Startingqt\Second sem project\EndSemProject-1\mind_your_money
 
     // Attempt to open the database
     if (!db.open()) {
@@ -91,41 +92,6 @@ void MainWindow::updateDateTime()
     ui->date->setText(currentDateTime);
 }
 
-//Login
-void MainWindow::on_btnLogin_clicked()
-{
-
-        QString Email = ui->txtEmail->text();
-        QString Password = ui->txtPassword->text();
-
-        if (Email.isEmpty() || Password.isEmpty()) {
-            QMessageBox::warning(this, "Login Error", "Please enter both Email and Password.");
-            return;
-        }
-
-        QSqlQuery query(db);
-        query.prepare("SELECT UserID, FirstName, LastName FROM User WHERE Email = :Email AND Password = :Password");
-        query.bindValue(":Email", Email);
-        query.bindValue(":Password", Password);
-
-        if (!query.exec()) {
-            QMessageBox::critical(this, "Database Error", "Failed to execute query: " + query.lastError().text());
-            return;
-        }
-
-        if (query.next()) {
-            loggedInUserID = query.value("UserID").toInt();  // loggedInUserID is globally defined
-            QString firstName = query.value("FirstName").toString();
-            QString lastName = query.value("LastName").toString();
-
-            QMessageBox::information(this, "Login Successful", "Welcome, " + firstName + " " + lastName + "!");
-            ui->stackedWidget->setCurrentIndex(4);  // Navigate to dashboard
-            ui->labelUserName->setText(firstName);  // Set the first name to the label
-        } else {
-            QMessageBox::warning(this, "Login Failed", "Invalid Email or Password.");
-        }
-
-    }
 
 //Navigation buttons:
 void MainWindow::on_btnSignup_clicked()
@@ -143,12 +109,16 @@ void MainWindow::on_btnSignUpPrev_clicked()
 }
 void MainWindow::on_btnPrevExpenseWelcomeUser_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(4);
+    ui->stackedWidget->setCurrentIndex(5);
 }
 
 void MainWindow::on_btnHome_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
+}
+void MainWindow::on_btnPrevGraphToWelcome_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(5);
 }
 
 void MainWindow::on_btnLogout_clicked()
@@ -157,103 +127,7 @@ void MainWindow::on_btnLogout_clicked()
     //more code to do here
 }
 
-//Code for Bar Graph
-void MainWindow::on_btnGraph_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(6);
 
-    // Step 1: Ensure a user is logged in
-    if (loggedInUserID == -1) {
-        QMessageBox::warning(this, "Error", "No user is logged in.");
-        return;
-    }
-
-    // Step 2: Define fixed categories and initialize their amounts to zero
-    QMap<QString, float> expenseMap;
-    QStringList categories = {"Food", "Rent", "Utilities", "Stationary"};  // Fixed categories
-    for (const QString &category : categories) {
-        expenseMap[category] = 0.0;  // Initialize all to zero
-    }
-
-    // Step 3: Query the database to sum expenses per category
-    QSqlQuery query(db);
-    query.prepare("SELECT Category, SUM(Amount) FROM Expenses WHERE UserID = :UserID GROUP BY Category");
-    query.bindValue(":UserID", loggedInUserID);
-
-    if (!query.exec()) {
-        QMessageBox::critical(this, "Database Error", "Failed to retrieve expenses: " + query.lastError().text());
-        return;
-    }
-
-    // Step 4: Store summed amounts in expenseMap
-    while (query.next()) {
-        QString category = query.value(0).toString();
-        float totalAmount = query.value(1).toFloat();
-
-        if (expenseMap.contains(category)) {  // Update only if category exists
-            expenseMap[category] = totalAmount;
-        }
-    }
-
-    // Step 5: Create a Bar Set for the Chart
-    QBarSet *barSet = new QBarSet("Expenses");
-    for (const QString &category : categories) {
-        *barSet << expenseMap[category];  // Insert summed values
-    }
-
-    // Step 6: Create and Configure the Bar Chart
-    QBarSeries *series = new QBarSeries();
-    series->append(barSet);
-
-    // Enable labels on the bars
-    series->setLabelsVisible(true); // Show labels
-    series->setLabelsFormat("Rs @value"); // Format labels to show the amount with "Rs"
-    series->setLabelsPosition(QAbstractBarSeries::LabelsCenter); // Position labels at the center of the bars
-
-    QChart *chart = new QChart();
-    chart->addSeries(series);
-    chart->setTitle("Expense Breakdown");
-    chart->setAnimationOptions(QChart::SeriesAnimations);
-
-    // Step 7: Configure the X-axis (Fixed Categories)
-    QBarCategoryAxis *axisX = new QBarCategoryAxis();
-    axisX->append(categories);
-    chart->addAxis(axisX, Qt::AlignBottom);
-    series->attachAxis(axisX);
-
-    // Step 8: Configure the Y-axis (Expense Amounts)
-    QValueAxis *axisY = new QValueAxis();
-    axisY->setTitleText("Amount Spent in Rs");
-    chart->addAxis(axisY, Qt::AlignLeft);
-    qreal maxExpense = *std::max_element(expenseMap.begin(), expenseMap.end());
-    qreal minExpense = 0; // Start from zero
-    axisY->setRange(minExpense, maxExpense + (maxExpense * 0.2)); // Add extra space for labels
-    axisY->setTickCount(5);  // Adjust number of grid lines
-    axisY->setMinorTickCount(2);
-    series->attachAxis(axisY);
-
-    // Step 9: Display the Chart in UI
-    QChartView *chartView = new QChartView(chart);
-    chartView->setRenderHint(QPainter::Antialiasing);
-
-    // Step 10: Clear previous chart and add new one
-    QLayout *layout = ui->bargraph->layout(); // Get the existing layout
-
-    if (!layout) {  // If there's no layout, create one
-        layout = new QVBoxLayout(ui->bargraph);
-        ui->bargraph->setLayout(layout);
-    }
-
-    // Remove any previous widgets inside the frame
-    QLayoutItem *item;
-    while ((item = layout->takeAt(0)) != nullptr) {
-        delete item->widget();
-        delete item;
-    }
-
-
-    ui->bargraph->layout()->addWidget(chartView);
-}
 
 //Code For monthly report
 void MainWindow::on_btnStats_clicked()
@@ -274,156 +148,12 @@ void MainWindow::on_btnReset_clicked()
 
 }
 
-void MainWindow::on_btnPrevGraphToWelcome_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(4);
-}
 
 void MainWindow::on_btnEnterExpense_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(5);
+    ui->stackedWidget->setCurrentIndex(6);
 
 }
-
-// Save Expense
-void MainWindow::on_btnSaveExpense_clicked()
-{
-    if (loggedInUserID == -1) {  // Ensure a user is logged in
-        QMessageBox::critical(this, "Error", "No user is currently logged in.");
-        return;
-    }
-
-    QString category = ui->ExpenseName->currentText();
-    float amount = ui->LineEditAmount->text().toFloat();
-
-    if (amount <= 0) {
-        QMessageBox::warning(this, "Invalid Input", "Expense amount must be greater than 0.");
-        return;
-    }
-
-    QSqlQuery qry(db);
-    qry.prepare(R"(
-        INSERT INTO Expenses (UserID, Category, Amount)
-        VALUES (:UserID, :Category, :Amount)
-    )");
-    qry.bindValue(":UserID", loggedInUserID);
-    qry.bindValue(":Category", category);
-    qry.bindValue(":Amount", amount);
-
-    if (qry.exec()) {
-        QMessageBox::information(this, "Success", "Expense saved successfully!");
-        qDebug() << "Expense saved successfully!";
-    } else {
-        QMessageBox::critical(this, "Database Error", "Failed to save expense: " + qry.lastError().text());
-        qDebug() << "Error saving expense:" << qry.lastError().text();
-    }
-
-    // Clear the input fields
-    ui->LineEditAmount->clear();
-    ui->ExpenseName->setCurrentIndex(0);
-}
-
-//Button SignUP
-void MainWindow::on_btnSignUpSave_clicked()
-{
-    if (!db.isOpen()) {
-        QMessageBox::critical(this, "Database Error", "Database is not open. Please check the connection.");
-        return;
-    }    if (loggedInUserID == -1) {  // Ensure a user is logged in
-        QMessageBox::critical(this, "Error", "No user is currently logged in.");
-        return;
-    }
-
-
-
-    float MonthlyBudget = ui->txtMonthlyBudget->text().toFloat();
-    float PFood=ui->txtPFood->text().toFloat();
-    float PRent=ui->txtPRent->text().toFloat();
-    float PUtilities=ui->txtPUtilities->text().toFloat();
-    float PStationary=ui->txtPstationary->text().toFloat();
-    float POthers=100-(PStationary+PRent+PFood+PUtilities);
-    float UFood=MonthlyBudget*PFood/100;
-    float URent=MonthlyBudget*PRent/100;
-    float UUtilities=(MonthlyBudget*PUtilities)/100;
-    float UStationary=MonthlyBudget*PStationary/100;
-    float UOthers=MonthlyBudget*POthers/100;
-
-
-
-
-    if ( MonthlyBudget<=0 || PFood<=0 || PRent<=0 ||  PUtilities<= 0 || PStationary<=0) {
-        QMessageBox::warning(this, "Invalid Input", "Ensure Every member is filled.");
-        return;
-    }
-    if((POthers+PStationary+PRent+PFood+PUtilities)!=100)
-    {
-        QMessageBox::warning(this, "Invalid Input", "Please Enter the budgt less than 100%");
-
-    }
-
-    // Prepare the query
-    QSqlQuery qry(db);
-
-    qry.prepare(R"(
-        INSERT INTO Expense1 (Food, Stationary, Rent, Utilities ,Others,MonthlyBudget,UserID )
-        VALUES ( :UFood, :UStationary,   :URent, :UUtilities,  :UOthers, :MonthlyBudget, :UserID)
-    )");
-
-    // Bind values to the placeholders
-
-
-    qry.bindValue(":UserID", loggedInUserID);
-    qry.bindValue(":UFood",UFood);
-     qry.bindValue(":UStationary",UStationary);
-    qry.bindValue(":URent",URent);
-     qry.bindValue(":UUtilities",UUtilities);
-    qry.bindValue(":UOthers",UOthers);
-    qry.bindValue(":MonthlyBudget",MonthlyBudget);
-    // Debugging: Log the prepared query and bound values
-
-    qDebug() << "Prepared query: " << qry.lastQuery();
-    qDebug() << "Bound values:";
-    qDebug() << "Food: " << UFood;
-    qDebug() << "Rent: " << URent;
-    qDebug() << "Stationary: " << UStationary;
-    qDebug() << "Utilities: " << UUtilities;
-    qDebug() << "Others: " << UOthers;
-    qDebug() << "MonthlyBudget: " << MonthlyBudget;
-
-    // Execute the query
-    if (qry.exec()) {
-        QMessageBox::information(this, "Success", "User registered successfully!");
-        // Clear the input fields
-        ui->txtPFood->clear();
-        ui->txtPRent->clear();
-        ui->txtPUtilities->clear();
-        ui->txtPstationary->clear();
-        ui->txtPstationary->clear();
-        ui->txtMonthlyBudget->clear();
-
-        // Retrieve the UserID of the newly added user
-        QSqlQuery getUserIdQuery(db);
-        if (getUserIdQuery.exec("SELECT last_insert_rowid()")) {
-            if (getUserIdQuery.next()) {
-                int userID = getUserIdQuery.value(0).toInt();
-                qDebug() << "New UserID:" << userID;
-            }
-        } else {
-            qDebug() << "Failed to retrieve UserID:" << getUserIdQuery.lastError().text();
-        }
-    } else {
-        QMessageBox::critical(this, "Database Error", "Failed to register user: " + qry.lastError().text());
-    }
-
-}
-
-
-
-
-
-
-
-
 
 void MainWindow::on_btnChangePassword_clicked()
 {
@@ -483,7 +213,7 @@ void MainWindow::on_btnPrevForgot_clicked()
 
 void MainWindow::on_pushButton_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(4);
+    ui->stackedWidget->setCurrentIndex(5);
 }
 
 
@@ -497,8 +227,90 @@ void MainWindow::on_btnEPush_clicked()
 
 
 
+//Expense SignUP: code done
+void MainWindow::on_btnSignUpSave_clicked()
+{
+    if (!db.isOpen()) {
+        QMessageBox::critical(this, "Database Error", "Database is not open. Please check the connection.");
+        return;
+    }
 
+    if (loggedInUserID == -1) {  // Ensure a user is logged in
+        QMessageBox::critical(this, "Error", "No user is currently logged in.");
+        return;
+    }
 
+    // Read the values from the input fields
+    float MonthlyBudget = ui->txtMonthlyBudget->text().toFloat();
+    float PFood = ui->txtPFood->text().toFloat();
+    float PRent = ui->txtPRent->text().toFloat();
+    float PUtilities = ui->txtPUtilities->text().toFloat();
+    float PStationary = ui->txtPstationary->text().toFloat();
+    float POthers = 100 - (PStationary + PRent + PFood + PUtilities);  // Ensure total is 100%
+
+    // Calculate the actual amounts for each category
+    float UFood = MonthlyBudget * PFood / 100;
+    float URent = MonthlyBudget * PRent / 100;
+    float UUtilities = (MonthlyBudget * PUtilities) / 100;
+    float UStationary = MonthlyBudget * PStationary / 100;
+    float UOthers = MonthlyBudget * POthers / 100;
+
+    // Validate the inputs
+    if (MonthlyBudget <= 0 || PFood <= 0 || PRent <= 0 || PUtilities <= 0 || PStationary <= 0) {
+        QMessageBox::warning(this, "Invalid Input", "Ensure every field is filled.");
+        return;
+    }
+
+    if ((POthers + PStationary + PRent + PFood + PUtilities) != 100) {
+        QMessageBox::warning(this, "Invalid Input", "The total percentage must equal 100%");
+        return;
+    }
+
+    // Prepare the query to insert the data into the Budget table
+    QSqlQuery qry(db);
+    qry.prepare(R"(
+        INSERT INTO Budget (user_id, monthly_budget, rent_percentage, food_percentage, utilities_percentage, stationery_percentage, other_percentage)
+        VALUES (:UserID, :MonthlyBudget, :PRent, :PFood, :PUtilities, :PStationary, :POthers)
+    )");
+
+    // Bind values to the placeholders
+    qry.bindValue(":UserID", loggedInUserID);
+    qry.bindValue(":MonthlyBudget", MonthlyBudget);
+    qry.bindValue(":PRent", PRent);
+    qry.bindValue(":PFood", PFood);
+    qry.bindValue(":PUtilities", PUtilities);
+    qry.bindValue(":PStationary", PStationary);
+    qry.bindValue(":POthers", POthers);
+
+    // Debugging: Log the prepared query and bound values
+    qDebug() << "Prepared query: " << qry.lastQuery();
+    qDebug() << "Bound values:";
+    qDebug() << "Food: " << UFood;
+    qDebug() << "Rent: " << URent;
+    qDebug() << "Stationary: " << UStationary;
+    qDebug() << "Utilities: " << UUtilities;
+    qDebug() << "Others: " << UOthers;
+    qDebug() << "MonthlyBudget: " << MonthlyBudget;
+
+    // Execute the query
+    if (qry.exec()) {
+        QMessageBox::information(this, "Success", "Budget saved successfully!\nPlease Login to enter expenses!");
+
+        ui->stackedWidget->setCurrentIndex(0); // Sending back to login page after signing up
+
+        // Clear the input fields
+        ui->txtPFood->clear();
+        ui->txtPRent->clear();
+        ui->txtPUtilities->clear();
+        ui->txtPstationary->clear();
+        ui->txtMonthlyBudget->clear();
+
+    } else {
+        QMessageBox::critical(this, "Database Error", "Failed to save budget: " + qry.lastError().text());
+    }
+}
+
+// User Signup code: code done
 void MainWindow::on_btnNext_clicked()
 {
     if (!db.isOpen()) {
@@ -512,29 +324,26 @@ void MainWindow::on_btnNext_clicked()
     QString Phone = ui->txtPhone->text();  // Phone as QString
     QString Password = ui->txtPasswords->text();
 
-    if (FirstName.isEmpty() || LastName.isEmpty() || Email.isEmpty() || Password.isEmpty() ) {
+    // Input validation
+    if (FirstName.isEmpty() || LastName.isEmpty() || Email.isEmpty() || Password.isEmpty()) {
         QMessageBox::warning(this, "Invalid Input", "Please fill in all required fields.");
         return;
     }
 
-
-     QSqlQuery qry(db);
+    // Prepare SQL query to insert new user
+    QSqlQuery qry(db);
     qry.prepare(R"(
-        INSERT INTO User (FirstName, LastName, Email, Phone, Password)
+        INSERT INTO Users (FirstName, LastName, Email, Phone, Password)
         VALUES (:FirstName, :LastName, :Email, :Phone, :Password)
     )");
-
-
-
 
     qry.bindValue(":FirstName", FirstName);
     qry.bindValue(":LastName", LastName);
     qry.bindValue(":Email", Email);
     qry.bindValue(":Phone", Phone.isEmpty() ? QVariant() : Phone); // Handle optional Phone as NULL if empty
-    qry.bindValue(":Password", Password);
+    qry.bindValue(":Password", Password); // Consider hashing the password for security
 
-
-
+    // Debugging: Log the prepared query and bound values
     qDebug() << "Prepared query: " << qry.lastQuery();
     qDebug() << "Bound values:";
     qDebug() << "FirstName: " << FirstName;
@@ -544,14 +353,15 @@ void MainWindow::on_btnNext_clicked()
     qDebug() << "Password: " << Password;
 
     if (qry.exec()) {
+        // Success message
         QMessageBox::information(this, "Success", "User registered successfully!");
+
         // Clear the input fields
         ui->txtFirstName->clear();
         ui->txtLastName->clear();
         ui->txtEmailA->clear();
         ui->txtPhone->clear();
         ui->txtPasswords->clear();
-        ui->txtMonthlyBudget->clear();
 
         // Retrieve the UserID of the newly added user
         QSqlQuery getUserIdQuery(db);
@@ -559,6 +369,7 @@ void MainWindow::on_btnNext_clicked()
             if (getUserIdQuery.next()) {
                 int userID = getUserIdQuery.value(0).toInt();
                 qDebug() << "New UserID:" << userID;
+                loggedInUserID = userID;  // Store the UserID for the logged-in user
             }
         } else {
             qDebug() << "Failed to retrieve UserID:" << getUserIdQuery.lastError().text();
@@ -567,10 +378,251 @@ void MainWindow::on_btnNext_clicked()
         QMessageBox::critical(this, "Database Error", "Failed to register user: " + qry.lastError().text());
     }
 
-
-
-    ui->stackedWidget->setCurrentIndex(2);
+    // Navigate to the next page in the UI
+    ui->stackedWidget->setCurrentIndex(2);  // Assuming the next page is at index 2
 }
+
+//Save Expense Button: code done
+void MainWindow::on_btnSaveExpense_clicked()
+{
+    if (loggedInUserID == -1) {  // Ensure a user is logged in
+        QMessageBox::critical(this, "Error", "No user is currently logged in.");
+        return;
+    }
+
+    QString category = ui->ExpenseName->currentText();
+    QString amountText = ui->LineEditAmount->text();
+
+    // Validate the amount input
+    bool isAmountValid = false;
+    float amount = amountText.toFloat(&isAmountValid);
+
+    if (!isAmountValid || amount <= 0) {
+        QMessageBox::warning(this, "Invalid Input", "Expense amount must be a valid number greater than 0.");
+        return;
+    }
+
+    // Get current date in "yyyy-MM-dd" format (e.g., "2025-02-15")
+    QString currentDate = QDate::currentDate().toString("yyyy-MM-dd");
+
+    // Check if an expense for this category already exists for the current month
+    QSqlQuery checkQuery(db);
+    checkQuery.prepare(R"(
+        SELECT id, amount FROM Expenses
+        WHERE user_id = :UserID AND category = :Category AND strftime('%Y-%m', date) = strftime('%Y-%m', :CurrentDate)
+    )");
+    checkQuery.bindValue(":UserID", loggedInUserID);
+    checkQuery.bindValue(":Category", category);
+    checkQuery.bindValue(":CurrentDate", currentDate);
+
+    if (!checkQuery.exec()) {
+        QMessageBox::critical(this, "Database Error", "Failed to check existing expenses: " + checkQuery.lastError().text());
+        qDebug() << "Error checking existing expenses:" << checkQuery.lastError().text();
+        return;
+    }
+
+    // If an expense already exists for the current month and category, update the amount
+    if (checkQuery.next()) {
+        int expenseId = checkQuery.value("id").toInt();
+        float existingAmount = checkQuery.value("amount").toFloat();
+        float newAmount = existingAmount + amount;  // Add the new amount to the existing one
+
+        // Update the existing expense record
+        QSqlQuery updateQuery(db);
+        updateQuery.prepare(R"(
+            UPDATE Expenses
+            SET amount = :Amount
+            WHERE id = :ExpenseID
+        )");
+        updateQuery.bindValue(":Amount", newAmount);
+        updateQuery.bindValue(":ExpenseID", expenseId);
+
+        if (updateQuery.exec()) {
+            QMessageBox::information(this, "Success", QString("Expense updated successfully! New total for %1: %2").arg(category).arg(newAmount));
+            qDebug() << "Expense updated successfully!";
+        } else {
+            QMessageBox::critical(this, "Database Error", "Failed to update expense: " + updateQuery.lastError().text());
+            qDebug() << "Error updating expense:" << updateQuery.lastError().text();
+        }
+
+    } else {
+        // If no entry exists for the current month and category, insert a new row
+        QSqlQuery insertQuery(db);
+        insertQuery.prepare(R"(
+            INSERT INTO Expenses (user_id, date, category, amount)
+            VALUES (:UserID, :Date, :Category, :Amount)
+        )");
+        insertQuery.bindValue(":UserID", loggedInUserID);
+        insertQuery.bindValue(":Date", currentDate);  // Store the current date
+        insertQuery.bindValue(":Category", category);
+        insertQuery.bindValue(":Amount", amount);
+
+        if (insertQuery.exec()) {
+            QMessageBox::information(this, "Success", "Expense saved successfully!");
+            qDebug() << "Expense saved successfully!";
+        } else {
+            QMessageBox::critical(this, "Database Error", "Failed to save expense: " + insertQuery.lastError().text());
+            qDebug() << "Error saving expense:" << insertQuery.lastError().text();
+        }
+    }
+
+    // Clear the input fields
+    ui->LineEditAmount->clear();
+    ui->ExpenseName->setCurrentIndex(0);
+}
+
+//User login button: code done
+void MainWindow::on_btnLogin_clicked()
+{
+    QString Email = ui->txtEmail->text();
+    QString Password = ui->txtPassword->text();
+
+    if (Email.isEmpty() || Password.isEmpty()) {
+        QMessageBox::warning(this, "Login Error", "Please enter both Email and Password.");
+        return;
+    }
+
+    QSqlQuery query(db);
+    query.prepare("SELECT id, FirstName, LastName, Password FROM Users WHERE Email = :Email");
+
+    query.bindValue(":Email", Email);
+
+    if (!query.exec()) {
+        QMessageBox::critical(this, "Database Error", "Failed to execute query: " + query.lastError().text());
+        return;
+    }
+
+    if (query.next()) {
+        QString storedPassword = query.value("Password").toString();
+        // Here, compare the entered password with the stored (hashed) password
+        if (Password == storedPassword) {  // Replace this with password hash comparison in real scenarios
+            loggedInUserID = query.value("id").toInt();  // loggedInUserID is globally defined
+            QString firstName = query.value("FirstName").toString();
+            QString lastName = query.value("LastName").toString();
+
+            QMessageBox::information(this, "Login Successful", "Welcome, " + firstName + " " + lastName + "!");
+            ui->stackedWidget->setCurrentIndex(5);  // Navigate to dashboard
+            ui->labelUserName->setText(firstName);  // Set the first name to the label
+        } else {
+            QMessageBox::warning(this, "Login Failed", "Invalid Email or Password.");
+        }
+    } else {
+        QMessageBox::warning(this, "Login Failed", "Invalid Email or Password.");
+    }
+}
+
+
+
+//Bar Graph: code done
+void MainWindow::on_btnGraph_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(7);
+
+    // Ensure a user is logged in
+    if (loggedInUserID == -1) {
+        QMessageBox::warning(this, "Error", "No user is logged in.");
+        return;
+    }
+
+    // Define the categories and initialize their amounts
+    QStringList categories = {"Food", "Rent", "Utilities", "Stationary", "Other"};
+    QMap<QString, float> expenseMap;
+    for (const QString &category : categories) {
+        expenseMap[category] = 0.0;
+    }
+
+    // Get the current month in "yyyy-MM" format
+    QString currentMonth = QDate::currentDate().toString("yyyy-MM");
+
+    // Query the database for total expenses per category in the current month
+    QSqlQuery query(db);
+    query.prepare(R"(
+        SELECT category, SUM(amount)
+        FROM Expenses
+        WHERE user_id = :UserID AND strftime('%Y-%m', date) = :CurrentMonth
+        GROUP BY category
+    )");
+    query.bindValue(":UserID", loggedInUserID);
+    query.bindValue(":CurrentMonth", currentMonth);
+
+    if (!query.exec()) {
+        qDebug() << "SQL Query Failed: " << query.lastError().text();
+        QMessageBox::critical(this, "Database Error", "Failed to retrieve expenses: " + query.lastError().text());
+        return;
+    }
+
+    // Store the total expense for each category in the expenseMap
+    while (query.next()) {
+        QString category = query.value(0).toString();
+        float totalAmount = query.value(1).toFloat();
+        if (expenseMap.contains(category)) {
+            expenseMap[category] = totalAmount;
+        }
+    }
+
+    // Create a Bar Set for the Chart
+    QBarSet *barSet = new QBarSet("Expenses");
+    for (const QString &category : categories) {
+        *barSet << expenseMap[category];
+    }
+
+    // Enable labels on bars
+    barSet->setLabelFont(QFont("Arial", 10, QFont::Bold));
+
+    QBarSeries *series = new QBarSeries();
+    series->append(barSet);
+    series->setLabelsVisible(true);
+    series->setLabelsFormat("Rs @value");
+    series->setLabelsPosition(QAbstractBarSeries::LabelsCenter);
+
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    chart->setTitle("Expense Breakdown for " + currentMonth);
+    chart->setAnimationOptions(QChart::SeriesAnimations);
+
+    // Configure the X-axis
+    QBarCategoryAxis *axisX = new QBarCategoryAxis();
+    axisX->append(categories);
+    chart->addAxis(axisX, Qt::AlignBottom);
+    series->attachAxis(axisX);
+
+    // Configure the Y-axis
+    qreal maxExpense = expenseMap.isEmpty() ? 100 : *std::max_element(expenseMap.begin(), expenseMap.end());
+    QValueAxis *axisY = new QValueAxis();
+    axisY->setTitleText("Amount Spent in Rs");
+    axisY->setRange(0, maxExpense + (maxExpense * 0.2));  // Add buffer space for visibility
+    axisY->setTickCount(5);
+    axisY->setMinorTickCount(2);
+    chart->addAxis(axisY, Qt::AlignLeft);
+    series->attachAxis(axisY);
+
+    // Display the Chart in UI
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+
+    // Clear previous chart and add the new one
+    QLayout *layout = ui->bargraph->layout();
+    if (!layout) {
+        layout = new QVBoxLayout(ui->bargraph);
+        ui->bargraph->setLayout(layout);
+    }
+
+    // Remove old widgets
+    QLayoutItem *item;
+    while ((item = layout->takeAt(0)) != nullptr) {
+        if (QWidget *widget = item->widget()) {
+            widget->deleteLater();
+        }
+        delete item;
+    }
+
+    // Add new chart
+    ui->bargraph->layout()->addWidget(chartView);
+
+    qDebug() << "Graph updated successfully!";
+}
+
+
 
 
 void MainWindow::on_btnBack_clicked()
