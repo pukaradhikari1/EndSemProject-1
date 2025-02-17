@@ -73,6 +73,7 @@ private:
     int currentUserID = -1;
     QSqlDatabase db;  // Define database object as a member
     bool openDatabase();
+    void displayRemainingBudget();
 
 private:
     Ui::MainWindow *ui;

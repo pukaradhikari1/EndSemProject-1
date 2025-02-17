@@ -42,20 +42,20 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     //Connecting buttons
-    connect(ui->btnLogin, &QPushButton::clicked, this, &MainWindow::on_btnLogin_clicked);
-    connect(ui->btnForgot, &QPushButton::clicked, this, &MainWindow::on_btnForgot_clicked);
-    connect(ui->btnSignup, &QPushButton::clicked, this, &MainWindow::on_btnSignup_clicked);
-    connect(ui->btnReset, &QPushButton::clicked, this, &MainWindow::on_btnReset_clicked);
-    connect(ui->btnEnterExpense, &QPushButton::clicked, this, &MainWindow::on_btnEnterExpense_clicked);
-    connect(ui->btnHome, &QPushButton::clicked, this, &MainWindow::on_btnHome_clicked);
-    connect(ui->btnSaveExpense, &QPushButton::clicked, this, &MainWindow::on_btnSaveExpense_clicked);
-    connect(ui->btnSignUpSave, &QPushButton::clicked, this, &MainWindow::on_btnSignUpSave_clicked);
-    connect(ui->btnSignUpPrev, &QPushButton::clicked, this, &MainWindow::on_btnSignUpPrev_clicked);
-    connect(ui->btnPrevExpenseWelcomeUser, &QPushButton::clicked, this, &MainWindow::on_btnPrevExpenseWelcomeUser_clicked);
-    connect(ui->btnLogout,&QPushButton::clicked, this,&MainWindow:: on_btnLogout_clicked);
-    connect(ui->btnGraph,&QPushButton::clicked, this,&MainWindow:: on_btnGraph_clicked);
-    connect(ui->btnStats,&QPushButton::clicked, this,&MainWindow:: on_btnStats_clicked);
-     connect(ui->btnPrevGraphToWelcome,&QPushButton::clicked, this,&MainWindow:: on_btnPrevGraphToWelcome_clicked);
+    // connect(ui->btnLogin, &QPushButton::clicked, this, &MainWindow::on_btnLogin_clicked);
+    // connect(ui->btnForgot, &QPushButton::clicked, this, &MainWindow::on_btnForgot_clicked);
+    // connect(ui->btnSignup, &QPushButton::clicked, this, &MainWindow::on_btnSignup_clicked);
+    // connect(ui->btnReset, &QPushButton::clicked, this, &MainWindow::on_btnReset_clicked);
+    // connect(ui->btnEnterExpense, &QPushButton::clicked, this, &MainWindow::on_btnEnterExpense_clicked);
+    // connect(ui->btnHome, &QPushButton::clicked, this, &MainWindow::on_btnHome_clicked);
+    // connect(ui->btnSaveExpense, &QPushButton::clicked, this, &MainWindow::on_btnSaveExpense_clicked);
+    // connect(ui->btnSignUpSave, &QPushButton::clicked, this, &MainWindow::on_btnSignUpSave_clicked);
+    // connect(ui->btnSignUpPrev, &QPushButton::clicked, this, &MainWindow::on_btnSignUpPrev_clicked);
+    // connect(ui->btnPrevExpenseWelcomeUser, &QPushButton::clicked, this, &MainWindow::on_btnPrevExpenseWelcomeUser_clicked);
+    // connect(ui->btnLogout,&QPushButton::clicked, this,&MainWindow:: on_btnLogout_clicked);
+    // connect(ui->btnGraph,&QPushButton::clicked, this,&MainWindow:: on_btnGraph_clicked);
+    // connect(ui->btnStats,&QPushButton::clicked, this,&MainWindow:: on_btnStats_clicked);
+    //  connect(ui->btnPrevGraphToWelcome,&QPushButton::clicked, this,&MainWindow:: on_btnPrevGraphToWelcome_clicked);
 
 
 }
@@ -100,7 +100,7 @@ void MainWindow::on_btnSignup_clicked()
 }
 void MainWindow::on_btnForgot_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(2);
+    ui->stackedWidget->setCurrentIndex(3);
 }
 void MainWindow::on_btnSignUpPrev_clicked()
 {
@@ -158,6 +158,20 @@ void MainWindow::on_btnEnterExpense_clicked()
 void MainWindow::on_btnChangePassword_clicked()
 {
    QString Password=ui->txtCPassword->text();
+    QString CmPassword=ui->txtCmPassword->text();
+   if(Password==CmPassword)
+    {
+        QSqlQuery query(db);
+       query.prepare("SELECT UserID, Password FROM User WHERE Password = :Password");
+       query.bindValue(":Password", Password);
+       //QMessageBox::information(this, "successfully changed password ");
+
+   }
+   else
+   {
+       QMessageBox::warning(this, "Invalid Input", "Password doesnt match");
+   }
+
 }
 
 
@@ -207,7 +221,7 @@ void MainWindow::on_btnNextForgot_clicked()
 
 void MainWindow::on_btnPrevForgot_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(1);
+    ui->stackedWidget->setCurrentIndex(0);
 }
 
 
@@ -276,17 +290,17 @@ void MainWindow::on_btnSignUpSave_clicked()
     QSqlQuery qry(db);
     qry.prepare(R"(
         INSERT INTO Budget (user_id, MonthlyBudget, Rent, Food, Utilities, Stationery, Others)
-        VALUES (:UserID, :MonthlyBudget, :PRent, :PFood, :PUtilities, :PStationary, :POthers)
+        VALUES (:UserID, :MonthlyBudget, :URent, :UFood, :UUtilities, :UStationary, :UOthers)
     )");
 
     // Bind values to the placeholders
     qry.bindValue(":UserID", loggedInUserID);
     qry.bindValue(":MonthlyBudget", MonthlyBudget);
-    qry.bindValue(":PRent", PRent);
-    qry.bindValue(":PFood", PFood);
-    qry.bindValue(":PUtilities", PUtilities);
-    qry.bindValue(":PStationary", PStationary);
-    qry.bindValue(":POthers", POthers);
+    qry.bindValue(":PRent", URent);
+    qry.bindValue(":PFood", UFood);
+    qry.bindValue(":PUtilities", UUtilities);
+    qry.bindValue(":PStationary", UStationary);
+    qry.bindValue(":POthers", UOthers);
 
     // Debugging: Log the prepared query and bound values
     qDebug() << "Prepared query: " << qry.lastQuery();
@@ -508,13 +522,18 @@ void MainWindow::on_btnLogin_clicked()
 
             QMessageBox::information(this, "Login Successful", "Welcome, " + firstName + " " + lastName + "!");
             ui->stackedWidget->setCurrentIndex(5);  // Navigate to dashboard
-            ui->labelUserName->setText(firstName);  // Set the first name to the label
+            ui->labelUserName->setText(firstName);
+            // Set the first name to the label
+            displayRemainingBudget();
+            ui->txtEmail->clear();
+            ui->txtPassword->clear();
         } else {
             QMessageBox::warning(this, "Login Failed", "Invalid Email or Password.");
         }
     } else {
         QMessageBox::warning(this, "Login Failed", "Invalid Email or Password.");
     }
+
 }
 
 
@@ -628,7 +647,49 @@ void MainWindow::on_btnGraph_clicked()
     qDebug() << "Graph updated successfully!";
 }
 
+void MainWindow::displayRemainingBudget()
+{
+    if (loggedInUserID == -1) {
+        QMessageBox::critical(this, "Error", "No user is currently logged in.");
+        return;
+    }
 
+    QSqlQuery query(db);
+    query.prepare(R"(
+        SELECT
+            B.MonthlyBudget - IFNULL(SUM(E.amount), 0) AS MonthlyBudget,
+            B.Rent - IFNULL(SUM(CASE WHEN E.category = 'Rent' THEN E.amount END), 0) AS Rent,
+            B.Food - IFNULL(SUM(CASE WHEN E.category = 'Food' THEN E.amount END), 0) AS Food,
+            B.Utilities - IFNULL(SUM(CASE WHEN E.category = 'Utilities' THEN E.amount END), 0) AS Utilities,
+            B.Stationery - IFNULL(SUM(CASE WHEN E.category = 'Stationery' THEN E.amount END), 0) AS Stationery,
+            B.Others - IFNULL(SUM(CASE WHEN E.category = 'Others' THEN E.amount END), 0) AS Others
+        FROM Budget B
+        LEFT JOIN Expenses E ON B.user_id = E.user_id
+            AND strftime('%Y-%m', E.date) = strftime('%Y-%m', date('now'))
+        WHERE B.user_id = :UserID
+    )");
+
+    query.bindValue(":UserID", loggedInUserID);
+
+    if (query.exec() && query.next()) {
+        float MonthlyBudget = query.value("MonthlyBudget").toFloat();
+        float Rent = query.value("Rent").toFloat();
+        float Food = query.value("Food").toFloat();
+        float Utilities = query.value("Utilities").toFloat();
+        float Stationery = query.value("Stationery").toFloat();
+        float Others = query.value("Others").toFloat();
+
+        // Update UI labels
+        ui->RemainingBudget->setText("" + QString::number(MonthlyBudget, 'f', 2));
+        ui->Rent->setText("" + QString::number(Rent, 'f', 2));
+        ui->Food->setText("" + QString::number(Food, 'f', 2));
+        ui->Utilities->setText("" + QString::number(Utilities, 'f', 2));
+        ui->Stationary->setText(": " + QString::number(Stationery, 'f', 2));
+        ui->Others->setText("" + QString::number(Others, 'f', 2));
+    } else {
+        QMessageBox::critical(this, "Database Error", "Failed to fetch remaining budget: " + query.lastError().text());
+    }
+}
 
 
 void MainWindow::on_btnBack_clicked()
