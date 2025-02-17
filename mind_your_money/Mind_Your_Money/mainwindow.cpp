@@ -65,8 +65,8 @@ bool MainWindow::openDatabase()
     db = QSqlDatabase::addDatabase("QSQLITE");
 
     // Set the path to your SQLite database file
-    db.setDatabaseName("F:/Startingqt/Second sem project/EndSemProject-1/mind_your_money/database_Mind_your_Money.db");
-    //F:\Startingqt\Second sem project\EndSemProject-1\mind_your_money
+    db.setDatabaseName("C:/Users/Hp Victus/Desktop/End sem project/EndSemProject-1/mind_your_money/database_Mind_your_Money.db");
+
 
     // Attempt to open the database
     if (!db.open()) {
@@ -75,7 +75,7 @@ bool MainWindow::openDatabase()
     }
 
     qDebug() << "Database is connected successfully!";
-    return true;  // Return true if the connection is successful
+    return true;
 }
 
 MainWindow::~MainWindow()
@@ -124,7 +124,7 @@ void MainWindow::on_btnPrevGraphToWelcome_clicked()
 void MainWindow::on_btnLogout_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
-    //more code to do here
+
 }
 
 
@@ -245,10 +245,16 @@ void MainWindow::on_btnSignUpSave_clicked()
     float PFood = ui->txtPFood->text().toFloat();
     float PRent = ui->txtPRent->text().toFloat();
     float PUtilities = ui->txtPUtilities->text().toFloat();
-    float PStationary = ui->txtPstationary->text().toFloat();
-    float POthers = 100 - (PStationary + PRent + PFood + PUtilities);  // Ensure total is 100%
-
-    // Calculate the actual amounts for each category
+    float PStationary = ui->txtPStationary->text().toFloat();
+    float POthers;
+    if((PStationary + PRent + PFood + PUtilities)<100)
+    {
+    POthers = 100 - (PStationary + PRent + PFood + PUtilities);    // Ensure total is 100%
+    }
+    else{
+        POthers=0;
+    }
+    // Calculate the actual amounts for each category that the user has given
     float UFood = MonthlyBudget * PFood / 100;
     float URent = MonthlyBudget * PRent / 100;
     float UUtilities = (MonthlyBudget * PUtilities) / 100;
@@ -262,14 +268,14 @@ void MainWindow::on_btnSignUpSave_clicked()
     }
 
     if ((POthers + PStationary + PRent + PFood + PUtilities) != 100) {
-        QMessageBox::warning(this, "Invalid Input", "The total percentage must equal 100%");
+        QMessageBox::warning(this, "Invalid Input", "The total percentage must be 100%");
         return;
     }
 
     // Prepare the query to insert the data into the Budget table
     QSqlQuery qry(db);
     qry.prepare(R"(
-        INSERT INTO Budget (user_id, monthly_budget, rent_percentage, food_percentage, utilities_percentage, stationery_percentage, other_percentage)
+        INSERT INTO Budget (user_id, MonthlyBudget, Rent, Food, Utilities, Stationery, Others)
         VALUES (:UserID, :MonthlyBudget, :PRent, :PFood, :PUtilities, :PStationary, :POthers)
     )");
 
@@ -302,7 +308,7 @@ void MainWindow::on_btnSignUpSave_clicked()
         ui->txtPFood->clear();
         ui->txtPRent->clear();
         ui->txtPUtilities->clear();
-        ui->txtPstationary->clear();
+
         ui->txtMonthlyBudget->clear();
 
     } else {
