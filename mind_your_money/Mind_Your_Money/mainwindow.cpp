@@ -707,53 +707,62 @@ void MainWindow::on_btnBack_clicked()
 //exit buttons
 void MainWindow::on_Exit0_clicked()
 {
+    db.close();
     delete ui;
 }
 
 void MainWindow::on_Exit1_clicked()
 {
+    db.close();
     delete ui;
 }
 
 
 void MainWindow::on_Exit2_clicked()
 {
+    db.close();
     delete ui;
 }
 
 
 void MainWindow::on_Exit3_clicked()
 {
+    db.close();
     delete ui;
 }
 
 
 void MainWindow::on_Exit4_clicked()
 {
+    db.close();
     delete ui;
 }
 
 
 void MainWindow::on_Exit5_clicked()
 {
+    db.close();
     delete ui;
 }
 
 
 void MainWindow::on_Exit6_clicked()
 {
+    db.close();
     delete ui;
 }
 
 
 void MainWindow::on_Exit7_clicked()
 {
+    db.close();
     delete ui;
 }
 
 
 void MainWindow::on_Exit8_clicked()
 {
+    db.close();
     delete ui;
 }
 

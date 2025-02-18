@@ -233,6 +233,7 @@ public:
         txtPassword = new QLineEdit(formLayoutWidget);
         txtPassword->setObjectName("txtPassword");
         txtPassword->setFont(font2);
+        txtPassword->setEchoMode(QLineEdit::EchoMode::Password);
 
         formLayout->setWidget(1, QFormLayout::FieldRole, txtPassword);
 
