@@ -17,10 +17,10 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>20</y>
-      <width>911</width>
-      <height>651</height>
+      <x>0</x>
+      <y>0</y>
+      <width>941</width>
+      <height>661</height>
      </rect>
     </property>
     <property name="font">
@@ -33,16 +33,16 @@
      <enum>Qt::LayoutDirection::LeftToRight</enum>
     </property>
     <property name="currentIndex">
-     <number>6</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>350</x>
-        <y>20</y>
-        <width>351</width>
-        <height>101</height>
+        <x>10</x>
+        <y>0</y>
+        <width>931</width>
+        <height>71</height>
        </rect>
       </property>
       <property name="font">
@@ -52,16 +52,16 @@
        </font>
       </property>
       <property name="text">
-       <string>Mind Your Money </string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;Mind Your Money &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QWidget" name="formLayoutWidget">
       <property name="geometry">
        <rect>
-        <x>260</x>
-        <y>170</y>
+        <x>200</x>
+        <y>160</y>
         <width>531</width>
-        <height>91</height>
+        <height>81</height>
        </rect>
       </property>
       <layout class="QFormLayout" name="formLayout">
@@ -116,10 +116,10 @@
      <widget class="QWidget" name="horizontalLayoutWidget">
       <property name="geometry">
        <rect>
-        <x>260</x>
-        <y>290</y>
-        <width>521</width>
-        <height>55</height>
+        <x>290</x>
+        <y>260</y>
+        <width>441</width>
+        <height>51</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout">
@@ -137,19 +137,6 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btnLogin">
-         <property name="font">
-          <font>
-           <pointsize>20</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Login</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QPushButton" name="btnForgot">
          <property name="font">
           <font>
@@ -162,7 +149,46 @@
          </property>
         </widget>
        </item>
+       <item>
+        <widget class="QPushButton" name="btnLogin">
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Login</string>
+         </property>
+        </widget>
+       </item>
       </layout>
+     </widget>
+     <widget class="QPushButton" name="Exit0">
+      <property name="geometry">
+       <rect>
+        <x>900</x>
+        <y>0</y>
+        <width>41</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton
+{
+	color:black;
+	background-color:red;
+}</string>
+      </property>
+      <property name="text">
+       <string>X</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="page_2">
@@ -281,10 +307,10 @@
      <widget class="QLabel" name="label_14">
       <property name="geometry">
        <rect>
-        <x>420</x>
+        <x>10</x>
         <y>0</y>
-        <width>261</width>
-        <height>81</height>
+        <width>931</width>
+        <height>71</height>
        </rect>
       </property>
       <property name="font">
@@ -294,7 +320,7 @@
        </font>
       </property>
       <property name="text">
-       <string>SignUP Page</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;Sign Up Here!!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QWidget" name="horizontalLayoutWidget_10">
@@ -342,31 +368,38 @@
        </item>
       </layout>
      </widget>
-    </widget>
-    <widget class="QWidget" name="page_9">
-     <widget class="QPushButton" name="btnSignUpSave">
+     <widget class="QPushButton" name="Exit1">
       <property name="geometry">
        <rect>
-        <x>510</x>
-        <y>430</y>
-        <width>261</width>
-        <height>53</height>
+        <x>900</x>
+        <y>0</y>
+        <width>41</width>
+        <height>24</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>20</pointsize>
-        <bold>true</bold>
+        <pointsize>9</pointsize>
+        <bold>false</bold>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton
+{
+	color:black;
+	background-color:red;
+}</string>
+      </property>
       <property name="text">
-       <string>Save</string>
+       <string>X</string>
       </property>
      </widget>
+    </widget>
+    <widget class="QWidget" name="page_9">
      <widget class="QWidget" name="formLayoutWidget_6">
       <property name="geometry">
        <rect>
-        <x>170</x>
+        <x>140</x>
         <y>130</y>
         <width>651</width>
         <height>290</height>
@@ -451,26 +484,13 @@
        </item>
       </layout>
      </widget>
-     <widget class="QPushButton" name="btnBack">
-      <property name="geometry">
-       <rect>
-        <x>310</x>
-        <y>430</y>
-        <width>191</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Back</string>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_26">
       <property name="geometry">
        <rect>
-        <x>350</x>
-        <y>40</y>
-        <width>341</width>
-        <height>61</height>
+        <x>10</x>
+        <y>0</y>
+        <width>931</width>
+        <height>71</height>
        </rect>
       </property>
       <property name="font">
@@ -480,7 +500,65 @@
        </font>
       </property>
       <property name="text">
-       <string>Enter the details</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;Sign Up Here!!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="horizontalLayoutWidget_12">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>430</y>
+        <width>431</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_13">
+       <item>
+        <widget class="QPushButton" name="btnBack">
+         <property name="text">
+          <string>Back</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnSignUpSave">
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Save</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QPushButton" name="Exit2">
+      <property name="geometry">
+       <rect>
+        <x>900</x>
+        <y>0</y>
+        <width>41</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton
+{
+	color:black;
+	background-color:red;
+}</string>
+      </property>
+      <property name="text">
+       <string>X</string>
       </property>
      </widget>
     </widget>
@@ -543,10 +621,10 @@
      <widget class="QLabel" name="label_13">
       <property name="geometry">
        <rect>
-        <x>370</x>
-        <y>10</y>
-        <width>331</width>
-        <height>81</height>
+        <x>10</x>
+        <y>0</y>
+        <width>931</width>
+        <height>71</height>
        </rect>
       </property>
       <property name="font">
@@ -556,7 +634,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Forgot Password</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;Reset Your Password&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QWidget" name="horizontalLayoutWidget_3">
@@ -596,6 +674,32 @@
         </widget>
        </item>
       </layout>
+     </widget>
+     <widget class="QPushButton" name="Exit3">
+      <property name="geometry">
+       <rect>
+        <x>900</x>
+        <y>0</y>
+        <width>41</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton
+{
+	color:black;
+	background-color:red;
+}</string>
+      </property>
+      <property name="text">
+       <string>X</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="page_6">
@@ -646,10 +750,10 @@
      <widget class="QLabel" name="label_19">
       <property name="geometry">
        <rect>
-        <x>360</x>
-        <y>50</y>
-        <width>271</width>
-        <height>61</height>
+        <x>10</x>
+        <y>0</y>
+        <width>931</width>
+        <height>71</height>
        </rect>
       </property>
       <property name="font">
@@ -659,7 +763,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Change Password</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;Change Password&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QPushButton" name="btnChangePassword">
@@ -698,6 +802,32 @@
       </property>
       <property name="text">
        <string>Home</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="Exit4">
+      <property name="geometry">
+       <rect>
+        <x>900</x>
+        <y>0</y>
+        <width>41</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton
+{
+	color:black;
+	background-color:red;
+}</string>
+      </property>
+      <property name="text">
+       <string>X</string>
       </property>
      </widget>
     </widget>
@@ -1098,15 +1228,41 @@ color:red;
        </item>
       </layout>
      </widget>
+     <widget class="QPushButton" name="Exit5">
+      <property name="geometry">
+       <rect>
+        <x>900</x>
+        <y>0</y>
+        <width>41</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton
+{
+	color:black;
+	background-color:red;
+}</string>
+      </property>
+      <property name="text">
+       <string>X</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="page_5">
      <widget class="QLabel" name="label_16">
       <property name="geometry">
        <rect>
-        <x>370</x>
-        <y>10</y>
-        <width>241</width>
-        <height>81</height>
+        <x>10</x>
+        <y>0</y>
+        <width>931</width>
+        <height>71</height>
        </rect>
       </property>
       <property name="font">
@@ -1116,16 +1272,16 @@ color:red;
        </font>
       </property>
       <property name="text">
-       <string>Expenditure</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;Expenditure&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QWidget" name="formLayoutWidget_4">
       <property name="geometry">
        <rect>
-        <x>50</x>
-        <y>230</y>
-        <width>471</width>
-        <height>121</height>
+        <x>240</x>
+        <y>150</y>
+        <width>461</width>
+        <height>131</height>
        </rect>
       </property>
       <layout class="QFormLayout" name="formLayout_4">
@@ -1199,9 +1355,9 @@ color:red;
      <widget class="QWidget" name="horizontalLayoutWidget_5">
       <property name="geometry">
        <rect>
-        <x>50</x>
-        <y>370</y>
-        <width>471</width>
+        <x>240</x>
+        <y>280</y>
+        <width>461</width>
         <height>61</height>
        </rect>
       </property>
@@ -1237,6 +1393,32 @@ color:red;
        </item>
       </layout>
      </widget>
+     <widget class="QPushButton" name="Exit6">
+      <property name="geometry">
+       <rect>
+        <x>900</x>
+        <y>0</y>
+        <width>41</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton
+{
+	color:black;
+	background-color:red;
+}</string>
+      </property>
+      <property name="text">
+       <string>X</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="page_7">
      <widget class="QFrame" name="bargraph">
@@ -1269,32 +1451,84 @@ color:red;
        <string>Back</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="Exit7">
+      <property name="geometry">
+       <rect>
+        <x>900</x>
+        <y>0</y>
+        <width>41</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton
+{
+	color:black;
+	background-color:red;
+}</string>
+      </property>
+      <property name="text">
+       <string>X</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="page_8">
      <widget class="QLabel" name="label_23">
       <property name="geometry">
        <rect>
-        <x>350</x>
-        <y>30</y>
-        <width>241</width>
-        <height>51</height>
+        <x>10</x>
+        <y>0</y>
+        <width>931</width>
+        <height>71</height>
        </rect>
       </property>
       <property name="text">
-       <string>Expense Report</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;Expense Report&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QPushButton" name="btnEPush">
       <property name="geometry">
        <rect>
-        <x>770</x>
-        <y>560</y>
+        <x>10</x>
+        <y>590</y>
         <width>101</width>
         <height>51</height>
        </rect>
       </property>
       <property name="text">
        <string>Prev</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="Exit8">
+      <property name="geometry">
+       <rect>
+        <x>900</x>
+        <y>0</y>
+        <width>41</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton
+{
+	color:black;
+	background-color:red;
+}</string>
+      </property>
+      <property name="text">
+       <string>X</string>
       </property>
      </widget>
     </widget>
@@ -1306,7 +1540,7 @@ color:red;
      <x>0</x>
      <y>0</y>
      <width>945</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHome_Page">

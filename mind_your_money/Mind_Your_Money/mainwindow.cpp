@@ -65,7 +65,7 @@ bool MainWindow::openDatabase()
     db = QSqlDatabase::addDatabase("QSQLITE");
 
     // Set the path to your SQLite database file
-    db.setDatabaseName("C:/Users/Hp Victus/Desktop/End sem project/EndSemProject-1/mind_your_money/database_Mind_your_Money.db");
+    db.setDatabaseName("C:/Users/sakar/OneDrive/Documents/GitHub/EndSemProject-1/mind_your_money/database_Mind_your_Money.db");
 
 
     // Attempt to open the database
@@ -701,5 +701,59 @@ void MainWindow::displayRemainingBudget()
 void MainWindow::on_btnBack_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
+}
+
+
+//exit buttons
+void MainWindow::on_Exit0_clicked()
+{
+    delete ui;
+}
+
+void MainWindow::on_Exit1_clicked()
+{
+    delete ui;
+}
+
+
+void MainWindow::on_Exit2_clicked()
+{
+    delete ui;
+}
+
+
+void MainWindow::on_Exit3_clicked()
+{
+    delete ui;
+}
+
+
+void MainWindow::on_Exit4_clicked()
+{
+    delete ui;
+}
+
+
+void MainWindow::on_Exit5_clicked()
+{
+    delete ui;
+}
+
+
+void MainWindow::on_Exit6_clicked()
+{
+    delete ui;
+}
+
+
+void MainWindow::on_Exit7_clicked()
+{
+    delete ui;
+}
+
+
+void MainWindow::on_Exit8_clicked()
+{
+    delete ui;
 }
 
