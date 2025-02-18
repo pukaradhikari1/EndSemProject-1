@@ -109,6 +109,12 @@ void MainWindow::on_btnSignUpPrev_clicked()
 }
 void MainWindow::on_btnPrevExpenseWelcomeUser_clicked()
 {
+
+
+
+
+    displayRemainingBudget();
+
     ui->stackedWidget->setCurrentIndex(5);
 }
 
@@ -684,7 +690,7 @@ void MainWindow::displayRemainingBudget()
         ui->Rent->setText("" + QString::number(Rent, 'f', 2));
         ui->Food->setText("" + QString::number(Food, 'f', 2));
         ui->Utilities->setText("" + QString::number(Utilities, 'f', 2));
-        ui->Stationary->setText(": " + QString::number(Stationery, 'f', 2));
+        ui->Stationary->setText("" + QString::number(Stationery, 'f', 2));
         ui->Others->setText("" + QString::number(Others, 'f', 2));
     } else {
         QMessageBox::critical(this, "Database Error", "Failed to fetch remaining budget: " + query.lastError().text());
