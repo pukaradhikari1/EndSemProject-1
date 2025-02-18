@@ -296,11 +296,11 @@ void MainWindow::on_btnSignUpSave_clicked()
     // Bind values to the placeholders
     qry.bindValue(":UserID", loggedInUserID);
     qry.bindValue(":MonthlyBudget", MonthlyBudget);
-    qry.bindValue(":PRent", URent);
-    qry.bindValue(":PFood", UFood);
-    qry.bindValue(":PUtilities", UUtilities);
-    qry.bindValue(":PStationary", UStationary);
-    qry.bindValue(":POthers", UOthers);
+    qry.bindValue(":UFood", UFood);
+     qry.bindValue(":URent", URent);
+    qry.bindValue(":UUtilities", UUtilities);
+    qry.bindValue(":UStationary", UStationary);
+    qry.bindValue(":UOthers", UOthers);
 
     // Debugging: Log the prepared query and bound values
     qDebug() << "Prepared query: " << qry.lastQuery();
