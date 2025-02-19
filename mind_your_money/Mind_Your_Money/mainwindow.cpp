@@ -65,7 +65,7 @@ bool MainWindow::openDatabase()
     db = QSqlDatabase::addDatabase("QSQLITE");
 
     // Set the path to your SQLite database file
-    db.setDatabaseName("C:/Users/sakar/OneDrive/Documents/GitHub/EndSemProject-1/mind_your_money/database_Mind_your_Money.db");
+    db.setDatabaseName("C:/Users/Hp Victus/Desktop/End sem project/EndSemProject-1/mind_your_money/database_Mind_your_Money.db");
 
 
     // Attempt to open the database
@@ -88,7 +88,7 @@ void MainWindow::updateDateTime()
     // Get the current date and time
     QString currentDateTime = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
 
-    // Display it in the QLabel (assuming QLabel is named lblDateTime in your UI)
+    // Display it in the Qlabel The label name is date
     ui->date->setText(currentDateTime);
 }
 
@@ -698,10 +698,7 @@ void MainWindow::displayRemainingBudget()
 }
 
 
-void MainWindow::on_btnBack_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(1);
-}
+
 
 
 //exit buttons
@@ -764,5 +761,13 @@ void MainWindow::on_Exit8_clicked()
 {
     db.close();
     delete ui;
+}
+
+
+void MainWindow::on_btnHomepage_clicked()
+{
+
+
+    ui->stackedWidget->setCurrentIndex(0);
 }
 
