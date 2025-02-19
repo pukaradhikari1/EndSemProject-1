@@ -45,8 +45,8 @@ public:
     QWidget *horizontalLayoutWidget;
     QHBoxLayout *horizontalLayout;
     QPushButton *btnSignup;
-    QPushButton *btnForgot;
     QPushButton *btnLogin;
+    QPushButton *btnForgot;
     QPushButton *Exit0;
     QWidget *page_2;
     QWidget *formLayoutWidget_2;
@@ -84,7 +84,7 @@ public:
     QLabel *label_26;
     QWidget *horizontalLayoutWidget_12;
     QHBoxLayout *horizontalLayout_13;
-    QPushButton *btnBack;
+    QPushButton *btnHomepage;
     QPushButton *btnSignUpSave;
     QPushButton *Exit2;
     QWidget *page_4;
@@ -118,7 +118,6 @@ public:
     QPushButton *btnEnterExpense;
     QPushButton *btnGraph;
     QPushButton *btnStats;
-    QPushButton *btnEditExpense;
     QWidget *horizontalLayoutWidget_4;
     QHBoxLayout *horizontalLayout_4;
     QLabel *label_15;
@@ -188,7 +187,7 @@ public:
         centralwidget->setObjectName("centralwidget");
         stackedWidget = new QStackedWidget(centralwidget);
         stackedWidget->setObjectName("stackedWidget");
-        stackedWidget->setGeometry(QRect(0, 0, 941, 661));
+        stackedWidget->setGeometry(QRect(0, 20, 941, 651));
         QFont font;
         font.setPointSize(20);
         font.setBold(true);
@@ -198,48 +197,45 @@ public:
         page->setObjectName("page");
         label = new QLabel(page);
         label->setObjectName("label");
-        label->setGeometry(QRect(10, 0, 931, 71));
+        label->setGeometry(QRect(180, 50, 721, 71));
         QFont font1;
         font1.setPointSize(25);
         font1.setBold(true);
         label->setFont(font1);
         formLayoutWidget = new QWidget(page);
         formLayoutWidget->setObjectName("formLayoutWidget");
-        formLayoutWidget->setGeometry(QRect(200, 160, 531, 81));
+        formLayoutWidget->setGeometry(QRect(200, 160, 611, 113));
         formLayout = new QFormLayout(formLayoutWidget);
         formLayout->setObjectName("formLayout");
         formLayout->setContentsMargins(0, 0, 0, 0);
         label_2 = new QLabel(formLayoutWidget);
         label_2->setObjectName("label_2");
-        QFont font2;
-        font2.setPointSize(15);
-        font2.setBold(true);
-        label_2->setFont(font2);
+        label_2->setFont(font);
 
         formLayout->setWidget(0, QFormLayout::LabelRole, label_2);
 
         txtEmail = new QLineEdit(formLayoutWidget);
         txtEmail->setObjectName("txtEmail");
-        txtEmail->setFont(font2);
+        txtEmail->setFont(font);
 
         formLayout->setWidget(0, QFormLayout::FieldRole, txtEmail);
 
         label_3 = new QLabel(formLayoutWidget);
         label_3->setObjectName("label_3");
-        label_3->setFont(font2);
+        label_3->setFont(font);
 
         formLayout->setWidget(1, QFormLayout::LabelRole, label_3);
 
         txtPassword = new QLineEdit(formLayoutWidget);
         txtPassword->setObjectName("txtPassword");
-        txtPassword->setFont(font2);
+        txtPassword->setFont(font);
         txtPassword->setEchoMode(QLineEdit::EchoMode::Password);
 
         formLayout->setWidget(1, QFormLayout::FieldRole, txtPassword);
 
         horizontalLayoutWidget = new QWidget(page);
         horizontalLayoutWidget->setObjectName("horizontalLayoutWidget");
-        horizontalLayoutWidget->setGeometry(QRect(290, 260, 441, 51));
+        horizontalLayoutWidget->setGeometry(QRect(209, 280, 601, 55));
         horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
         horizontalLayout->setObjectName("horizontalLayout");
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
@@ -249,25 +245,25 @@ public:
 
         horizontalLayout->addWidget(btnSignup);
 
-        btnForgot = new QPushButton(horizontalLayoutWidget);
-        btnForgot->setObjectName("btnForgot");
-        btnForgot->setFont(font);
-
-        horizontalLayout->addWidget(btnForgot);
-
         btnLogin = new QPushButton(horizontalLayoutWidget);
         btnLogin->setObjectName("btnLogin");
         btnLogin->setFont(font);
 
         horizontalLayout->addWidget(btnLogin);
 
+        btnForgot = new QPushButton(horizontalLayoutWidget);
+        btnForgot->setObjectName("btnForgot");
+        btnForgot->setFont(font);
+
+        horizontalLayout->addWidget(btnForgot);
+
         Exit0 = new QPushButton(page);
         Exit0->setObjectName("Exit0");
         Exit0->setGeometry(QRect(900, 0, 41, 24));
-        QFont font3;
-        font3.setPointSize(9);
-        font3.setBold(false);
-        Exit0->setFont(font3);
+        QFont font2;
+        font2.setPointSize(9);
+        font2.setBold(false);
+        Exit0->setFont(font2);
         Exit0->setStyleSheet(QString::fromUtf8("QPushButton\n"
 "{\n"
 "	color:black;\n"
@@ -284,7 +280,10 @@ public:
         formLayout_2->setContentsMargins(0, 0, 0, 0);
         label_4 = new QLabel(formLayoutWidget_2);
         label_4->setObjectName("label_4");
-        label_4->setFont(font2);
+        QFont font3;
+        font3.setPointSize(18);
+        font3.setBold(true);
+        label_4->setFont(font3);
 
         formLayout_2->setWidget(0, QFormLayout::LabelRole, label_4);
 
@@ -295,7 +294,7 @@ public:
 
         label_6 = new QLabel(formLayoutWidget_2);
         label_6->setObjectName("label_6");
-        label_6->setFont(font2);
+        label_6->setFont(font3);
 
         formLayout_2->setWidget(1, QFormLayout::LabelRole, label_6);
 
@@ -306,7 +305,7 @@ public:
 
         label_7 = new QLabel(formLayoutWidget_2);
         label_7->setObjectName("label_7");
-        label_7->setFont(font2);
+        label_7->setFont(font3);
 
         formLayout_2->setWidget(2, QFormLayout::LabelRole, label_7);
 
@@ -317,7 +316,7 @@ public:
 
         label_8 = new QLabel(formLayoutWidget_2);
         label_8->setObjectName("label_8");
-        label_8->setFont(font2);
+        label_8->setFont(font3);
 
         formLayout_2->setWidget(3, QFormLayout::LabelRole, label_8);
 
@@ -328,7 +327,7 @@ public:
 
         label_9 = new QLabel(formLayoutWidget_2);
         label_9->setObjectName("label_9");
-        label_9->setFont(font2);
+        label_9->setFont(font3);
 
         formLayout_2->setWidget(4, QFormLayout::LabelRole, label_9);
 
@@ -367,7 +366,7 @@ public:
         Exit1 = new QPushButton(page_2);
         Exit1->setObjectName("Exit1");
         Exit1->setGeometry(QRect(900, 0, 41, 24));
-        Exit1->setFont(font3);
+        Exit1->setFont(font2);
         Exit1->setStyleSheet(QString::fromUtf8("QPushButton\n"
 "{\n"
 "	color:black;\n"
@@ -439,14 +438,14 @@ public:
         label_26->setFont(font1);
         horizontalLayoutWidget_12 = new QWidget(page_9);
         horizontalLayoutWidget_12->setObjectName("horizontalLayoutWidget_12");
-        horizontalLayoutWidget_12->setGeometry(QRect(360, 430, 431, 80));
+        horizontalLayoutWidget_12->setGeometry(QRect(360, 440, 431, 61));
         horizontalLayout_13 = new QHBoxLayout(horizontalLayoutWidget_12);
         horizontalLayout_13->setObjectName("horizontalLayout_13");
         horizontalLayout_13->setContentsMargins(0, 0, 0, 0);
-        btnBack = new QPushButton(horizontalLayoutWidget_12);
-        btnBack->setObjectName("btnBack");
+        btnHomepage = new QPushButton(horizontalLayoutWidget_12);
+        btnHomepage->setObjectName("btnHomepage");
 
-        horizontalLayout_13->addWidget(btnBack);
+        horizontalLayout_13->addWidget(btnHomepage);
 
         btnSignUpSave = new QPushButton(horizontalLayoutWidget_12);
         btnSignUpSave->setObjectName("btnSignUpSave");
@@ -457,7 +456,7 @@ public:
         Exit2 = new QPushButton(page_9);
         Exit2->setObjectName("Exit2");
         Exit2->setGeometry(QRect(900, 0, 41, 24));
-        Exit2->setFont(font3);
+        Exit2->setFont(font2);
         Exit2->setStyleSheet(QString::fromUtf8("QPushButton\n"
 "{\n"
 "	color:black;\n"
@@ -484,13 +483,16 @@ public:
 
         label_11 = new QLabel(formLayoutWidget_3);
         label_11->setObjectName("label_11");
-        label_11->setFont(font2);
+        QFont font4;
+        font4.setPointSize(15);
+        font4.setBold(true);
+        label_11->setFont(font4);
 
         formLayout_3->setWidget(0, QFormLayout::LabelRole, label_11);
 
         label_12 = new QLabel(formLayoutWidget_3);
         label_12->setObjectName("label_12");
-        label_12->setFont(font2);
+        label_12->setFont(font4);
 
         formLayout_3->setWidget(1, QFormLayout::LabelRole, label_12);
 
@@ -519,7 +521,7 @@ public:
         Exit3 = new QPushButton(page_4);
         Exit3->setObjectName("Exit3");
         Exit3->setGeometry(QRect(900, 0, 41, 24));
-        Exit3->setFont(font3);
+        Exit3->setFont(font2);
         Exit3->setStyleSheet(QString::fromUtf8("QPushButton\n"
 "{\n"
 "	color:black;\n"
@@ -562,16 +564,16 @@ public:
         label_19->setFont(font);
         btnChangePassword = new QPushButton(page_6);
         btnChangePassword->setObjectName("btnChangePassword");
-        btnChangePassword->setGeometry(QRect(700, 310, 101, 29));
-        btnChangePassword->setFont(font2);
+        btnChangePassword->setGeometry(QRect(690, 310, 121, 41));
+        btnChangePassword->setFont(font);
         btnHome = new QPushButton(page_6);
         btnHome->setObjectName("btnHome");
-        btnHome->setGeometry(QRect(592, 310, 81, 31));
-        btnHome->setFont(font2);
+        btnHome->setGeometry(QRect(562, 310, 111, 41));
+        btnHome->setFont(font);
         Exit4 = new QPushButton(page_6);
         Exit4->setObjectName("Exit4");
         Exit4->setGeometry(QRect(900, 0, 41, 24));
-        Exit4->setFont(font3);
+        Exit4->setFont(font2);
         Exit4->setStyleSheet(QString::fromUtf8("QPushButton\n"
 "{\n"
 "	color:black;\n"
@@ -582,11 +584,11 @@ public:
         page_3->setObjectName("page_3");
         label_10 = new QLabel(page_3);
         label_10->setObjectName("label_10");
-        label_10->setGeometry(QRect(20, -10, 181, 121));
-        QFont font4;
-        font4.setPointSize(24);
-        font4.setBold(true);
-        label_10->setFont(font4);
+        label_10->setGeometry(QRect(40, 10, 181, 121));
+        QFont font5;
+        font5.setPointSize(24);
+        font5.setBold(true);
+        label_10->setFont(font5);
         verticalLayoutWidget_2 = new QWidget(page_3);
         verticalLayoutWidget_2->setObjectName("verticalLayoutWidget_2");
         verticalLayoutWidget_2->setGeometry(QRect(10, 160, 255, 460));
@@ -612,12 +614,6 @@ public:
 
         verticalLayout_2->addWidget(btnStats);
 
-        btnEditExpense = new QPushButton(verticalLayoutWidget_2);
-        btnEditExpense->setObjectName("btnEditExpense");
-        btnEditExpense->setFont(font);
-
-        verticalLayout_2->addWidget(btnEditExpense);
-
         horizontalLayoutWidget_4 = new QWidget(page_3);
         horizontalLayoutWidget_4->setObjectName("horizontalLayoutWidget_4");
         horizontalLayoutWidget_4->setGeometry(QRect(540, 40, 321, 51));
@@ -628,7 +624,7 @@ public:
         label_15 = new QLabel(horizontalLayoutWidget_4);
         label_15->setObjectName("label_15");
         label_15->setMaximumSize(QSize(80, 16777215));
-        label_15->setFont(font2);
+        label_15->setFont(font4);
         label_15->setStyleSheet(QString::fromUtf8("QLabel\n"
 "{\n"
 "color:red;\n"
@@ -638,10 +634,10 @@ public:
 
         date = new QLabel(horizontalLayoutWidget_4);
         date->setObjectName("date");
-        QFont font5;
-        font5.setPointSize(16);
-        font5.setBold(true);
-        date->setFont(font5);
+        QFont font6;
+        font6.setPointSize(16);
+        font6.setBold(true);
+        date->setFont(font6);
         date->setStyleSheet(QString::fromUtf8("QLabel\n"
 "{\n"
 "color:red;\n"
@@ -656,7 +652,7 @@ public:
         btnLogout = new QPushButton(page_3);
         btnLogout->setObjectName("btnLogout");
         btnLogout->setGeometry(QRect(720, 580, 191, 41));
-        btnLogout->setFont(font2);
+        btnLogout->setFont(font4);
         name = new QLabel(page_3);
         name->setObjectName("name");
         name->setGeometry(QRect(230, 10, 151, 41));
@@ -733,7 +729,15 @@ public:
         label_28->setGeometry(QRect(470, 90, 431, 61));
         RemainingBudget = new QLabel(page_3);
         RemainingBudget->setObjectName("RemainingBudget");
-        RemainingBudget->setGeometry(QRect(590, 160, 151, 31));
+        RemainingBudget->setGeometry(QRect(590, 160, 221, 51));
+        QFont font7;
+        font7.setPointSize(15);
+        font7.setBold(false);
+        RemainingBudget->setFont(font7);
+        RemainingBudget->setStyleSheet(QString::fromUtf8("QLabel\n"
+"{\n"
+"color:red;\n"
+"};"));
         horizontalLayoutWidget_11 = new QWidget(page_3);
         horizontalLayoutWidget_11->setObjectName("horizontalLayoutWidget_11");
         horizontalLayoutWidget_11->setGeometry(QRect(470, 480, 381, 46));
@@ -771,7 +775,7 @@ public:
         Exit5 = new QPushButton(page_3);
         Exit5->setObjectName("Exit5");
         Exit5->setGeometry(QRect(900, 0, 41, 24));
-        Exit5->setFont(font3);
+        Exit5->setFont(font2);
         Exit5->setStyleSheet(QString::fromUtf8("QPushButton\n"
 "{\n"
 "	color:black;\n"
@@ -839,7 +843,7 @@ public:
         Exit6 = new QPushButton(page_5);
         Exit6->setObjectName("Exit6");
         Exit6->setGeometry(QRect(900, 0, 41, 24));
-        Exit6->setFont(font3);
+        Exit6->setFont(font2);
         Exit6->setStyleSheet(QString::fromUtf8("QPushButton\n"
 "{\n"
 "	color:black;\n"
@@ -856,11 +860,11 @@ public:
         btnPrevGraphToWelcome = new QPushButton(page_7);
         btnPrevGraphToWelcome->setObjectName("btnPrevGraphToWelcome");
         btnPrevGraphToWelcome->setGeometry(QRect(800, 610, 93, 29));
-        btnPrevGraphToWelcome->setFont(font2);
+        btnPrevGraphToWelcome->setFont(font4);
         Exit7 = new QPushButton(page_7);
         Exit7->setObjectName("Exit7");
         Exit7->setGeometry(QRect(900, 0, 41, 24));
-        Exit7->setFont(font3);
+        Exit7->setFont(font2);
         Exit7->setStyleSheet(QString::fromUtf8("QPushButton\n"
 "{\n"
 "	color:black;\n"
@@ -878,7 +882,7 @@ public:
         Exit8 = new QPushButton(page_8);
         Exit8->setObjectName("Exit8");
         Exit8->setGeometry(QRect(900, 0, 41, 24));
-        Exit8->setFont(font3);
+        Exit8->setFont(font2);
         Exit8->setStyleSheet(QString::fromUtf8("QPushButton\n"
 "{\n"
 "	color:black;\n"
@@ -888,7 +892,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 945, 21));
+        menubar->setGeometry(QRect(0, 0, 945, 25));
         menuHome_Page = new QMenu(menubar);
         menuHome_Page->setObjectName("menuHome_Page");
         MainWindow->setMenuBar(menubar);
@@ -913,14 +917,14 @@ public:
         label_2->setText(QCoreApplication::translate("MainWindow", "Email", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "Password", nullptr));
         btnSignup->setText(QCoreApplication::translate("MainWindow", "SignUp", nullptr));
-        btnForgot->setText(QCoreApplication::translate("MainWindow", "ForgotPassword", nullptr));
         btnLogin->setText(QCoreApplication::translate("MainWindow", "Login", nullptr));
+        btnForgot->setText(QCoreApplication::translate("MainWindow", "ForgotPassword", nullptr));
         Exit0->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
         label_4->setText(QCoreApplication::translate("MainWindow", "First Name", nullptr));
         txtFirstName->setPlaceholderText(QCoreApplication::translate("MainWindow", "EG: JOHN", nullptr));
         label_6->setText(QCoreApplication::translate("MainWindow", "Last Name", nullptr));
         txtLastName->setPlaceholderText(QCoreApplication::translate("MainWindow", "EG: NEPAL", nullptr));
-        label_7->setText(QCoreApplication::translate("MainWindow", "Email Address", nullptr));
+        label_7->setText(QCoreApplication::translate("MainWindow", "Email ", nullptr));
         txtEmailA->setPlaceholderText(QCoreApplication::translate("MainWindow", "xyz@gmail.com", nullptr));
         label_8->setText(QCoreApplication::translate("MainWindow", "Phone Number", nullptr));
         txtPhone->setPlaceholderText(QCoreApplication::translate("MainWindow", "98000000000", nullptr));
@@ -942,7 +946,7 @@ public:
         txtPStationary->setPlaceholderText(QCoreApplication::translate("MainWindow", "In Percentage", nullptr));
         label_25->setText(QCoreApplication::translate("MainWindow", "Stationery", nullptr));
         label_26->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:36pt;\">Sign Up Here!!</span></p></body></html>", nullptr));
-        btnBack->setText(QCoreApplication::translate("MainWindow", "Back", nullptr));
+        btnHomepage->setText(QCoreApplication::translate("MainWindow", "Home", nullptr));
         btnSignUpSave->setText(QCoreApplication::translate("MainWindow", "Save", nullptr));
         Exit2->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
         txtFEmail->setText(QString());
@@ -964,7 +968,6 @@ public:
         btnEnterExpense->setText(QCoreApplication::translate("MainWindow", "Enter Expense", nullptr));
         btnGraph->setText(QCoreApplication::translate("MainWindow", "Generate Graph", nullptr));
         btnStats->setText(QCoreApplication::translate("MainWindow", "Stats", nullptr));
-        btnEditExpense->setText(QCoreApplication::translate("MainWindow", "Edit Expense", nullptr));
         label_15->setText(QCoreApplication::translate("MainWindow", "Date:", nullptr));
         date->setText(QString());
         labelUserName->setText(QString());

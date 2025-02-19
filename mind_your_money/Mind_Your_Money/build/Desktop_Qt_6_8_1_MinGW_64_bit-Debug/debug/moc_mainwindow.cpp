@@ -60,7 +60,6 @@ static constexpr auto qt_meta_stringdata_ZN10MainWindowE = QtMocHelpers::stringD
     "on_btnEPush_clicked",
     "on_btnPrevGraphToWelcome_clicked",
     "on_btnNext_clicked",
-    "on_btnBack_clicked",
     "on_Exit0_clicked",
     "on_Exit1_clicked",
     "on_Exit2_clicked",
@@ -69,7 +68,8 @@ static constexpr auto qt_meta_stringdata_ZN10MainWindowE = QtMocHelpers::stringD
     "on_Exit5_clicked",
     "on_Exit6_clicked",
     "on_Exit7_clicked",
-    "on_Exit8_clicked"
+    "on_Exit8_clicked",
+    "on_btnHomepage_clicked"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -208,8 +208,6 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_btnNext_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'on_btnBack_clicked'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_Exit0_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_Exit1_clicked'
@@ -227,6 +225,8 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         // method 'on_Exit7_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_Exit8_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_btnHomepage_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -258,16 +258,16 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 18: _t->on_btnEPush_clicked(); break;
         case 19: _t->on_btnPrevGraphToWelcome_clicked(); break;
         case 20: _t->on_btnNext_clicked(); break;
-        case 21: _t->on_btnBack_clicked(); break;
-        case 22: _t->on_Exit0_clicked(); break;
-        case 23: _t->on_Exit1_clicked(); break;
-        case 24: _t->on_Exit2_clicked(); break;
-        case 25: _t->on_Exit3_clicked(); break;
-        case 26: _t->on_Exit4_clicked(); break;
-        case 27: _t->on_Exit5_clicked(); break;
-        case 28: _t->on_Exit6_clicked(); break;
-        case 29: _t->on_Exit7_clicked(); break;
-        case 30: _t->on_Exit8_clicked(); break;
+        case 21: _t->on_Exit0_clicked(); break;
+        case 22: _t->on_Exit1_clicked(); break;
+        case 23: _t->on_Exit2_clicked(); break;
+        case 24: _t->on_Exit3_clicked(); break;
+        case 25: _t->on_Exit4_clicked(); break;
+        case 26: _t->on_Exit5_clicked(); break;
+        case 27: _t->on_Exit6_clicked(); break;
+        case 28: _t->on_Exit7_clicked(); break;
+        case 29: _t->on_Exit8_clicked(); break;
+        case 30: _t->on_btnHomepage_clicked(); break;
         default: ;
         }
     }

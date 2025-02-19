@@ -66,7 +66,6 @@ private slots:
 
     void on_btnNext_clicked();
 
-    void on_btnBack_clicked();
 
     void on_Exit0_clicked();
     void on_Exit1_clicked();
