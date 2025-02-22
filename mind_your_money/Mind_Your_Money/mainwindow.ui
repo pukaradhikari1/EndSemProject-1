@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>20</y>
+      <y>0</y>
       <width>941</width>
       <height>651</height>
      </rect>
@@ -33,15 +33,15 @@
      <enum>Qt::LayoutDirection::LeftToRight</enum>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>180</x>
-        <y>50</y>
-        <width>721</width>
+        <x>10</x>
+        <y>0</y>
+        <width>931</width>
         <height>71</height>
        </rect>
       </property>
@@ -472,7 +472,7 @@
         </widget>
        </item>
        <item row="4" column="1">
-        <widget class="QLineEdit" name="txtPStationary">
+        <widget class="QLineEdit" name="txtPStationery">
          <property name="placeholderText">
           <string>In Percentage</string>
          </property>
@@ -637,7 +637,7 @@
        </font>
       </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;Reset Your Password&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;Reset Your Password&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QWidget" name="horizontalLayoutWidget_3">
@@ -838,10 +838,10 @@
      <widget class="QLabel" name="label_10">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>10</y>
+        <x>0</x>
+        <y>0</y>
         <width>181</width>
-        <height>121</height>
+        <height>51</height>
        </rect>
       </property>
       <property name="font">
@@ -851,7 +851,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Welcome</string>
+       <string>Welcome,</string>
       </property>
      </widget>
      <widget class="QWidget" name="verticalLayoutWidget_2">
@@ -970,10 +970,10 @@ color:red;
      <widget class="QLabel" name="labelUserName">
       <property name="geometry">
        <rect>
-        <x>270</x>
-        <y>30</y>
+        <x>170</x>
+        <y>0</y>
         <width>171</width>
-        <height>41</height>
+        <height>51</height>
        </rect>
       </property>
       <property name="font">
@@ -1008,8 +1008,8 @@ color:red;
      <widget class="QLabel" name="name">
       <property name="geometry">
        <rect>
-        <x>230</x>
-        <y>10</y>
+        <x>300</x>
+        <y>310</y>
         <width>151</width>
         <height>41</height>
        </rect>
@@ -1188,12 +1188,12 @@ color:red;
        <item>
         <widget class="QLabel" name="label_32">
          <property name="text">
-          <string>Stationary</string>
+          <string>Stationery</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="Stationary">
+        <widget class="QLabel" name="Stationery">
          <property name="text">
           <string/>
          </property>
@@ -1330,7 +1330,7 @@ color:red;
          </item>
          <item>
           <property name="text">
-           <string>Stationary</string>
+           <string>Stationery</string>
           </property>
          </item>
          <item>
@@ -1437,8 +1437,8 @@ color:red;
      <widget class="QPushButton" name="btnPrevGraphToWelcome">
       <property name="geometry">
        <rect>
-        <x>800</x>
-        <y>610</y>
+        <x>10</x>
+        <y>620</y>
         <width>93</width>
         <height>29</height>
        </rect>
@@ -1477,6 +1477,25 @@ color:red;
       </property>
       <property name="text">
        <string>X</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_LineGraph">
+      <property name="geometry">
+       <rect>
+        <x>830</x>
+        <y>620</y>
+        <width>93</width>
+        <height>29</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Line Graph</string>
       </property>
      </widget>
     </widget>
@@ -1534,6 +1553,58 @@ color:red;
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="page_10">
+     <widget class="QLabel" name="label_29">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>931</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;Line Graph&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="Exit9">
+      <property name="geometry">
+       <rect>
+        <x>900</x>
+        <y>0</y>
+        <width>41</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton
+{
+	color:black;
+	background-color:red;
+}</string>
+      </property>
+      <property name="text">
+       <string>X</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="lineGraphWidget" native="true">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>80</y>
+        <width>881</width>
+        <height>541</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_14"/>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -1542,7 +1613,7 @@ color:red;
      <x>0</x>
      <y>0</y>
      <width>945</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHome_Page">

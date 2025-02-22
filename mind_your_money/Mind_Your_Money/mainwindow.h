@@ -8,6 +8,13 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 
+//header files for line graph
+#include <QtCharts/QChart>
+#include <QtCharts/QChartView>
+#include <QtCharts/QLineSeries>
+#include <QtCharts/QDateTimeAxis>
+#include <QtCharts/QValueAxis>
+
 //header files for graph
 #include <QtCharts/QChartView>
 #include <QtCharts/QBarSeries>
@@ -80,6 +87,10 @@ private slots:
     void on_Exit8_clicked();
 
     void on_btnHomepage_clicked();
+
+    void on_Exit9_clicked();
+
+    void on_btn_LineGraph_clicked();
 
 private:
     int currentUserID = -1;
