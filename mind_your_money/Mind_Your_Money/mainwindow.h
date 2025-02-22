@@ -5,6 +5,8 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlError>
+#include <QSqlQuery>
+#include <QSqlRecord>
 
 //header files for graph
 #include <QtCharts/QChartView>

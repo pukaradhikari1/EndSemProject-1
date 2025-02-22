@@ -65,7 +65,7 @@ bool MainWindow::openDatabase()
     db = QSqlDatabase::addDatabase("QSQLITE");
 
     // Set the path to your SQLite database file
-    db.setDatabaseName("C:/Users/sakar/OneDrive/Documents/GitHub/EndSemProject-1/mind_your_money/database_Mind_your_Money.db");
+    db.setDatabaseName("F:/Startingqt/Second sem Project/EndSemProject-1/mind_your_money/database_Mind_your_Money.db");
 
 
     // Attempt to open the database
@@ -109,12 +109,8 @@ void MainWindow::on_btnSignUpPrev_clicked()
 }
 void MainWindow::on_btnPrevExpenseWelcomeUser_clicked()
 {
-
-
-
-
+    //Updating the home page
     displayRemainingBudget();
-
     ui->stackedWidget->setCurrentIndex(5);
 }
 
@@ -126,13 +122,16 @@ void MainWindow::on_btnPrevGraphToWelcome_clicked()
 {
     ui->stackedWidget->setCurrentIndex(5);
 }
-
+//log out button done
 void MainWindow::on_btnLogout_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
+    //Reseting the values
+    ui->txtPasswords->clear();
+    ui->txtEmailA->clear();
+    loggedInUserID=-1;
 
 }
-
 
 
 //Code For monthly report
@@ -407,11 +406,10 @@ void MainWindow::on_btnNext_clicked()
     // Navigate to the next page in the UI
     ui->stackedWidget->setCurrentIndex(2);  // Assuming the next page is at index 2
 }
-
-//Save Expense Button: code done
+//Save Expense button.
 void MainWindow::on_btnSaveExpense_clicked()
 {
-    if (loggedInUserID == -1) {  // Ensure a user is logged in
+    if (loggedInUserID == -1) {
         QMessageBox::critical(this, "Error", "No user is currently logged in.");
         return;
     }
@@ -419,7 +417,6 @@ void MainWindow::on_btnSaveExpense_clicked()
     QString category = ui->ExpenseName->currentText();
     QString amountText = ui->LineEditAmount->text();
 
-    // Validate the amount input
     bool isAmountValid = false;
     float amount = amountText.toFloat(&isAmountValid);
 
@@ -428,74 +425,74 @@ void MainWindow::on_btnSaveExpense_clicked()
         return;
     }
 
-    // Get current date in "yyyy-MM-dd" format (e.g., "2025-02-15")
     QString currentDate = QDate::currentDate().toString("yyyy-MM-dd");
 
-    // Check if an expense for this category already exists for the current month
+    // Check if a row for today exists
     QSqlQuery checkQuery(db);
     checkQuery.prepare(R"(
-        SELECT id, amount FROM Expenses
-        WHERE user_id = :UserID AND category = :Category AND strftime('%Y-%m', date) = strftime('%Y-%m', :CurrentDate)
+        SELECT Food, Rent, Stationary, Utilities, Others
+        FROM Expenses
+        WHERE user_id = :UserID AND Date = :CurrentDate
     )");
     checkQuery.bindValue(":UserID", loggedInUserID);
-    checkQuery.bindValue(":Category", category);
     checkQuery.bindValue(":CurrentDate", currentDate);
 
     if (!checkQuery.exec()) {
         QMessageBox::critical(this, "Database Error", "Failed to check existing expenses: " + checkQuery.lastError().text());
-        qDebug() << "Error checking existing expenses:" << checkQuery.lastError().text();
         return;
     }
 
-    // If an expense already exists for the current month and category, update the amount
     if (checkQuery.next()) {
-        int expenseId = checkQuery.value("id").toInt();
-        float existingAmount = checkQuery.value("amount").toFloat();
-        float newAmount = existingAmount + amount;  // Add the new amount to the existing one
+        // Row exists: Update existing record
+        int columnIndex = checkQuery.record().indexOf(category);
+        float existingCategoryAmount = checkQuery.value(columnIndex).toFloat();
+        float newCategoryAmount = existingCategoryAmount + amount;
 
-        // Update the existing expense record
         QSqlQuery updateQuery(db);
-        updateQuery.prepare(R"(
+        updateQuery.prepare(QString(R"(
             UPDATE Expenses
-            SET amount = :Amount
-            WHERE id = :ExpenseID
-        )");
-        updateQuery.bindValue(":Amount", newAmount);
-        updateQuery.bindValue(":ExpenseID", expenseId);
+            SET %1 = :NewCategoryAmount
+            WHERE user_id = :UserID AND Date = :CurrentDate
+        )").arg(category));
+
+        updateQuery.bindValue(":NewCategoryAmount", newCategoryAmount);
+        updateQuery.bindValue(":UserID", loggedInUserID);
+        updateQuery.bindValue(":CurrentDate", currentDate);
 
         if (updateQuery.exec()) {
-            QMessageBox::information(this, "Success", QString("Expense updated successfully! New total for %1: %2").arg(category).arg(newAmount));
-            qDebug() << "Expense updated successfully!";
+            QMessageBox::information(this, "Success", QString("Expense for '%1' updated successfully!").arg(category));
         } else {
             QMessageBox::critical(this, "Database Error", "Failed to update expense: " + updateQuery.lastError().text());
-            qDebug() << "Error updating expense:" << updateQuery.lastError().text();
         }
 
     } else {
-        // If no entry exists for the current month and category, insert a new row
+        // No entry for today: Insert a new record
         QSqlQuery insertQuery(db);
         insertQuery.prepare(R"(
-            INSERT INTO Expenses (user_id, date, category, amount)
-            VALUES (:UserID, :Date, :Category, :Amount)
+            INSERT INTO Expenses (user_id, Date, Food, Rent, Stationary, Utilities, Others)
+            VALUES (:UserID, :Date, :Food, :Rent, :Stationary, :Utilities, :Others)
         )");
+
         insertQuery.bindValue(":UserID", loggedInUserID);
-        insertQuery.bindValue(":Date", currentDate);  // Store the current date
-        insertQuery.bindValue(":Category", category);
-        insertQuery.bindValue(":Amount", amount);
+        insertQuery.bindValue(":Date", currentDate);
+        insertQuery.bindValue(":Food", (category == "Food") ? amount : 0);
+        insertQuery.bindValue(":Rent", (category == "Rent") ? amount : 0);
+        insertQuery.bindValue(":Stationary", (category == "Stationary") ? amount : 0);
+        insertQuery.bindValue(":Utilities", (category == "Utilities") ? amount : 0);
+        insertQuery.bindValue(":Others", (category == "Others") ? amount : 0);
 
         if (insertQuery.exec()) {
-            QMessageBox::information(this, "Success", "Expense saved successfully!");
-            qDebug() << "Expense saved successfully!";
+            QMessageBox::information(this, "Success", "New expense entry added for today!");
         } else {
             QMessageBox::critical(this, "Database Error", "Failed to save expense: " + insertQuery.lastError().text());
-            qDebug() << "Error saving expense:" << insertQuery.lastError().text();
         }
     }
 
-    // Clear the input fields
+    // Clear input fields
     ui->LineEditAmount->clear();
     ui->ExpenseName->setCurrentIndex(0);
 }
+
 
 //User login button: code done
 void MainWindow::on_btnLogin_clicked()
@@ -663,39 +660,41 @@ void MainWindow::displayRemainingBudget()
     QSqlQuery query(db);
     query.prepare(R"(
         SELECT
-            B.MonthlyBudget - IFNULL(SUM(E.amount), 0) AS MonthlyBudget,
-            B.Rent - IFNULL(SUM(CASE WHEN E.category = 'Rent' THEN E.amount END), 0) AS Rent,
-            B.Food - IFNULL(SUM(CASE WHEN E.category = 'Food' THEN E.amount END), 0) AS Food,
-            B.Utilities - IFNULL(SUM(CASE WHEN E.category = 'Utilities' THEN E.amount END), 0) AS Utilities,
-            B.Stationery - IFNULL(SUM(CASE WHEN E.category = 'Stationery' THEN E.amount END), 0) AS Stationery,
-            B.Others - IFNULL(SUM(CASE WHEN E.category = 'Others' THEN E.amount END), 0) AS Others
+            B.MonthlyBudget - IFNULL(SUM(E.Total), 0) AS RemainingMonthlyBudget,
+            B.Rent - IFNULL(SUM(E.Rent), 0) AS RemainingRent,
+            B.Food - IFNULL(SUM(E.Food), 0) AS RemainingFood,
+            B.Utilities - IFNULL(SUM(E.Utilities), 0) AS RemainingUtilities,
+            B.Stationary - IFNULL(SUM(E.Stationary), 0) AS RemainingStationary,
+            B.Others - IFNULL(SUM(E.Others), 0) AS RemainingOthers
         FROM Budget B
         LEFT JOIN Expenses E ON B.user_id = E.user_id
-            AND strftime('%Y-%m', E.date) = strftime('%Y-%m', date('now'))
+            AND strftime('%Y-%m', E.Date) = strftime('%Y-%m', date('now'))
         WHERE B.user_id = :UserID
     )");
 
     query.bindValue(":UserID", loggedInUserID);
 
     if (query.exec() && query.next()) {
-        float MonthlyBudget = query.value("MonthlyBudget").toFloat();
-        float Rent = query.value("Rent").toFloat();
-        float Food = query.value("Food").toFloat();
-        float Utilities = query.value("Utilities").toFloat();
-        float Stationery = query.value("Stationery").toFloat();
-        float Others = query.value("Others").toFloat();
+        float RemainingMonthlyBudget = query.value("RemainingMonthlyBudget").toFloat();
+        float RemainingRent = query.value("RemainingRent").toFloat();
+        float RemainingFood = query.value("RemainingFood").toFloat();
+        float RemainingUtilities = query.value("RemainingUtilities").toFloat();
+        float RemainingStationary = query.value("RemainingStationary").toFloat();
+        float RemainingOthers = query.value("RemainingOthers").toFloat();
 
         // Update UI labels
-        ui->RemainingBudget->setText("" + QString::number(MonthlyBudget, 'f', 2));
-        ui->Rent->setText("" + QString::number(Rent, 'f', 2));
-        ui->Food->setText("" + QString::number(Food, 'f', 2));
-        ui->Utilities->setText("" + QString::number(Utilities, 'f', 2));
-        ui->Stationary->setText("" + QString::number(Stationery, 'f', 2));
-        ui->Others->setText("" + QString::number(Others, 'f', 2));
+        ui->RemainingBudget->setText(QString::number(RemainingMonthlyBudget, 'f', 2));
+        ui->Rent->setText(QString::number(RemainingRent, 'f', 2));
+        ui->Food->setText(QString::number(RemainingFood, 'f', 2));
+        ui->Utilities->setText(QString::number(RemainingUtilities, 'f', 2));
+        ui->Stationary->setText(QString::number(RemainingStationary, 'f', 2));
+        ui->Others->setText(QString::number(RemainingOthers, 'f', 2));
     } else {
         QMessageBox::critical(this, "Database Error", "Failed to fetch remaining budget: " + query.lastError().text());
     }
 }
+
+
 
 
 

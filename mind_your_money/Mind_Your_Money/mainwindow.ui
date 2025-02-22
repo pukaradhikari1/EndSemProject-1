@@ -1023,7 +1023,7 @@ color:red;
        <rect>
         <x>470</x>
         <y>230</y>
-        <width>391</width>
+        <width>392</width>
         <height>46</height>
        </rect>
       </property>
@@ -1542,7 +1542,7 @@ color:red;
      <x>0</x>
      <y>0</y>
      <width>945</width>
-     <height>25</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHome_Page">
