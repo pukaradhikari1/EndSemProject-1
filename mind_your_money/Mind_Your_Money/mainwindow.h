@@ -85,16 +85,15 @@ private slots:
     void on_Exit6_clicked();
     void on_Exit7_clicked();
     void on_Exit8_clicked();
-
-    void on_btnHomepage_clicked();
-
     void on_Exit9_clicked();
 
     void on_btn_LineGraph_clicked();
 
-    void on_btnERHome_clicked();
-
     void on_btnLHome_clicked();
+
+    void on_btn_ExpenseReportHome_clicked();
+
+    void on_btnSignUpBack_clicked();
 
 private:
     int currentUserID = -1;

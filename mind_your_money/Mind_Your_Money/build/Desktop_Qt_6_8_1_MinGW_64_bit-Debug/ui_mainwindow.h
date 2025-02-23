@@ -125,32 +125,6 @@ public:
     QLabel *labelUserName;
     QPushButton *btnLogout;
     QLabel *name;
-    QWidget *horizontalLayoutWidget_2;
-    QHBoxLayout *horizontalLayout_6;
-    QLabel *Category;
-    QLabel *label_27;
-    QWidget *horizontalLayoutWidget_6;
-    QHBoxLayout *horizontalLayout_7;
-    QLabel *LFood;
-    QLabel *Food;
-    QWidget *horizontalLayoutWidget_7;
-    QHBoxLayout *horizontalLayout_8;
-    QLabel *LRent;
-    QLabel *Rent;
-    QWidget *horizontalLayoutWidget_9;
-    QHBoxLayout *horizontalLayout_10;
-    QLabel *label_30;
-    QLabel *Utilities;
-    QLabel *label_28;
-    QLabel *RemainingBudget;
-    QWidget *horizontalLayoutWidget_11;
-    QHBoxLayout *horizontalLayout_12;
-    QLabel *label_32;
-    QLabel *Stationery;
-    QWidget *horizontalLayoutWidget_8;
-    QHBoxLayout *horizontalLayout_9;
-    QLabel *label_31;
-    QLabel *Others;
     QPushButton *Exit5;
     QWidget *page_5;
     QLabel *label_16;
@@ -171,15 +145,41 @@ public:
     QPushButton *btnPrevGraphToWelcome;
     QPushButton *Exit7;
     QPushButton *btn_LineGraph;
-    QWidget *page_8;
-    QLabel *label_23;
-    QPushButton *btnEPush;
-    QPushButton *Exit8;
     QWidget *page_10;
     QLabel *label_29;
     QPushButton *Exit9;
     QWidget *lineGraphWidget;
     QHBoxLayout *horizontalLayout_14;
+    QPushButton *btnLHome;
+    QWidget *page_8;
+    QLabel *label_23;
+    QPushButton *btn_ExpenseReportHome;
+    QLabel *RemainingBudget;
+    QLabel *label_28;
+    QWidget *horizontalLayoutWidget_25;
+    QHBoxLayout *horizontalLayout_39;
+    QLabel *Category_4;
+    QLabel *label_135;
+    QWidget *horizontalLayoutWidget_26;
+    QHBoxLayout *horizontalLayout_40;
+    QLabel *Category_9;
+    QLabel *food;
+    QWidget *horizontalLayoutWidget_27;
+    QHBoxLayout *horizontalLayout_41;
+    QLabel *Category_8;
+    QLabel *rent;
+    QWidget *horizontalLayoutWidget_28;
+    QHBoxLayout *horizontalLayout_42;
+    QLabel *Category_7;
+    QLabel *utilities;
+    QWidget *horizontalLayoutWidget_29;
+    QHBoxLayout *horizontalLayout_43;
+    QLabel *Category_10;
+    QLabel *stationery;
+    QWidget *horizontalLayoutWidget_30;
+    QHBoxLayout *horizontalLayout_44;
+    QLabel *Category_11;
+    QLabel *others;
     QMenuBar *menubar;
     QMenu *menuHome_Page;
     QStatusBar *statusbar;
@@ -203,7 +203,7 @@ public:
         page->setObjectName("page");
         label = new QLabel(page);
         label->setObjectName("label");
-        label->setGeometry(QRect(10, 0, 931, 71));
+        label->setGeometry(QRect(40, 40, 931, 71));
         QFont font1;
         font1.setPointSize(25);
         font1.setBold(true);
@@ -280,7 +280,7 @@ public:
         page_2->setObjectName("page_2");
         formLayoutWidget_2 = new QWidget(page_2);
         formLayoutWidget_2->setObjectName("formLayoutWidget_2");
-        formLayoutWidget_2->setGeometry(QRect(200, 120, 671, 301));
+        formLayoutWidget_2->setGeometry(QRect(200, 120, 671, 350));
         formLayout_2 = new QFormLayout(formLayoutWidget_2);
         formLayout_2->setObjectName("formLayout_2");
         formLayout_2->setContentsMargins(0, 0, 0, 0);
@@ -348,7 +348,7 @@ public:
         label_14->setFont(font1);
         horizontalLayoutWidget_10 = new QWidget(page_2);
         horizontalLayoutWidget_10->setObjectName("horizontalLayoutWidget_10");
-        horizontalLayoutWidget_10->setGeometry(QRect(200, 430, 661, 61));
+        horizontalLayoutWidget_10->setGeometry(QRect(200, 430, 661, 67));
         horizontalLayout_11 = new QHBoxLayout(horizontalLayoutWidget_10);
         horizontalLayout_11->setObjectName("horizontalLayout_11");
         horizontalLayout_11->setContentsMargins(0, 0, 0, 0);
@@ -383,7 +383,7 @@ public:
         page_9->setObjectName("page_9");
         formLayoutWidget_6 = new QWidget(page_9);
         formLayoutWidget_6->setObjectName("formLayoutWidget_6");
-        formLayoutWidget_6->setGeometry(QRect(140, 130, 651, 290));
+        formLayoutWidget_6->setGeometry(QRect(140, 130, 651, 301));
         formLayout_6 = new QFormLayout(formLayoutWidget_6);
         formLayout_6->setObjectName("formLayout_6");
         formLayout_6->setContentsMargins(0, 0, 0, 0);
@@ -395,6 +395,7 @@ public:
 
         txtMonthlyBudget = new QLineEdit(formLayoutWidget_6);
         txtMonthlyBudget->setObjectName("txtMonthlyBudget");
+        txtMonthlyBudget->setFont(font);
 
         formLayout_6->setWidget(0, QFormLayout::FieldRole, txtMonthlyBudget);
 
@@ -444,8 +445,9 @@ public:
         label_26->setFont(font1);
         horizontalLayoutWidget_12 = new QWidget(page_9);
         horizontalLayoutWidget_12->setObjectName("horizontalLayoutWidget_12");
-        horizontalLayoutWidget_12->setGeometry(QRect(360, 440, 431, 61));
+        horizontalLayoutWidget_12->setGeometry(QRect(360, 440, 431, 67));
         horizontalLayout_13 = new QHBoxLayout(horizontalLayoutWidget_12);
+        horizontalLayout_13->setSpacing(50);
         horizontalLayout_13->setObjectName("horizontalLayout_13");
         horizontalLayout_13->setContentsMargins(0, 0, 0, 0);
         btnHomepage = new QPushButton(horizontalLayoutWidget_12);
@@ -473,7 +475,7 @@ public:
         page_4->setObjectName("page_4");
         formLayoutWidget_3 = new QWidget(page_4);
         formLayoutWidget_3->setObjectName("formLayoutWidget_3");
-        formLayoutWidget_3->setGeometry(QRect(130, 140, 771, 113));
+        formLayoutWidget_3->setGeometry(QRect(130, 140, 771, 137));
         formLayout_3 = new QFormLayout(formLayoutWidget_3);
         formLayout_3->setObjectName("formLayout_3");
         formLayout_3->setContentsMargins(0, 0, 0, 0);
@@ -489,16 +491,13 @@ public:
 
         label_11 = new QLabel(formLayoutWidget_3);
         label_11->setObjectName("label_11");
-        QFont font4;
-        font4.setPointSize(15);
-        font4.setBold(true);
-        label_11->setFont(font4);
+        label_11->setFont(font);
 
         formLayout_3->setWidget(0, QFormLayout::LabelRole, label_11);
 
         label_12 = new QLabel(formLayoutWidget_3);
         label_12->setObjectName("label_12");
-        label_12->setFont(font4);
+        label_12->setFont(font);
 
         formLayout_3->setWidget(1, QFormLayout::LabelRole, label_12);
 
@@ -508,7 +507,7 @@ public:
         label_13->setFont(font1);
         horizontalLayoutWidget_3 = new QWidget(page_4);
         horizontalLayoutWidget_3->setObjectName("horizontalLayoutWidget_3");
-        horizontalLayoutWidget_3->setGeometry(QRect(490, 260, 391, 61));
+        horizontalLayoutWidget_3->setGeometry(QRect(470, 300, 391, 61));
         horizontalLayout_3 = new QHBoxLayout(horizontalLayoutWidget_3);
         horizontalLayout_3->setObjectName("horizontalLayout_3");
         horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
@@ -538,7 +537,7 @@ public:
         page_6->setObjectName("page_6");
         formLayoutWidget_5 = new QWidget(page_6);
         formLayoutWidget_5->setObjectName("formLayoutWidget_5");
-        formLayoutWidget_5->setGeometry(QRect(190, 160, 611, 121));
+        formLayoutWidget_5->setGeometry(QRect(190, 160, 611, 137));
         formLayout_5 = new QFormLayout(formLayoutWidget_5);
         formLayout_5->setObjectName("formLayout_5");
         formLayout_5->setContentsMargins(0, 0, 0, 0);
@@ -590,14 +589,14 @@ public:
         page_3->setObjectName("page_3");
         label_10 = new QLabel(page_3);
         label_10->setObjectName("label_10");
-        label_10->setGeometry(QRect(0, 0, 181, 51));
-        QFont font5;
-        font5.setPointSize(24);
-        font5.setBold(true);
-        label_10->setFont(font5);
+        label_10->setGeometry(QRect(40, 30, 181, 51));
+        QFont font4;
+        font4.setPointSize(24);
+        font4.setBold(true);
+        label_10->setFont(font4);
         verticalLayoutWidget_2 = new QWidget(page_3);
         verticalLayoutWidget_2->setObjectName("verticalLayoutWidget_2");
-        verticalLayoutWidget_2->setGeometry(QRect(10, 160, 255, 460));
+        verticalLayoutWidget_2->setGeometry(QRect(50, 150, 255, 460));
         verticalLayout_2 = new QVBoxLayout(verticalLayoutWidget_2);
         verticalLayout_2->setSpacing(50);
         verticalLayout_2->setObjectName("verticalLayout_2");
@@ -630,7 +629,10 @@ public:
         label_15 = new QLabel(horizontalLayoutWidget_4);
         label_15->setObjectName("label_15");
         label_15->setMaximumSize(QSize(80, 16777215));
-        label_15->setFont(font4);
+        QFont font5;
+        font5.setPointSize(15);
+        font5.setBold(true);
+        label_15->setFont(font5);
         label_15->setStyleSheet(QString::fromUtf8("QLabel\n"
 "{\n"
 "color:red;\n"
@@ -653,131 +655,15 @@ public:
 
         labelUserName = new QLabel(page_3);
         labelUserName->setObjectName("labelUserName");
-        labelUserName->setGeometry(QRect(170, 0, 171, 51));
+        labelUserName->setGeometry(QRect(250, 20, 171, 51));
         labelUserName->setFont(font);
         btnLogout = new QPushButton(page_3);
         btnLogout->setObjectName("btnLogout");
-        btnLogout->setGeometry(QRect(720, 580, 191, 41));
-        btnLogout->setFont(font4);
+        btnLogout->setGeometry(QRect(730, 560, 191, 41));
+        btnLogout->setFont(font5);
         name = new QLabel(page_3);
         name->setObjectName("name");
         name->setGeometry(QRect(300, 310, 151, 41));
-        horizontalLayoutWidget_2 = new QWidget(page_3);
-        horizontalLayoutWidget_2->setObjectName("horizontalLayoutWidget_2");
-        horizontalLayoutWidget_2->setGeometry(QRect(470, 230, 392, 46));
-        horizontalLayout_6 = new QHBoxLayout(horizontalLayoutWidget_2);
-        horizontalLayout_6->setSpacing(50);
-        horizontalLayout_6->setObjectName("horizontalLayout_6");
-        horizontalLayout_6->setContentsMargins(0, 0, 0, 0);
-        Category = new QLabel(horizontalLayoutWidget_2);
-        Category->setObjectName("Category");
-
-        horizontalLayout_6->addWidget(Category);
-
-        label_27 = new QLabel(horizontalLayoutWidget_2);
-        label_27->setObjectName("label_27");
-
-        horizontalLayout_6->addWidget(label_27);
-
-        horizontalLayoutWidget_6 = new QWidget(page_3);
-        horizontalLayoutWidget_6->setObjectName("horizontalLayoutWidget_6");
-        horizontalLayoutWidget_6->setGeometry(QRect(470, 290, 381, 46));
-        horizontalLayout_7 = new QHBoxLayout(horizontalLayoutWidget_6);
-        horizontalLayout_7->setSpacing(60);
-        horizontalLayout_7->setObjectName("horizontalLayout_7");
-        horizontalLayout_7->setContentsMargins(0, 0, 0, 0);
-        LFood = new QLabel(horizontalLayoutWidget_6);
-        LFood->setObjectName("LFood");
-
-        horizontalLayout_7->addWidget(LFood);
-
-        Food = new QLabel(horizontalLayoutWidget_6);
-        Food->setObjectName("Food");
-
-        horizontalLayout_7->addWidget(Food);
-
-        horizontalLayoutWidget_7 = new QWidget(page_3);
-        horizontalLayoutWidget_7->setObjectName("horizontalLayoutWidget_7");
-        horizontalLayoutWidget_7->setGeometry(QRect(470, 360, 381, 46));
-        horizontalLayout_8 = new QHBoxLayout(horizontalLayoutWidget_7);
-        horizontalLayout_8->setSpacing(60);
-        horizontalLayout_8->setObjectName("horizontalLayout_8");
-        horizontalLayout_8->setContentsMargins(0, 0, 0, 0);
-        LRent = new QLabel(horizontalLayoutWidget_7);
-        LRent->setObjectName("LRent");
-
-        horizontalLayout_8->addWidget(LRent);
-
-        Rent = new QLabel(horizontalLayoutWidget_7);
-        Rent->setObjectName("Rent");
-
-        horizontalLayout_8->addWidget(Rent);
-
-        horizontalLayoutWidget_9 = new QWidget(page_3);
-        horizontalLayoutWidget_9->setObjectName("horizontalLayoutWidget_9");
-        horizontalLayoutWidget_9->setGeometry(QRect(470, 420, 381, 46));
-        horizontalLayout_10 = new QHBoxLayout(horizontalLayoutWidget_9);
-        horizontalLayout_10->setSpacing(60);
-        horizontalLayout_10->setObjectName("horizontalLayout_10");
-        horizontalLayout_10->setContentsMargins(0, 0, 0, 0);
-        label_30 = new QLabel(horizontalLayoutWidget_9);
-        label_30->setObjectName("label_30");
-
-        horizontalLayout_10->addWidget(label_30);
-
-        Utilities = new QLabel(horizontalLayoutWidget_9);
-        Utilities->setObjectName("Utilities");
-
-        horizontalLayout_10->addWidget(Utilities);
-
-        label_28 = new QLabel(page_3);
-        label_28->setObjectName("label_28");
-        label_28->setGeometry(QRect(470, 90, 431, 61));
-        RemainingBudget = new QLabel(page_3);
-        RemainingBudget->setObjectName("RemainingBudget");
-        RemainingBudget->setGeometry(QRect(590, 160, 221, 51));
-        QFont font7;
-        font7.setPointSize(15);
-        font7.setBold(false);
-        RemainingBudget->setFont(font7);
-        RemainingBudget->setStyleSheet(QString::fromUtf8("QLabel\n"
-"{\n"
-"color:red;\n"
-"};"));
-        horizontalLayoutWidget_11 = new QWidget(page_3);
-        horizontalLayoutWidget_11->setObjectName("horizontalLayoutWidget_11");
-        horizontalLayoutWidget_11->setGeometry(QRect(470, 480, 381, 46));
-        horizontalLayout_12 = new QHBoxLayout(horizontalLayoutWidget_11);
-        horizontalLayout_12->setSpacing(60);
-        horizontalLayout_12->setObjectName("horizontalLayout_12");
-        horizontalLayout_12->setContentsMargins(0, 0, 0, 0);
-        label_32 = new QLabel(horizontalLayoutWidget_11);
-        label_32->setObjectName("label_32");
-
-        horizontalLayout_12->addWidget(label_32);
-
-        Stationery = new QLabel(horizontalLayoutWidget_11);
-        Stationery->setObjectName("Stationery");
-
-        horizontalLayout_12->addWidget(Stationery);
-
-        horizontalLayoutWidget_8 = new QWidget(page_3);
-        horizontalLayoutWidget_8->setObjectName("horizontalLayoutWidget_8");
-        horizontalLayoutWidget_8->setGeometry(QRect(470, 530, 371, 46));
-        horizontalLayout_9 = new QHBoxLayout(horizontalLayoutWidget_8);
-        horizontalLayout_9->setSpacing(60);
-        horizontalLayout_9->setObjectName("horizontalLayout_9");
-        horizontalLayout_9->setContentsMargins(0, 0, 0, 0);
-        label_31 = new QLabel(horizontalLayoutWidget_8);
-        label_31->setObjectName("label_31");
-
-        horizontalLayout_9->addWidget(label_31);
-
-        Others = new QLabel(horizontalLayoutWidget_8);
-        Others->setObjectName("Others");
-
-        horizontalLayout_9->addWidget(Others);
-
         Exit5 = new QPushButton(page_3);
         Exit5->setObjectName("Exit5");
         Exit5->setGeometry(QRect(900, 0, 41, 24));
@@ -796,7 +682,7 @@ public:
         label_16->setFont(font1);
         formLayoutWidget_4 = new QWidget(page_5);
         formLayoutWidget_4->setObjectName("formLayoutWidget_4");
-        formLayoutWidget_4->setGeometry(QRect(240, 150, 461, 131));
+        formLayoutWidget_4->setGeometry(QRect(240, 150, 461, 137));
         formLayout_4 = new QFormLayout(formLayoutWidget_4);
         formLayout_4->setObjectName("formLayout_4");
         formLayout_4->setContentsMargins(0, 0, 0, 0);
@@ -865,8 +751,8 @@ public:
         horizontalLayout_2->setObjectName("horizontalLayout_2");
         btnPrevGraphToWelcome = new QPushButton(page_7);
         btnPrevGraphToWelcome->setObjectName("btnPrevGraphToWelcome");
-        btnPrevGraphToWelcome->setGeometry(QRect(10, 620, 93, 29));
-        btnPrevGraphToWelcome->setFont(font4);
+        btnPrevGraphToWelcome->setGeometry(QRect(10, 600, 93, 29));
+        btnPrevGraphToWelcome->setFont(font5);
         Exit7 = new QPushButton(page_7);
         Exit7->setObjectName("Exit7");
         Exit7->setGeometry(QRect(900, 0, 41, 24));
@@ -878,35 +764,18 @@ public:
 "}"));
         btn_LineGraph = new QPushButton(page_7);
         btn_LineGraph->setObjectName("btn_LineGraph");
-        btn_LineGraph->setGeometry(QRect(830, 620, 93, 29));
-        QFont font8;
-        font8.setPointSize(9);
-        font8.setBold(true);
-        btn_LineGraph->setFont(font8);
+        btn_LineGraph->setGeometry(QRect(792, 600, 131, 29));
+        btn_LineGraph->setFont(font5);
         stackedWidget->addWidget(page_7);
-        page_8 = new QWidget();
-        page_8->setObjectName("page_8");
-        label_23 = new QLabel(page_8);
-        label_23->setObjectName("label_23");
-        label_23->setGeometry(QRect(10, 0, 931, 71));
-        btnEPush = new QPushButton(page_8);
-        btnEPush->setObjectName("btnEPush");
-        btnEPush->setGeometry(QRect(10, 590, 101, 51));
-        Exit8 = new QPushButton(page_8);
-        Exit8->setObjectName("Exit8");
-        Exit8->setGeometry(QRect(900, 0, 41, 24));
-        Exit8->setFont(font2);
-        Exit8->setStyleSheet(QString::fromUtf8("QPushButton\n"
-"{\n"
-"	color:black;\n"
-"	background-color:red;\n"
-"}"));
-        stackedWidget->addWidget(page_8);
         page_10 = new QWidget();
         page_10->setObjectName("page_10");
         label_29 = new QLabel(page_10);
         label_29->setObjectName("label_29");
-        label_29->setGeometry(QRect(10, 0, 931, 61));
+        label_29->setGeometry(QRect(0, -10, 931, 81));
+        QFont font7;
+        font7.setPointSize(10);
+        font7.setBold(true);
+        label_29->setFont(font7);
         Exit9 = new QPushButton(page_10);
         Exit9->setObjectName("Exit9");
         Exit9->setGeometry(QRect(900, 0, 41, 24));
@@ -918,10 +787,135 @@ public:
 "}"));
         lineGraphWidget = new QWidget(page_10);
         lineGraphWidget->setObjectName("lineGraphWidget");
-        lineGraphWidget->setGeometry(QRect(40, 80, 881, 541));
+        lineGraphWidget->setGeometry(QRect(30, 60, 881, 541));
         horizontalLayout_14 = new QHBoxLayout(lineGraphWidget);
         horizontalLayout_14->setObjectName("horizontalLayout_14");
+        btnLHome = new QPushButton(page_10);
+        btnLHome->setObjectName("btnLHome");
+        btnLHome->setGeometry(QRect(30, 610, 83, 29));
+        btnLHome->setFont(font5);
         stackedWidget->addWidget(page_10);
+        page_8 = new QWidget();
+        page_8->setObjectName("page_8");
+        label_23 = new QLabel(page_8);
+        label_23->setObjectName("label_23");
+        label_23->setGeometry(QRect(290, 0, 381, 121));
+        QFont font8;
+        font8.setPointSize(30);
+        font8.setBold(true);
+        label_23->setFont(font8);
+        btn_ExpenseReportHome = new QPushButton(page_8);
+        btn_ExpenseReportHome->setObjectName("btn_ExpenseReportHome");
+        btn_ExpenseReportHome->setGeometry(QRect(790, 570, 111, 41));
+        RemainingBudget = new QLabel(page_8);
+        RemainingBudget->setObjectName("RemainingBudget");
+        RemainingBudget->setGeometry(QRect(360, 180, 261, 51));
+        RemainingBudget->setFont(font1);
+        RemainingBudget->setStyleSheet(QString::fromUtf8("QLabel\n"
+"{\n"
+"color:red;\n"
+"};"));
+        label_28 = new QLabel(page_8);
+        label_28->setObjectName("label_28");
+        label_28->setGeometry(QRect(270, 110, 431, 61));
+        label_28->setFont(font);
+        horizontalLayoutWidget_25 = new QWidget(page_8);
+        horizontalLayoutWidget_25->setObjectName("horizontalLayoutWidget_25");
+        horizontalLayoutWidget_25->setGeometry(QRect(290, 240, 411, 61));
+        horizontalLayout_39 = new QHBoxLayout(horizontalLayoutWidget_25);
+        horizontalLayout_39->setObjectName("horizontalLayout_39");
+        horizontalLayout_39->setContentsMargins(0, 0, 0, 0);
+        Category_4 = new QLabel(horizontalLayoutWidget_25);
+        Category_4->setObjectName("Category_4");
+
+        horizontalLayout_39->addWidget(Category_4);
+
+        label_135 = new QLabel(horizontalLayoutWidget_25);
+        label_135->setObjectName("label_135");
+
+        horizontalLayout_39->addWidget(label_135);
+
+        horizontalLayoutWidget_26 = new QWidget(page_8);
+        horizontalLayoutWidget_26->setObjectName("horizontalLayoutWidget_26");
+        horizontalLayoutWidget_26->setGeometry(QRect(290, 310, 401, 58));
+        horizontalLayout_40 = new QHBoxLayout(horizontalLayoutWidget_26);
+        horizontalLayout_40->setObjectName("horizontalLayout_40");
+        horizontalLayout_40->setContentsMargins(0, 0, 0, 0);
+        Category_9 = new QLabel(horizontalLayoutWidget_26);
+        Category_9->setObjectName("Category_9");
+
+        horizontalLayout_40->addWidget(Category_9);
+
+        food = new QLabel(horizontalLayoutWidget_26);
+        food->setObjectName("food");
+
+        horizontalLayout_40->addWidget(food);
+
+        horizontalLayoutWidget_27 = new QWidget(page_8);
+        horizontalLayoutWidget_27->setObjectName("horizontalLayoutWidget_27");
+        horizontalLayoutWidget_27->setGeometry(QRect(290, 370, 401, 58));
+        horizontalLayout_41 = new QHBoxLayout(horizontalLayoutWidget_27);
+        horizontalLayout_41->setObjectName("horizontalLayout_41");
+        horizontalLayout_41->setContentsMargins(0, 0, 0, 0);
+        Category_8 = new QLabel(horizontalLayoutWidget_27);
+        Category_8->setObjectName("Category_8");
+
+        horizontalLayout_41->addWidget(Category_8);
+
+        rent = new QLabel(horizontalLayoutWidget_27);
+        rent->setObjectName("rent");
+
+        horizontalLayout_41->addWidget(rent);
+
+        horizontalLayoutWidget_28 = new QWidget(page_8);
+        horizontalLayoutWidget_28->setObjectName("horizontalLayoutWidget_28");
+        horizontalLayoutWidget_28->setGeometry(QRect(290, 430, 401, 58));
+        horizontalLayout_42 = new QHBoxLayout(horizontalLayoutWidget_28);
+        horizontalLayout_42->setObjectName("horizontalLayout_42");
+        horizontalLayout_42->setContentsMargins(0, 0, 0, 0);
+        Category_7 = new QLabel(horizontalLayoutWidget_28);
+        Category_7->setObjectName("Category_7");
+
+        horizontalLayout_42->addWidget(Category_7);
+
+        utilities = new QLabel(horizontalLayoutWidget_28);
+        utilities->setObjectName("utilities");
+
+        horizontalLayout_42->addWidget(utilities);
+
+        horizontalLayoutWidget_29 = new QWidget(page_8);
+        horizontalLayoutWidget_29->setObjectName("horizontalLayoutWidget_29");
+        horizontalLayoutWidget_29->setGeometry(QRect(290, 480, 401, 58));
+        horizontalLayout_43 = new QHBoxLayout(horizontalLayoutWidget_29);
+        horizontalLayout_43->setObjectName("horizontalLayout_43");
+        horizontalLayout_43->setContentsMargins(0, 0, 0, 0);
+        Category_10 = new QLabel(horizontalLayoutWidget_29);
+        Category_10->setObjectName("Category_10");
+
+        horizontalLayout_43->addWidget(Category_10);
+
+        stationery = new QLabel(horizontalLayoutWidget_29);
+        stationery->setObjectName("stationery");
+
+        horizontalLayout_43->addWidget(stationery);
+
+        horizontalLayoutWidget_30 = new QWidget(page_8);
+        horizontalLayoutWidget_30->setObjectName("horizontalLayoutWidget_30");
+        horizontalLayoutWidget_30->setGeometry(QRect(290, 540, 401, 58));
+        horizontalLayout_44 = new QHBoxLayout(horizontalLayoutWidget_30);
+        horizontalLayout_44->setObjectName("horizontalLayout_44");
+        horizontalLayout_44->setContentsMargins(0, 0, 0, 0);
+        Category_11 = new QLabel(horizontalLayoutWidget_30);
+        Category_11->setObjectName("Category_11");
+
+        horizontalLayout_44->addWidget(Category_11);
+
+        others = new QLabel(horizontalLayoutWidget_30);
+        others->setObjectName("others");
+
+        horizontalLayout_44->addWidget(others);
+
+        stackedWidget->addWidget(page_8);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -937,7 +931,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(7);
+        stackedWidget->setCurrentIndex(9);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1006,20 +1000,6 @@ public:
         labelUserName->setText(QString());
         btnLogout->setText(QCoreApplication::translate("MainWindow", "Log out", nullptr));
         name->setText(QString());
-        Category->setText(QCoreApplication::translate("MainWindow", "Category", nullptr));
-        label_27->setText(QCoreApplication::translate("MainWindow", "Amount Left", nullptr));
-        LFood->setText(QCoreApplication::translate("MainWindow", "Food", nullptr));
-        Food->setText(QString());
-        LRent->setText(QCoreApplication::translate("MainWindow", "Rent", nullptr));
-        Rent->setText(QString());
-        label_30->setText(QCoreApplication::translate("MainWindow", "Utilities", nullptr));
-        Utilities->setText(QString());
-        label_28->setText(QCoreApplication::translate("MainWindow", "Budget Amount Remaining", nullptr));
-        RemainingBudget->setText(QString());
-        label_32->setText(QCoreApplication::translate("MainWindow", "Stationery", nullptr));
-        Stationery->setText(QString());
-        label_31->setText(QCoreApplication::translate("MainWindow", "Others", nullptr));
-        Others->setText(QString());
         Exit5->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
         label_16->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:36pt;\">Expenditure</span></p></body></html>", nullptr));
         label_17->setText(QCoreApplication::translate("MainWindow", "Amount", nullptr));
@@ -1038,11 +1018,25 @@ public:
         btnPrevGraphToWelcome->setText(QCoreApplication::translate("MainWindow", "Back", nullptr));
         Exit7->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
         btn_LineGraph->setText(QCoreApplication::translate("MainWindow", "Line Graph", nullptr));
-        label_23->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:36pt;\">Expense Report</span></p></body></html>", nullptr));
-        btnEPush->setText(QCoreApplication::translate("MainWindow", "Prev", nullptr));
-        Exit8->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
         label_29->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:36pt;\">Line Graph</span></p></body></html>", nullptr));
         Exit9->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
+        btnLHome->setText(QCoreApplication::translate("MainWindow", "Home", nullptr));
+        label_23->setText(QCoreApplication::translate("MainWindow", "Expense Report", nullptr));
+        btn_ExpenseReportHome->setText(QCoreApplication::translate("MainWindow", "Home", nullptr));
+        RemainingBudget->setText(QCoreApplication::translate("MainWindow", "RS.", nullptr));
+        label_28->setText(QCoreApplication::translate("MainWindow", "Budget Amount Remaining", nullptr));
+        Category_4->setText(QCoreApplication::translate("MainWindow", "Category", nullptr));
+        label_135->setText(QCoreApplication::translate("MainWindow", "Amount Left", nullptr));
+        Category_9->setText(QCoreApplication::translate("MainWindow", "Food", nullptr));
+        food->setText(QCoreApplication::translate("MainWindow", "RS.", nullptr));
+        Category_8->setText(QCoreApplication::translate("MainWindow", "Rent", nullptr));
+        rent->setText(QCoreApplication::translate("MainWindow", "RS.", nullptr));
+        Category_7->setText(QCoreApplication::translate("MainWindow", "Utilities", nullptr));
+        utilities->setText(QCoreApplication::translate("MainWindow", "RS.", nullptr));
+        Category_10->setText(QCoreApplication::translate("MainWindow", "Stationery", nullptr));
+        stationery->setText(QCoreApplication::translate("MainWindow", "RS.", nullptr));
+        Category_11->setText(QCoreApplication::translate("MainWindow", "Others", nullptr));
+        others->setText(QCoreApplication::translate("MainWindow", "RS.", nullptr));
         menuHome_Page->setTitle(QCoreApplication::translate("MainWindow", "Home Page", nullptr));
     } // retranslateUi
 
