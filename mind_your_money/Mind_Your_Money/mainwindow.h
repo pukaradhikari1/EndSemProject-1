@@ -92,6 +92,10 @@ private slots:
 
     void on_btn_LineGraph_clicked();
 
+    void on_btnERHome_clicked();
+
+    void on_btnLHome_clicked();
+
 private:
     int currentUserID = -1;
     QSqlDatabase db;  // Define database object as a member

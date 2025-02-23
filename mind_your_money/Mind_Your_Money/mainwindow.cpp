@@ -65,7 +65,7 @@ bool MainWindow::openDatabase()
     db = QSqlDatabase::addDatabase("QSQLITE");
 
     // Set the path to your SQLite database file
-    db.setDatabaseName("C:/Users/sakar/OneDrive/Documents/GitHub/EndSemProject-1/mind_your_money/database_Mind_your_Money.db");
+    db.setDatabaseName("C:/Users/Hp Victus/Desktop/End sem project/EndSemProject-1/mind_your_money/database_Mind_your_Money.db");
 
 
     // Attempt to open the database
@@ -137,7 +137,7 @@ void MainWindow::on_btnLogout_clicked()
 //Code For monthly report
 void MainWindow::on_btnStats_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(7);
+    ui->stackedWidget->setCurrentIndex(9);
 }
 
 void MainWindow::on_btnReset_clicked()
@@ -690,11 +690,11 @@ void MainWindow::displayRemainingBudget()
 
         // Update UI labels
         ui->RemainingBudget->setText(QString::number(RemainingMonthlyBudget, 'f', 2));
-        ui->Rent->setText(QString::number(RemainingRent, 'f', 2));
-        ui->Food->setText(QString::number(RemainingFood, 'f', 2));
-        ui->Utilities->setText(QString::number(RemainingUtilities, 'f', 2));
-        ui->Stationery->setText(QString::number(RemainingStationery, 'f', 2));
-        ui->Others->setText(QString::number(RemainingOthers, 'f', 2));
+        ui->rent->setText(QString::number(RemainingRent, 'f', 2));
+        ui->food->setText(QString::number(RemainingFood, 'f', 2));
+        ui->utilities->setText(QString::number(RemainingUtilities, 'f', 2));
+        ui->stationery->setText(QString::number(RemainingStationery, 'f', 2));
+        ui->others->setText(QString::number(RemainingOthers, 'f', 2));
     } else {
         QMessageBox::critical(this, "Database Error", "Failed to fetch remaining budget: " + query.lastError().text());
     }
@@ -876,5 +876,17 @@ void MainWindow::on_btn_LineGraph_clicked()
         delete item;
     }
     layout->addWidget(chartView);
+}
+
+
+void MainWindow::on_btnERHome_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(5);
+}
+
+
+void MainWindow::on_btnLHome_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(5);
 }
 
