@@ -794,7 +794,7 @@ void MainWindow::on_btn_LineGraph_clicked()
         return;
     }
 
-    ui->stackedWidget->setCurrentIndex(9);
+    ui->stackedWidget->setCurrentIndex(8);
 
     // Prepare the line series
     QLineSeries *series = new QLineSeries();
