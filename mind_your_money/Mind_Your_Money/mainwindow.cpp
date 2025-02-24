@@ -65,7 +65,7 @@ bool MainWindow::openDatabase()
     db = QSqlDatabase::addDatabase("QSQLITE");
 
     // Set the path to your SQLite database file
-    db.setDatabaseName("C:/Users/sakar/OneDrive/Documents/GitHub/EndSemProject-1/mind_your_money/database_Mind_your_Money.db");
+    db.setDatabaseName("C:/Users/Sakar/Documents/GitHub/EndSemProject-1/mind_your_money/database_Mind_your_Money.db");
 
 
     // Attempt to open the database
@@ -544,116 +544,7 @@ void MainWindow::on_btnLogin_clicked()
 //Bar Graph: code done
 void MainWindow::on_btnGraph_clicked()
 {
-    // Switch to the chart page (assumed to be index 7 in the stacked widget)
-    ui->stackedWidget->setCurrentIndex(7);
-
-    // Ensure a user is logged in
-    if (loggedInUserID == -1) {
-        QMessageBox::warning(this, "Error", "No user is logged in.");
-        return;
-    }
-
-    // Define the categories and initialize their amounts
-    QStringList categories = {"Food", "Rent", "Utilities", "Stationery", "Other"};
-    QMap<QString, float> expenseMap;
-    for (const QString &category : categories) {
-        expenseMap[category] = 0.0;
-    }
-
-
-    // Get the current month in "yyyy-MM" format
-    QString currentMonth = QDate::currentDate().toString("yyyy-MM");
-
-    // Build the SQL query to sum each expense column for the current month for the logged-in user.
-    // We use a single-row query that sums each column individually.
-    QSqlQuery query(db);
-    QString sql = QString(
-        "SELECT "
-        "SUM(Food) as sumFood, "
-        "SUM(Rent) as sumRent, "
-        "SUM(Utilities) as sumUtilities, "
-        "SUM(Stationery) as sumStationery, "
-        "SUM(Others) as sumOthers "
-        "FROM Expenses "
-        "WHERE user_id = :UserID AND strftime('%%Y-%%m', Date) = :CurrentMonth"
-        );
-    query.prepare(sql);
-    query.bindValue(":UserID", loggedInUserID);
-    query.bindValue(":CurrentMonth", currentMonth);
-
-    if (!query.exec()) {
-        qDebug() << "SQL Query Failed: " << query.lastError().text();
-        QMessageBox::critical(this, "Database Error", "Failed to retrieve expenses: " + query.lastError().text());
-        return;
-    }
-
-    if (query.next()) {
-        expenseMap["Food"] = query.value("sumFood").toFloat();
-        expenseMap["Rent"] = query.value("sumRent").toFloat();
-        expenseMap["Utilities"] = query.value("sumUtilities").toFloat();
-        expenseMap["Stationery"] = query.value("sumStationery").toFloat();
-        expenseMap["Other"] = query.value("sumOthers").toFloat();
-    }
-
-    // Create a bar set for the chart and populate it with the summed expenses in the order of uiCategories.
-    QBarSet *barSet = new QBarSet("Expenses");
-    for (const QString &category : categories) {
-        *barSet << expenseMap[category];
-    }
-    barSet->setLabelFont(QFont("Arial", 10, QFont::Bold));
-
-    // Create the bar series and add the bar set to it.
-    QBarSeries *series = new QBarSeries();
-    series->append(barSet);
-    series->setLabelsVisible(true);
-    series->setLabelsFormat("Rs @value");
-    series->setLabelsPosition(QAbstractBarSeries::LabelsCenter);
-
-    // Create the chart, add the series, and configure chart options.
-    QChart *chart = new QChart();
-    chart->addSeries(series);
-    chart->setTitle("Expense Breakdown for " + currentMonth);
-    chart->setAnimationOptions(QChart::SeriesAnimations);
-
-    // Configure the X-axis with the category labels.
-    QBarCategoryAxis *axisX = new QBarCategoryAxis();
-    axisX->append(categories);
-    chart->addAxis(axisX, Qt::AlignBottom);
-    series->attachAxis(axisX);
-
-    // Calculate the maximum expense to set the Y-axis range.
-    float maxExpense = 0.0f;
-    for (float value : expenseMap)
-        if (value > maxExpense)
-            maxExpense = value;
-    // Add 20% buffer for visibility.
-    QValueAxis *axisY = new QValueAxis();
-    axisY->setTitleText("Amount Spent in Rs");
-    axisY->setRange(0, maxExpense + (maxExpense * 0.2));
-    axisY->setTickCount(5);
-    axisY->setMinorTickCount(2);
-    chart->addAxis(axisY, Qt::AlignLeft);
-    series->attachAxis(axisY);
-
-    // Create a chart view, set anti-aliasing, and display the chart.
-    QChartView *chartView = new QChartView(chart);
-    chartView->setRenderHint(QPainter::Antialiasing);
-
-    // Clear any previous chart from the 'bargraph' widget, then add the new chart view.
-    QLayout *layout = ui->bargraph->layout();
-    if (!layout) {
-        layout = new QVBoxLayout(ui->bargraph);
-        ui->bargraph->setLayout(layout);
-    }
-    QLayoutItem *item;
-    while ((item = layout->takeAt(0)) != nullptr) {
-        if (QWidget *widget = item->widget())
-            widget->deleteLater();
-        delete item;
-    }
-    layout->addWidget(chartView);
-
-    qDebug() << "Graph updated successfully!";
+    ui->stackedWidget->setCurrentIndex(10);
 }
 
 void MainWindow::displayRemainingBudget()
@@ -890,5 +781,150 @@ void MainWindow::on_btn_ExpenseReportHome_clicked()
 void MainWindow::on_btnSignUpBack_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
+}
+
+
+void MainWindow::on_Exit11_clicked()
+{
+    QApplication::quit();
+}
+
+
+void MainWindow::on_Exit10_clicked()
+{
+    QApplication::quit();
+}
+
+
+void MainWindow::on_pushButton_GraphsBarGraph_clicked()
+{
+    // Switch to the chart page (assumed to be index 7 in the stacked widget)
+    ui->stackedWidget->setCurrentIndex(7);
+
+    // Ensure a user is logged in
+    if (loggedInUserID == -1) {
+        QMessageBox::warning(this, "Error", "No user is logged in.");
+        return;
+    }
+
+    // Define the categories and initialize their amounts
+    QStringList categories = {"Food", "Rent", "Utilities", "Stationery", "Other"};
+    QMap<QString, float> expenseMap;
+    for (const QString &category : categories) {
+        expenseMap[category] = 0.0;
+    }
+
+
+    // Get the current month in "yyyy-MM" format
+    QString currentMonth = QDate::currentDate().toString("yyyy-MM");
+
+    // Build the SQL query to sum each expense column for the current month for the logged-in user.
+    // We use a single-row query that sums each column individually.
+    QSqlQuery query(db);
+    QString sql = QString(
+        "SELECT "
+        "SUM(Food) as sumFood, "
+        "SUM(Rent) as sumRent, "
+        "SUM(Utilities) as sumUtilities, "
+        "SUM(Stationery) as sumStationery, "
+        "SUM(Others) as sumOthers "
+        "FROM Expenses "
+        "WHERE user_id = :UserID AND strftime('%%Y-%%m', Date) = :CurrentMonth"
+        );
+    query.prepare(sql);
+    query.bindValue(":UserID", loggedInUserID);
+    query.bindValue(":CurrentMonth", currentMonth);
+
+    if (!query.exec()) {
+        qDebug() << "SQL Query Failed: " << query.lastError().text();
+        QMessageBox::critical(this, "Database Error", "Failed to retrieve expenses: " + query.lastError().text());
+        return;
+    }
+
+    if (query.next()) {
+        expenseMap["Food"] = query.value("sumFood").toFloat();
+        expenseMap["Rent"] = query.value("sumRent").toFloat();
+        expenseMap["Utilities"] = query.value("sumUtilities").toFloat();
+        expenseMap["Stationery"] = query.value("sumStationery").toFloat();
+        expenseMap["Other"] = query.value("sumOthers").toFloat();
+    }
+
+    // Create a bar set for the chart and populate it with the summed expenses in the order of uiCategories.
+    QBarSet *barSet = new QBarSet("Expenses");
+    for (const QString &category : categories) {
+        *barSet << expenseMap[category];
+    }
+    barSet->setLabelFont(QFont("Arial", 10, QFont::Bold));
+
+    // Create the bar series and add the bar set to it.
+    QBarSeries *series = new QBarSeries();
+    series->append(barSet);
+    series->setLabelsVisible(true);
+    series->setLabelsFormat("Rs @value");
+    series->setLabelsPosition(QAbstractBarSeries::LabelsCenter);
+
+    // Create the chart, add the series, and configure chart options.
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    chart->setTitle("Expense Breakdown for " + currentMonth);
+    chart->setAnimationOptions(QChart::SeriesAnimations);
+
+    // Configure the X-axis with the category labels.
+    QBarCategoryAxis *axisX = new QBarCategoryAxis();
+    axisX->append(categories);
+    chart->addAxis(axisX, Qt::AlignBottom);
+    series->attachAxis(axisX);
+
+    // Calculate the maximum expense to set the Y-axis range.
+    float maxExpense = 0.0f;
+    for (float value : expenseMap)
+        if (value > maxExpense)
+            maxExpense = value;
+    // Add 20% buffer for visibility.
+    QValueAxis *axisY = new QValueAxis();
+    axisY->setTitleText("Amount Spent in Rs");
+    axisY->setRange(0, maxExpense + (maxExpense * 0.2));
+    axisY->setTickCount(5);
+    axisY->setMinorTickCount(2);
+    chart->addAxis(axisY, Qt::AlignLeft);
+    series->attachAxis(axisY);
+
+    // Create a chart view, set anti-aliasing, and display the chart.
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+
+    // Clear any previous chart from the 'bargraph' widget, then add the new chart view.
+    QLayout *layout = ui->bargraph->layout();
+    if (!layout) {
+        layout = new QVBoxLayout(ui->bargraph);
+        ui->bargraph->setLayout(layout);
+    }
+    QLayoutItem *item;
+    while ((item = layout->takeAt(0)) != nullptr) {
+        if (QWidget *widget = item->widget())
+            widget->deleteLater();
+        delete item;
+    }
+    layout->addWidget(chartView);
+
+    qDebug() << "Graph updated successfully!";
+}
+
+
+void MainWindow::on_pushButton_GraphsLineGraph_clicked()
+{
+    ui->btn_LineGraph->clicked(1);
+}
+
+
+void MainWindow::on_pushButton_GraphsPrev_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(5);
+}
+
+
+void MainWindow::on_pushButton_LineGraphPrev_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(10);
 }
 

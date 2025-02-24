@@ -95,6 +95,18 @@ private slots:
 
     void on_btnSignUpBack_clicked();
 
+    void on_Exit11_clicked();
+
+    void on_Exit10_clicked();
+
+    void on_pushButton_GraphsBarGraph_clicked();
+
+    void on_pushButton_GraphsLineGraph_clicked();
+
+    void on_pushButton_GraphsPrev_clicked();
+
+    void on_pushButton_LineGraphPrev_clicked();
+
 private:
     int currentUserID = -1;
     QSqlDatabase db;  // Define database object as a member
