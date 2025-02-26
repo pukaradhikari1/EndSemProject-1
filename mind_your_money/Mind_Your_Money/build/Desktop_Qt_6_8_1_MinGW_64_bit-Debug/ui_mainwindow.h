@@ -45,8 +45,8 @@ public:
     QWidget *horizontalLayoutWidget;
     QHBoxLayout *horizontalLayout;
     QPushButton *btnSignup;
-    QPushButton *btnLogin;
     QPushButton *btnForgot;
+    QPushButton *btnLogin;
     QPushButton *Exit0;
     QWidget *page_2;
     QWidget *formLayoutWidget_2;
@@ -84,7 +84,7 @@ public:
     QLabel *label_26;
     QWidget *horizontalLayoutWidget_12;
     QHBoxLayout *horizontalLayout_13;
-    QPushButton *btnHomepage;
+    QPushButton *btnSignUpBack;
     QPushButton *btnSignUpSave;
     QPushButton *Exit2;
     QWidget *page_4;
@@ -108,9 +108,11 @@ public:
     QLineEdit *txtCPassword;
     QLineEdit *txtCmPassword;
     QLabel *label_19;
-    QPushButton *btnChangePassword;
-    QPushButton *btnHome;
     QPushButton *Exit4;
+    QWidget *horizontalLayoutWidget_2;
+    QHBoxLayout *horizontalLayout_6;
+    QPushButton *btnHome;
+    QPushButton *btnChangePassword;
     QWidget *page_3;
     QLabel *label_10;
     QWidget *verticalLayoutWidget_2;
@@ -126,6 +128,8 @@ public:
     QPushButton *btnLogout;
     QLabel *name;
     QPushButton *Exit5;
+    QWidget *PieChart;
+    QHBoxLayout *horizontalLayout_8;
     QWidget *page_5;
     QLabel *label_16;
     QWidget *formLayoutWidget_4;
@@ -144,13 +148,14 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QPushButton *btnPrevGraphToWelcome;
     QPushButton *Exit7;
-    QPushButton *btn_LineGraph;
+    QLabel *label_30;
     QWidget *page_10;
     QLabel *label_29;
     QPushButton *Exit9;
     QWidget *lineGraphWidget;
     QHBoxLayout *horizontalLayout_14;
     QPushButton *btnLHome;
+    QPushButton *pushButton_LineGraphPrev;
     QWidget *page_8;
     QLabel *label_23;
     QPushButton *btn_ExpenseReportHome;
@@ -180,6 +185,13 @@ public:
     QHBoxLayout *horizontalLayout_44;
     QLabel *Category_11;
     QLabel *others;
+    QPushButton *Exit10;
+    QWidget *page_11;
+    QLabel *label_27;
+    QPushButton *Exit11;
+    QPushButton *pushButton_GraphsPrev;
+    QPushButton *pushButton_GraphsBarGraph;
+    QPushButton *pushButton_GraphsLineGraph;
     QMenuBar *menubar;
     QMenu *menuHome_Page;
     QStatusBar *statusbar;
@@ -203,14 +215,14 @@ public:
         page->setObjectName("page");
         label = new QLabel(page);
         label->setObjectName("label");
-        label->setGeometry(QRect(40, 40, 931, 71));
+        label->setGeometry(QRect(10, 0, 931, 71));
         QFont font1;
         font1.setPointSize(25);
         font1.setBold(true);
         label->setFont(font1);
         formLayoutWidget = new QWidget(page);
         formLayoutWidget->setObjectName("formLayoutWidget");
-        formLayoutWidget->setGeometry(QRect(200, 160, 611, 113));
+        formLayoutWidget->setGeometry(QRect(150, 220, 611, 113));
         formLayout = new QFormLayout(formLayoutWidget);
         formLayout->setObjectName("formLayout");
         formLayout->setContentsMargins(0, 0, 0, 0);
@@ -241,7 +253,7 @@ public:
 
         horizontalLayoutWidget = new QWidget(page);
         horizontalLayoutWidget->setObjectName("horizontalLayoutWidget");
-        horizontalLayoutWidget->setGeometry(QRect(209, 280, 601, 55));
+        horizontalLayoutWidget->setGeometry(QRect(150, 330, 611, 55));
         horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
         horizontalLayout->setObjectName("horizontalLayout");
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
@@ -251,17 +263,17 @@ public:
 
         horizontalLayout->addWidget(btnSignup);
 
-        btnLogin = new QPushButton(horizontalLayoutWidget);
-        btnLogin->setObjectName("btnLogin");
-        btnLogin->setFont(font);
-
-        horizontalLayout->addWidget(btnLogin);
-
         btnForgot = new QPushButton(horizontalLayoutWidget);
         btnForgot->setObjectName("btnForgot");
         btnForgot->setFont(font);
 
         horizontalLayout->addWidget(btnForgot);
+
+        btnLogin = new QPushButton(horizontalLayoutWidget);
+        btnLogin->setObjectName("btnLogin");
+        btnLogin->setFont(font);
+
+        horizontalLayout->addWidget(btnLogin);
 
         Exit0 = new QPushButton(page);
         Exit0->setObjectName("Exit0");
@@ -280,7 +292,7 @@ public:
         page_2->setObjectName("page_2");
         formLayoutWidget_2 = new QWidget(page_2);
         formLayoutWidget_2->setObjectName("formLayoutWidget_2");
-        formLayoutWidget_2->setGeometry(QRect(200, 120, 671, 350));
+        formLayoutWidget_2->setGeometry(QRect(160, 120, 671, 350));
         formLayout_2 = new QFormLayout(formLayoutWidget_2);
         formLayout_2->setObjectName("formLayout_2");
         formLayout_2->setContentsMargins(0, 0, 0, 0);
@@ -348,7 +360,7 @@ public:
         label_14->setFont(font1);
         horizontalLayoutWidget_10 = new QWidget(page_2);
         horizontalLayoutWidget_10->setObjectName("horizontalLayoutWidget_10");
-        horizontalLayoutWidget_10->setGeometry(QRect(200, 430, 661, 67));
+        horizontalLayoutWidget_10->setGeometry(QRect(160, 470, 671, 67));
         horizontalLayout_11 = new QHBoxLayout(horizontalLayoutWidget_10);
         horizontalLayout_11->setObjectName("horizontalLayout_11");
         horizontalLayout_11->setContentsMargins(0, 0, 0, 0);
@@ -383,7 +395,7 @@ public:
         page_9->setObjectName("page_9");
         formLayoutWidget_6 = new QWidget(page_9);
         formLayoutWidget_6->setObjectName("formLayoutWidget_6");
-        formLayoutWidget_6->setGeometry(QRect(140, 130, 651, 301));
+        formLayoutWidget_6->setGeometry(QRect(150, 120, 651, 301));
         formLayout_6 = new QFormLayout(formLayoutWidget_6);
         formLayout_6->setObjectName("formLayout_6");
         formLayout_6->setContentsMargins(0, 0, 0, 0);
@@ -445,15 +457,15 @@ public:
         label_26->setFont(font1);
         horizontalLayoutWidget_12 = new QWidget(page_9);
         horizontalLayoutWidget_12->setObjectName("horizontalLayoutWidget_12");
-        horizontalLayoutWidget_12->setGeometry(QRect(360, 440, 431, 67));
+        horizontalLayoutWidget_12->setGeometry(QRect(370, 420, 431, 55));
         horizontalLayout_13 = new QHBoxLayout(horizontalLayoutWidget_12);
         horizontalLayout_13->setSpacing(50);
         horizontalLayout_13->setObjectName("horizontalLayout_13");
         horizontalLayout_13->setContentsMargins(0, 0, 0, 0);
-        btnHomepage = new QPushButton(horizontalLayoutWidget_12);
-        btnHomepage->setObjectName("btnHomepage");
+        btnSignUpBack = new QPushButton(horizontalLayoutWidget_12);
+        btnSignUpBack->setObjectName("btnSignUpBack");
 
-        horizontalLayout_13->addWidget(btnHomepage);
+        horizontalLayout_13->addWidget(btnSignUpBack);
 
         btnSignUpSave = new QPushButton(horizontalLayoutWidget_12);
         btnSignUpSave->setObjectName("btnSignUpSave");
@@ -507,7 +519,7 @@ public:
         label_13->setFont(font1);
         horizontalLayoutWidget_3 = new QWidget(page_4);
         horizontalLayoutWidget_3->setObjectName("horizontalLayoutWidget_3");
-        horizontalLayoutWidget_3->setGeometry(QRect(470, 300, 391, 61));
+        horizontalLayoutWidget_3->setGeometry(QRect(510, 280, 391, 55));
         horizontalLayout_3 = new QHBoxLayout(horizontalLayoutWidget_3);
         horizontalLayout_3->setObjectName("horizontalLayout_3");
         horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
@@ -567,14 +579,6 @@ public:
         label_19->setObjectName("label_19");
         label_19->setGeometry(QRect(10, 0, 931, 71));
         label_19->setFont(font);
-        btnChangePassword = new QPushButton(page_6);
-        btnChangePassword->setObjectName("btnChangePassword");
-        btnChangePassword->setGeometry(QRect(690, 310, 121, 41));
-        btnChangePassword->setFont(font);
-        btnHome = new QPushButton(page_6);
-        btnHome->setObjectName("btnHome");
-        btnHome->setGeometry(QRect(562, 310, 111, 41));
-        btnHome->setFont(font);
         Exit4 = new QPushButton(page_6);
         Exit4->setObjectName("Exit4");
         Exit4->setGeometry(QRect(900, 0, 41, 24));
@@ -584,6 +588,24 @@ public:
 "	color:black;\n"
 "	background-color:red;\n"
 "}"));
+        horizontalLayoutWidget_2 = new QWidget(page_6);
+        horizontalLayoutWidget_2->setObjectName("horizontalLayoutWidget_2");
+        horizontalLayoutWidget_2->setGeometry(QRect(497, 300, 301, 61));
+        horizontalLayout_6 = new QHBoxLayout(horizontalLayoutWidget_2);
+        horizontalLayout_6->setObjectName("horizontalLayout_6");
+        horizontalLayout_6->setContentsMargins(0, 0, 0, 0);
+        btnHome = new QPushButton(horizontalLayoutWidget_2);
+        btnHome->setObjectName("btnHome");
+        btnHome->setFont(font);
+
+        horizontalLayout_6->addWidget(btnHome);
+
+        btnChangePassword = new QPushButton(horizontalLayoutWidget_2);
+        btnChangePassword->setObjectName("btnChangePassword");
+        btnChangePassword->setFont(font);
+
+        horizontalLayout_6->addWidget(btnChangePassword);
+
         stackedWidget->addWidget(page_6);
         page_3 = new QWidget();
         page_3->setObjectName("page_3");
@@ -673,6 +695,11 @@ public:
 "	color:black;\n"
 "	background-color:red;\n"
 "}"));
+        PieChart = new QWidget(page_3);
+        PieChart->setObjectName("PieChart");
+        PieChart->setGeometry(QRect(540, 110, 321, 221));
+        horizontalLayout_8 = new QHBoxLayout(PieChart);
+        horizontalLayout_8->setObjectName("horizontalLayout_8");
         stackedWidget->addWidget(page_3);
         page_5 = new QWidget();
         page_5->setObjectName("page_5");
@@ -746,7 +773,7 @@ public:
         page_7->setObjectName("page_7");
         bargraph = new QFrame(page_7);
         bargraph->setObjectName("bargraph");
-        bargraph->setGeometry(QRect(80, 20, 781, 571));
+        bargraph->setGeometry(QRect(20, 70, 891, 521));
         horizontalLayout_2 = new QHBoxLayout(bargraph);
         horizontalLayout_2->setObjectName("horizontalLayout_2");
         btnPrevGraphToWelcome = new QPushButton(page_7);
@@ -762,10 +789,9 @@ public:
 "	color:black;\n"
 "	background-color:red;\n"
 "}"));
-        btn_LineGraph = new QPushButton(page_7);
-        btn_LineGraph->setObjectName("btn_LineGraph");
-        btn_LineGraph->setGeometry(QRect(792, 600, 131, 29));
-        btn_LineGraph->setFont(font5);
+        label_30 = new QLabel(page_7);
+        label_30->setObjectName("label_30");
+        label_30->setGeometry(QRect(0, 0, 941, 61));
         stackedWidget->addWidget(page_7);
         page_10 = new QWidget();
         page_10->setObjectName("page_10");
@@ -792,18 +818,25 @@ public:
         horizontalLayout_14->setObjectName("horizontalLayout_14");
         btnLHome = new QPushButton(page_10);
         btnLHome->setObjectName("btnLHome");
-        btnLHome->setGeometry(QRect(30, 610, 83, 29));
-        btnLHome->setFont(font5);
+        btnLHome->setGeometry(QRect(830, 610, 83, 29));
+        QFont font8;
+        font8.setPointSize(9);
+        font8.setBold(true);
+        btnLHome->setFont(font8);
+        pushButton_LineGraphPrev = new QPushButton(page_10);
+        pushButton_LineGraphPrev->setObjectName("pushButton_LineGraphPrev");
+        pushButton_LineGraphPrev->setGeometry(QRect(30, 610, 83, 29));
+        pushButton_LineGraphPrev->setFont(font8);
         stackedWidget->addWidget(page_10);
         page_8 = new QWidget();
         page_8->setObjectName("page_8");
         label_23 = new QLabel(page_8);
         label_23->setObjectName("label_23");
         label_23->setGeometry(QRect(290, 0, 381, 121));
-        QFont font8;
-        font8.setPointSize(30);
-        font8.setBold(true);
-        label_23->setFont(font8);
+        QFont font9;
+        font9.setPointSize(30);
+        font9.setBold(true);
+        label_23->setFont(font9);
         btn_ExpenseReportHome = new QPushButton(page_8);
         btn_ExpenseReportHome->setObjectName("btn_ExpenseReportHome");
         btn_ExpenseReportHome->setGeometry(QRect(790, 570, 111, 41));
@@ -915,7 +948,43 @@ public:
 
         horizontalLayout_44->addWidget(others);
 
+        Exit10 = new QPushButton(page_8);
+        Exit10->setObjectName("Exit10");
+        Exit10->setGeometry(QRect(900, 0, 41, 24));
+        Exit10->setFont(font2);
+        Exit10->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{\n"
+"	color:black;\n"
+"	background-color:red;\n"
+"}"));
         stackedWidget->addWidget(page_8);
+        page_11 = new QWidget();
+        page_11->setObjectName("page_11");
+        label_27 = new QLabel(page_11);
+        label_27->setObjectName("label_27");
+        label_27->setGeometry(QRect(10, 0, 931, 71));
+        Exit11 = new QPushButton(page_11);
+        Exit11->setObjectName("Exit11");
+        Exit11->setGeometry(QRect(900, 0, 41, 24));
+        Exit11->setFont(font2);
+        Exit11->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{\n"
+"	color:black;\n"
+"	background-color:red;\n"
+"}"));
+        pushButton_GraphsPrev = new QPushButton(page_11);
+        pushButton_GraphsPrev->setObjectName("pushButton_GraphsPrev");
+        pushButton_GraphsPrev->setGeometry(QRect(20, 610, 83, 29));
+        pushButton_GraphsPrev->setFont(font8);
+        pushButton_GraphsBarGraph = new QPushButton(page_11);
+        pushButton_GraphsBarGraph->setObjectName("pushButton_GraphsBarGraph");
+        pushButton_GraphsBarGraph->setGeometry(QRect(30, 160, 81, 31));
+        pushButton_GraphsBarGraph->setFont(font8);
+        pushButton_GraphsLineGraph = new QPushButton(page_11);
+        pushButton_GraphsLineGraph->setObjectName("pushButton_GraphsLineGraph");
+        pushButton_GraphsLineGraph->setGeometry(QRect(30, 230, 81, 31));
+        pushButton_GraphsLineGraph->setFont(font8);
+        stackedWidget->addWidget(page_11);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -931,7 +1000,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(9);
+        stackedWidget->setCurrentIndex(7);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -944,8 +1013,8 @@ public:
         label_2->setText(QCoreApplication::translate("MainWindow", "Email", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "Password", nullptr));
         btnSignup->setText(QCoreApplication::translate("MainWindow", "SignUp", nullptr));
-        btnLogin->setText(QCoreApplication::translate("MainWindow", "Login", nullptr));
         btnForgot->setText(QCoreApplication::translate("MainWindow", "ForgotPassword", nullptr));
+        btnLogin->setText(QCoreApplication::translate("MainWindow", "Login", nullptr));
         Exit0->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
         label_4->setText(QCoreApplication::translate("MainWindow", "First Name", nullptr));
         txtFirstName->setPlaceholderText(QCoreApplication::translate("MainWindow", "EG: JOHN", nullptr));
@@ -958,7 +1027,7 @@ public:
         label_9->setText(QCoreApplication::translate("MainWindow", "Password", nullptr));
         txtPasswords->setPlaceholderText(QCoreApplication::translate("MainWindow", "CANT BE EMPTY", nullptr));
         label_14->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:36pt;\">Sign Up Here!!</span></p></body></html>", nullptr));
-        btnSignUpPrev->setText(QCoreApplication::translate("MainWindow", "Previous", nullptr));
+        btnSignUpPrev->setText(QCoreApplication::translate("MainWindow", "Back", nullptr));
         btnReset->setText(QCoreApplication::translate("MainWindow", "Reset", nullptr));
         btnNext->setText(QCoreApplication::translate("MainWindow", "Next", nullptr));
         Exit1->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
@@ -973,7 +1042,7 @@ public:
         txtPStationery->setPlaceholderText(QCoreApplication::translate("MainWindow", "In Percentage", nullptr));
         label_25->setText(QCoreApplication::translate("MainWindow", "Stationery", nullptr));
         label_26->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:36pt;\">Sign Up Here!!</span></p></body></html>", nullptr));
-        btnHomepage->setText(QCoreApplication::translate("MainWindow", "Home", nullptr));
+        btnSignUpBack->setText(QCoreApplication::translate("MainWindow", "Back", nullptr));
         btnSignUpSave->setText(QCoreApplication::translate("MainWindow", "Save", nullptr));
         Exit2->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
         txtFEmail->setText(QString());
@@ -988,12 +1057,12 @@ public:
         label_20->setText(QCoreApplication::translate("MainWindow", "New Password", nullptr));
         label_21->setText(QCoreApplication::translate("MainWindow", "Confirm Password", nullptr));
         label_19->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:36pt;\">Change Password</span></p></body></html>", nullptr));
-        btnChangePassword->setText(QCoreApplication::translate("MainWindow", "Change", nullptr));
-        btnHome->setText(QCoreApplication::translate("MainWindow", "Home", nullptr));
         Exit4->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
+        btnHome->setText(QCoreApplication::translate("MainWindow", "Home", nullptr));
+        btnChangePassword->setText(QCoreApplication::translate("MainWindow", "Change", nullptr));
         label_10->setText(QCoreApplication::translate("MainWindow", "Welcome,", nullptr));
         btnEnterExpense->setText(QCoreApplication::translate("MainWindow", "Enter Expense", nullptr));
-        btnGraph->setText(QCoreApplication::translate("MainWindow", "Generate Graph", nullptr));
+        btnGraph->setText(QCoreApplication::translate("MainWindow", "Graphs", nullptr));
         btnStats->setText(QCoreApplication::translate("MainWindow", "Stats", nullptr));
         label_15->setText(QCoreApplication::translate("MainWindow", "Date:", nullptr));
         date->setText(QString());
@@ -1017,10 +1086,11 @@ public:
         Exit6->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
         btnPrevGraphToWelcome->setText(QCoreApplication::translate("MainWindow", "Back", nullptr));
         Exit7->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
-        btn_LineGraph->setText(QCoreApplication::translate("MainWindow", "Line Graph", nullptr));
+        label_30->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:36pt;\">Bar Graph</span></p></body></html>", nullptr));
         label_29->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:36pt;\">Line Graph</span></p></body></html>", nullptr));
         Exit9->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
         btnLHome->setText(QCoreApplication::translate("MainWindow", "Home", nullptr));
+        pushButton_LineGraphPrev->setText(QCoreApplication::translate("MainWindow", "Prev", nullptr));
         label_23->setText(QCoreApplication::translate("MainWindow", "Expense Report", nullptr));
         btn_ExpenseReportHome->setText(QCoreApplication::translate("MainWindow", "Home", nullptr));
         RemainingBudget->setText(QCoreApplication::translate("MainWindow", "RS.", nullptr));
@@ -1037,6 +1107,12 @@ public:
         stationery->setText(QCoreApplication::translate("MainWindow", "RS.", nullptr));
         Category_11->setText(QCoreApplication::translate("MainWindow", "Others", nullptr));
         others->setText(QCoreApplication::translate("MainWindow", "RS.", nullptr));
+        Exit10->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
+        label_27->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:36pt;\">Graphs</span></p></body></html>", nullptr));
+        Exit11->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
+        pushButton_GraphsPrev->setText(QCoreApplication::translate("MainWindow", "Prev", nullptr));
+        pushButton_GraphsBarGraph->setText(QCoreApplication::translate("MainWindow", "Bar Graph", nullptr));
+        pushButton_GraphsLineGraph->setText(QCoreApplication::translate("MainWindow", "Line Graph", nullptr));
         menuHome_Page->setTitle(QCoreApplication::translate("MainWindow", "Home Page", nullptr));
     } // retranslateUi
 

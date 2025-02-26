@@ -9,18 +9,8 @@
 #include <QSqlRecord>
 
 //header files for line graph
-#include <QtCharts/QChart>
-#include <QtCharts/QChartView>
-#include <QtCharts/QLineSeries>
-#include <QtCharts/QDateTimeAxis>
-#include <QtCharts/QValueAxis>
+#include <QtCharts>
 
-//header files for graph
-#include <QtCharts/QChartView>
-#include <QtCharts/QBarSeries>
-#include <QtCharts/QBarSet>
-#include <QtCharts/QBarCategoryAxis>
-#include <QtCharts/QValueAxis>
 //-----------------------------
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -87,8 +77,6 @@ private slots:
     void on_Exit8_clicked();
     void on_Exit9_clicked();
 
-    void on_btn_LineGraph_clicked();
-
     void on_btnLHome_clicked();
 
     void on_btn_ExpenseReportHome_clicked();
@@ -106,6 +94,11 @@ private slots:
     void on_pushButton_GraphsPrev_clicked();
 
     void on_pushButton_LineGraphPrev_clicked();
+
+    void PieChart();
+    void LineGraph();
+
+
 
 private:
     int currentUserID = -1;

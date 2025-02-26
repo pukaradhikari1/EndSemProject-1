@@ -65,7 +65,7 @@ bool MainWindow::openDatabase()
     db = QSqlDatabase::addDatabase("QSQLITE");
 
     // Set the path to your SQLite database file
-    db.setDatabaseName("C:/Users/Sakar/Documents/GitHub/EndSemProject-1/mind_your_money/database_Mind_your_Money.db");
+    db.setDatabaseName("C:/Users/sakar/OneDrive/Documents/GitHub/EndSemProject-1/mind_your_money/database_Mind_your_Money.db");
 
 
     // Attempt to open the database
@@ -537,6 +537,8 @@ void MainWindow::on_btnLogin_clicked()
         QMessageBox::warning(this, "Login Failed", "Invalid Email or Password.");
     }
 
+    PieChart();
+
 }
 
 
@@ -659,7 +661,7 @@ void MainWindow::on_Exit9_clicked()
 }
 
 
-void MainWindow::on_btn_LineGraph_clicked()
+void MainWindow::LineGraph()
 {
     // Ensure a user is logged in
     if (loggedInUserID == -1) {
@@ -913,7 +915,7 @@ void MainWindow::on_pushButton_GraphsBarGraph_clicked()
 
 void MainWindow::on_pushButton_GraphsLineGraph_clicked()
 {
-    ui->btn_LineGraph->clicked(1);
+    LineGraph();
 }
 
 
@@ -926,5 +928,114 @@ void MainWindow::on_pushButton_GraphsPrev_clicked()
 void MainWindow::on_pushButton_LineGraphPrev_clicked()
 {
     ui->stackedWidget->setCurrentIndex(10);
+}
+
+void MainWindow::PieChart(){
+    //Ensure a user is logged in
+    if (loggedInUserID == -1){
+        QMessageBox::warning(this,"Error","No user is currently logged in.");
+        return;
+    }
+
+    //initialise variables
+    QPieSeries *series = new QPieSeries();
+    float food = 0.0;
+    float rent = 0.0;
+    float stationery = 0.0;
+    float utilities = 0.0;
+    float others = 0.0;
+    QDate currentDate = QDate::currentDate();
+    QDate firstDay = QDate(currentDate.year(),currentDate.month(),1);
+    QDate iterDate = firstDay;
+
+    //loop to interate through each date
+    while (iterDate <= currentDate) {
+        // Query total expenses of each item
+        // Food, Rent, Stationery, Utilities, Others.
+        QSqlQuery expenseQuery(db);
+        expenseQuery.prepare(R"(
+            SELECT (IFNULL (Food,0)) as FoodExpense
+            SELECT (IFNULL (Rent,0)) as RentExpense
+            SELECT (IFNULL (Stationery,0)) as StationeryExpense
+            SELECT (IFNULL (Utilities,0)) as UtilitiesExpense
+            SELECT (IFNULL (Others,0)) as OthersExpense
+
+            FROM Expenses
+            WHERE user_id = :UserID AND Date = :Date
+        )");
+        expenseQuery.bindValue(":UserID", loggedInUserID);
+        expenseQuery.bindValue(":Date", iterDate.toString("yyyy-MM-dd"));
+
+        //sum and entry data
+        if (expenseQuery.exec() && expenseQuery.next()) {
+            food += expenseQuery.value("FoodExpense").toFloat();
+            rent += expenseQuery.value("RentExpense").toFloat();
+            stationery += expenseQuery.value("StationeryExpense").toFloat();
+            utilities += expenseQuery.value("UtilitiesExpense").toFloat();
+            others += expenseQuery.value("OthersExpense").toFloat();
+        }
+
+        // Move to the next day
+        iterDate = iterDate.addDays(1);
+    }
+
+    //after loop, add each data into the series
+    series->append("Food", food);
+    series->append("Rent", rent);
+    series->append("Stationery", stationery);
+    series->append("Utilities",utilities);
+    series->append("Others", others);
+    series->append("Test1",5);
+    series->append("Test2",6);
+    series->append("Test3",10);
+
+    //make a chart and add the series we just made to it
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    chart->setTitle("PieChart");
+    chart->legend()->hide();
+    chart->setVisible(true);
+
+    //make the chart viewable
+    QChartView *chartview = new QChartView(chart);
+    chartview->setRenderHint(QPainter::Antialiasing);
+    chartview->setVisible(true);
+
+    //make slices of the pie chart
+    QPieSlice *foodSlice = series->slices().at(0);
+    QPieSlice *rentSlice = series->slices().at(1);
+    QPieSlice *stationerySlice = series->slices().at(2);
+    QPieSlice *utilitiesSlice = series->slices().at(3);
+    QPieSlice *othersSlice = series->slices().at(4);
+
+    //modify slices data
+    foodSlice->setLabelVisible(true);
+    foodSlice->setBrush(Qt::green);
+
+    rentSlice->setLabelVisible(true);
+    rentSlice->setBrush(Qt::blue);
+
+    stationerySlice->setLabelVisible(true);
+    stationerySlice->setBrush(Qt::yellow);
+
+    utilitiesSlice->setLabelVisible(true);
+    utilitiesSlice->setBrush(Qt::cyan);
+
+    othersSlice->setLabelVisible(true);
+    othersSlice->setBrush(Qt::gray);
+
+    QPieSlice *test1Slice = series->slices().at(4);
+
+    test1Slice->setLabelVisible(true);
+    test1Slice->setBrush(Qt::red);
+
+    //display the pie chart
+    QLayout *layout = ui->PieChart->layout();
+    if (!layout) {
+        layout = new QVBoxLayout(ui->PieChart);
+        ui->PieChart->setLayout(layout);
+    }
+
+    layout->addWidget(chartview);
 }
 

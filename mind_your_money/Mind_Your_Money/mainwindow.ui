@@ -33,7 +33,7 @@
      <enum>Qt::LayoutDirection::LeftToRight</enum>
     </property>
     <property name="currentIndex">
-     <number>8</number>
+     <number>7</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QLabel" name="label">
@@ -1053,6 +1053,17 @@ color:red;
        <string>X</string>
       </property>
      </widget>
+     <widget class="QWidget" name="PieChart" native="true">
+      <property name="geometry">
+       <rect>
+        <x>540</x>
+        <y>110</y>
+        <width>321</width>
+        <height>221</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_8"/>
+     </widget>
     </widget>
     <widget class="QWidget" name="page_5">
      <widget class="QLabel" name="label_16">
@@ -1223,10 +1234,10 @@ color:red;
      <widget class="QFrame" name="bargraph">
       <property name="geometry">
        <rect>
-        <x>80</x>
-        <y>20</y>
-        <width>781</width>
-        <height>571</height>
+        <x>20</x>
+        <y>70</y>
+        <width>891</width>
+        <height>521</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2"/>
@@ -1276,23 +1287,17 @@ color:red;
        <string>X</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="btn_LineGraph">
+     <widget class="QLabel" name="label_30">
       <property name="geometry">
        <rect>
-        <x>792</x>
-        <y>600</y>
-        <width>131</width>
-        <height>29</height>
+        <x>0</x>
+        <y>0</y>
+        <width>941</width>
+        <height>61</height>
        </rect>
       </property>
-      <property name="font">
-       <font>
-        <pointsize>15</pointsize>
-        <bold>true</bold>
-       </font>
-      </property>
       <property name="text">
-       <string>Line Graph</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;Bar Graph&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
     </widget>
@@ -1692,57 +1697,6 @@ color:red;
        <string>X</string>
       </property>
      </widget>
-     <widget class="QWidget" name="horizontalLayoutWidget_6">
-      <property name="geometry">
-       <rect>
-        <x>150</x>
-        <y>220</y>
-        <width>661</width>
-        <height>80</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_7">
-       <item>
-        <widget class="QPushButton" name="pushButton_GraphsLineGraph">
-         <property name="font">
-          <font>
-           <pointsize>9</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Line Graph</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_GraphsBarGraph">
-         <property name="font">
-          <font>
-           <pointsize>9</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Bar Graph</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_GraphsPieChart">
-         <property name="font">
-          <font>
-           <pointsize>9</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Pie Chart</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
      <widget class="QPushButton" name="pushButton_GraphsPrev">
       <property name="geometry">
        <rect>
@@ -1762,6 +1716,44 @@ color:red;
        <string>Prev</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="pushButton_GraphsBarGraph">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>160</y>
+        <width>81</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Bar Graph</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_GraphsLineGraph">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>230</y>
+        <width>81</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Line Graph</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>
@@ -1771,7 +1763,7 @@ color:red;
      <x>0</x>
      <y>0</y>
      <width>945</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHome_Page">
