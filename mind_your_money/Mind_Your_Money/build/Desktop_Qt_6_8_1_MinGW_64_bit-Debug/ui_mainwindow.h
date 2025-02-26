@@ -120,6 +120,7 @@ public:
     QPushButton *btnEnterExpense;
     QPushButton *btnGraph;
     QPushButton *btnStats;
+    QPushButton *ChangePassword;
     QWidget *horizontalLayoutWidget_4;
     QHBoxLayout *horizontalLayout_4;
     QLabel *label_15;
@@ -641,6 +642,11 @@ public:
 
         verticalLayout_2->addWidget(btnStats);
 
+        ChangePassword = new QPushButton(verticalLayoutWidget_2);
+        ChangePassword->setObjectName("ChangePassword");
+
+        verticalLayout_2->addWidget(ChangePassword);
+
         horizontalLayoutWidget_4 = new QWidget(page_3);
         horizontalLayoutWidget_4->setObjectName("horizontalLayoutWidget_4");
         horizontalLayoutWidget_4->setGeometry(QRect(540, 40, 321, 51));
@@ -1000,7 +1006,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(7);
+        stackedWidget->setCurrentIndex(4);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1064,6 +1070,7 @@ public:
         btnEnterExpense->setText(QCoreApplication::translate("MainWindow", "Enter Expense", nullptr));
         btnGraph->setText(QCoreApplication::translate("MainWindow", "Graphs", nullptr));
         btnStats->setText(QCoreApplication::translate("MainWindow", "Stats", nullptr));
+        ChangePassword->setText(QCoreApplication::translate("MainWindow", "ChangePassword", nullptr));
         label_15->setText(QCoreApplication::translate("MainWindow", "Date:", nullptr));
         date->setText(QString());
         labelUserName->setText(QString());

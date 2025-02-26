@@ -39,26 +39,8 @@ MainWindow::MainWindow(QWidget *parent)
     // Set the initial date and time
     updateDateTime();
 
-
-
-    //Connecting buttons
-    // connect(ui->btnLogin, &QPushButton::clicked, this, &MainWindow::on_btnLogin_clicked);
-    // connect(ui->btnForgot, &QPushButton::clicked, this, &MainWindow::on_btnForgot_clicked);
-    // connect(ui->btnSignup, &QPushButton::clicked, this, &MainWindow::on_btnSignup_clicked);
-    // connect(ui->btnReset, &QPushButton::clicked, this, &MainWindow::on_btnReset_clicked);
-    // connect(ui->btnEnterExpense, &QPushButton::clicked, this, &MainWindow::on_btnEnterExpense_clicked);
-    // connect(ui->btnHome, &QPushButton::clicked, this, &MainWindow::on_btnHome_clicked);
-    // connect(ui->btnSaveExpense, &QPushButton::clicked, this, &MainWindow::on_btnSaveExpense_clicked);
-    // connect(ui->btnSignUpSave, &QPushButton::clicked, this, &MainWindow::on_btnSignUpSave_clicked);
-    // connect(ui->btnSignUpPrev, &QPushButton::clicked, this, &MainWindow::on_btnSignUpPrev_clicked);
-    // connect(ui->btnPrevExpenseWelcomeUser, &QPushButton::clicked, this, &MainWindow::on_btnPrevExpenseWelcomeUser_clicked);
-    // connect(ui->btnLogout,&QPushButton::clicked, this,&MainWindow:: on_btnLogout_clicked);
-    // connect(ui->btnGraph,&QPushButton::clicked, this,&MainWindow:: on_btnGraph_clicked);
-    // connect(ui->btnStats,&QPushButton::clicked, this,&MainWindow:: on_btnStats_clicked);
-    //  connect(ui->btnPrevGraphToWelcome,&QPushButton::clicked, this,&MainWindow:: on_btnPrevGraphToWelcome_clicked);
-
-
 }
+
 bool MainWindow::openDatabase()
 {
     // Add the SQLite database driver
@@ -66,7 +48,6 @@ bool MainWindow::openDatabase()
 
     // Set the path to your SQLite database file
     db.setDatabaseName("C:/Users/sakar/OneDrive/Documents/GitHub/EndSemProject-1/mind_your_money/database_Mind_your_Money.db");
-
 
     // Attempt to open the database
     if (!db.open()) {
@@ -83,6 +64,7 @@ MainWindow::~MainWindow()
     db.close();  // Close the database connection when MainWindow is destroyed
     delete ui;
 }
+
 void MainWindow::updateDateTime()
 {
     // Get the current date and time
@@ -105,7 +87,6 @@ void MainWindow::on_btnForgot_clicked()
 void MainWindow::on_btnSignUpPrev_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
-
 }
 void MainWindow::on_btnPrevExpenseWelcomeUser_clicked()
 {
@@ -130,11 +111,7 @@ void MainWindow::on_btnLogout_clicked()
     ui->txtPasswords->clear();
     ui->txtEmailA->clear();
     loggedInUserID=-1;
-
 }
-
-
-//Code For monthly report
 void MainWindow::on_btnStats_clicked()
 {
     ui->stackedWidget->setCurrentIndex(9);
@@ -145,31 +122,26 @@ void MainWindow::on_btnReset_clicked()
     ui->txtFirstName->clear();
     ui->txtLastName->clear();
     ui->txtPhone->clear();
-
     ui->txtPasswords->clear();
     ui->txtEmailA->clear();
     ui->txtMonthlyBudget->clear();
-
-
 }
-
 
 void MainWindow::on_btnEnterExpense_clicked()
 {
     ui->stackedWidget->setCurrentIndex(6);
-
 }
 
 void MainWindow::on_btnChangePassword_clicked()
 {
-   QString Password=ui->txtCPassword->text();
+    QString Password=ui->txtCPassword->text();
     QString CmPassword=ui->txtCmPassword->text();
-   if(Password==CmPassword)
+    if(Password==CmPassword)
     {
         QSqlQuery query(db);
-       query.prepare("SELECT UserID, Password FROM User WHERE Password = :Password");
-       query.bindValue(":Password", Password);
-       //QMessageBox::information(this, "successfully changed password ");
+        query.prepare("SELECT UserID, Password FROM User WHERE Password = :Password");
+        query.bindValue(":Password", Password);
+        QMessageBox::information(this,"info","Password has been changed");
 
    }
    else
@@ -240,11 +212,6 @@ void MainWindow::on_btnEPush_clicked()
 {
     ui->stackedWidget->setCurrentIndex(4);
 }
-
-
-
-
-
 
 //Expense SignUP: code done
 void MainWindow::on_btnSignUpSave_clicked()
@@ -800,7 +767,7 @@ void MainWindow::on_Exit10_clicked()
 
 void MainWindow::on_pushButton_GraphsBarGraph_clicked()
 {
-    // Switch to the chart page (assumed to be index 7 in the stacked widget)
+    // Switch to the chart page
     ui->stackedWidget->setCurrentIndex(7);
 
     // Ensure a user is logged in
@@ -809,54 +776,62 @@ void MainWindow::on_pushButton_GraphsBarGraph_clicked()
         return;
     }
 
-    // Define the categories and initialize their amounts
-    QStringList categories = {"Food", "Rent", "Utilities", "Stationery", "Other"};
-    QMap<QString, float> expenseMap;
-    for (const QString &category : categories) {
-        expenseMap[category] = 0.0;
+    //assign categories
+    QStringList Categories;
+    Categories.append("Food");
+    Categories.append("Rent");
+    Categories.append("Stationery");
+    Categories.append("Utilities");
+    Categories.append("Others");
+
+    //initialise variables
+    float food = 0.0;
+    float rent = 0.0;
+    float stationery = 0.0;
+    float utilities = 0.0;
+    float others = 0.0;
+    QDate currentDate = QDate::currentDate();
+    QDate firstDay = QDate(currentDate.year(),currentDate.month(),1);
+    QDate iterDate = firstDay;
+
+    //loop to interate through each date
+    while (iterDate <= currentDate) {
+        // Query total expenses of each item
+        // Food, Rent, Stationery, Utilities, Others.
+        QSqlQuery expenseQuery(db);
+        expenseQuery.prepare(R"(
+            SELECT (IFNULL (Food,0)) as FoodExpense
+            SELECT (IFNULL (Rent,0)) as RentExpense
+            SELECT (IFNULL (Stationery,0)) as StationeryExpense
+            SELECT (IFNULL (Utilities,0)) as UtilitiesExpense
+            SELECT (IFNULL (Others,0)) as OthersExpense
+
+            FROM Expenses
+            WHERE user_id = :UserID AND Date = :Date
+        )");
+        expenseQuery.bindValue(":UserID", loggedInUserID);
+        expenseQuery.bindValue(":Date", iterDate.toString("yyyy-MM-dd"));
+
+        //sum and entry data
+        if (expenseQuery.exec() && expenseQuery.next()) {
+            food += expenseQuery.value("FoodExpense").toFloat();
+            rent += expenseQuery.value("RentExpense").toFloat();
+            stationery += expenseQuery.value("StationeryExpense").toFloat();
+            utilities += expenseQuery.value("UtilitiesExpense").toFloat();
+            others += expenseQuery.value("OthersExpense").toFloat();
+        }
+
+        // Move to the next day
+        iterDate = iterDate.addDays(1);
     }
 
-
-    // Get the current month in "yyyy-MM" format
-    QString currentMonth = QDate::currentDate().toString("yyyy-MM");
-
-    // Build the SQL query to sum each expense column for the current month for the logged-in user.
-    // We use a single-row query that sums each column individually.
-    QSqlQuery query(db);
-    QString sql = QString(
-        "SELECT "
-        "SUM(Food) as sumFood, "
-        "SUM(Rent) as sumRent, "
-        "SUM(Utilities) as sumUtilities, "
-        "SUM(Stationery) as sumStationery, "
-        "SUM(Others) as sumOthers "
-        "FROM Expenses "
-        "WHERE user_id = :UserID AND strftime('%%Y-%%m', Date) = :CurrentMonth"
-        );
-    query.prepare(sql);
-    query.bindValue(":UserID", loggedInUserID);
-    query.bindValue(":CurrentMonth", currentMonth);
-
-    if (!query.exec()) {
-        qDebug() << "SQL Query Failed: " << query.lastError().text();
-        QMessageBox::critical(this, "Database Error", "Failed to retrieve expenses: " + query.lastError().text());
-        return;
-    }
-
-    if (query.next()) {
-        expenseMap["Food"] = query.value("sumFood").toFloat();
-        expenseMap["Rent"] = query.value("sumRent").toFloat();
-        expenseMap["Utilities"] = query.value("sumUtilities").toFloat();
-        expenseMap["Stationery"] = query.value("sumStationery").toFloat();
-        expenseMap["Other"] = query.value("sumOthers").toFloat();
-    }
-
-    // Create a bar set for the chart and populate it with the summed expenses in the order of uiCategories.
-    QBarSet *barSet = new QBarSet("Expenses");
-    for (const QString &category : categories) {
-        *barSet << expenseMap[category];
-    }
-    barSet->setLabelFont(QFont("Arial", 10, QFont::Bold));
+    // create a bar set that contains the summed data of each category
+    QBarSet *barSet = new QBarSet("Bar Graph here lol");
+    barSet->append(food);
+    barSet->append(rent);
+    barSet->append(stationery);
+    barSet->append(utilities);
+    barSet->append(others);
 
     // Create the bar series and add the bar set to it.
     QBarSeries *series = new QBarSeries();
@@ -868,24 +843,29 @@ void MainWindow::on_pushButton_GraphsBarGraph_clicked()
     // Create the chart, add the series, and configure chart options.
     QChart *chart = new QChart();
     chart->addSeries(series);
-    chart->setTitle("Expense Breakdown for " + currentMonth);
+    chart->setTitle("Expense Breakdown for " + QDate::currentDate().toString("yyyy-MM"));
     chart->setAnimationOptions(QChart::SeriesAnimations);
 
     // Configure the X-axis with the category labels.
     QBarCategoryAxis *axisX = new QBarCategoryAxis();
-    axisX->append(categories);
+    axisX->append(Categories);
     chart->addAxis(axisX, Qt::AlignBottom);
     series->attachAxis(axisX);
 
     // Calculate the maximum expense to set the Y-axis range.
-    float maxExpense = 0.0f;
-    for (float value : expenseMap)
-        if (value > maxExpense)
-            maxExpense = value;
+    // float maxExpense = 0.0f;
+    // for (float value : *barSet)
+    //     if (value > maxExpense)
+    //         maxExpense = value;
+
+
+    //temp fix
+    float maxExpense = 10000;
+
     // Add 20% buffer for visibility.
     QValueAxis *axisY = new QValueAxis();
     axisY->setTitleText("Amount Spent in Rs");
-    axisY->setRange(0, maxExpense + (maxExpense * 0.2));
+    axisY->setRange(0, 1.2*maxExpense);
     axisY->setTickCount(5);
     axisY->setMinorTickCount(2);
     chart->addAxis(axisY, Qt::AlignLeft);
@@ -1036,6 +1016,19 @@ void MainWindow::PieChart(){
         ui->PieChart->setLayout(layout);
     }
 
+    //clear any previous graph
+    QLayoutItem *item;
+    while ((item = layout->takeAt(0)) != nullptr) {
+        if (QWidget *widget = item->widget())
+            widget->deleteLater();
+        delete item;
+    }
+
     layout->addWidget(chartview);
+}
+
+void MainWindow::on_ChangePassword_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(4);
 }
 

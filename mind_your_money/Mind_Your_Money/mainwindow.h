@@ -100,6 +100,8 @@ private slots:
 
 
 
+    void on_ChangePassword_clicked();
+
 private:
     int currentUserID = -1;
     QSqlDatabase db;  // Define database object as a member
