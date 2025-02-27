@@ -33,7 +33,7 @@
      <enum>Qt::LayoutDirection::LeftToRight</enum>
     </property>
     <property name="currentIndex">
-     <number>7</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QLabel" name="label">
@@ -201,7 +201,7 @@
         <x>160</x>
         <y>120</y>
         <width>671</width>
-        <height>350</height>
+        <height>291</height>
        </rect>
       </property>
       <layout class="QFormLayout" name="formLayout_2">
@@ -329,8 +329,8 @@
      <widget class="QWidget" name="horizontalLayoutWidget_10">
       <property name="geometry">
        <rect>
-        <x>160</x>
-        <y>470</y>
+        <x>150</x>
+        <y>410</y>
         <width>671</width>
         <height>67</height>
        </rect>
@@ -849,7 +849,7 @@
        <rect>
         <x>20</x>
         <y>60</y>
-        <width>151</width>
+        <width>171</width>
         <height>51</height>
        </rect>
       </property>
@@ -860,7 +860,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Welcome,</string>
+       <string>Welcome</string>
       </property>
      </widget>
      <widget class="QWidget" name="verticalLayoutWidget_2">
@@ -868,7 +868,7 @@
        <rect>
         <x>50</x>
         <y>150</y>
-        <width>255</width>
+        <width>274</width>
         <height>460</height>
        </rect>
       </property>
@@ -986,8 +986,8 @@ color:red;
      <widget class="QLabel" name="labelUserName">
       <property name="geometry">
        <rect>
-        <x>170</x>
-        <y>60</y>
+        <x>210</x>
+        <y>70</y>
         <width>171</width>
         <height>51</height>
        </rect>
@@ -1047,13 +1047,13 @@ color:red;
        <string>X</string>
       </property>
      </widget>
-     <widget class="QWidget" name="PieChart" native="true">
+     <widget class="QWidget" name="piechart" native="true">
       <property name="geometry">
        <rect>
-        <x>540</x>
-        <y>110</y>
-        <width>321</width>
-        <height>221</height>
+        <x>480</x>
+        <y>130</y>
+        <width>431</width>
+        <height>381</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_8"/>
@@ -1749,15 +1749,15 @@ color:red;
      <widget class="QPushButton" name="pushButton_GraphsBarGraph">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>160</y>
-        <width>81</width>
-        <height>31</height>
+        <x>590</x>
+        <y>270</y>
+        <width>271</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>9</pointsize>
+        <pointsize>20</pointsize>
         <bold>true</bold>
        </font>
       </property>
@@ -1769,14 +1769,14 @@ color:red;
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>230</y>
-        <width>81</width>
-        <height>31</height>
+        <y>270</y>
+        <width>201</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>9</pointsize>
+        <pointsize>20</pointsize>
         <bold>true</bold>
        </font>
       </property>
@@ -1793,7 +1793,7 @@ color:red;
      <x>0</x>
      <y>0</y>
      <width>945</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHome_Page">

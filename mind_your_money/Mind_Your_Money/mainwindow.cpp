@@ -47,7 +47,7 @@ bool MainWindow::openDatabase()
     db = QSqlDatabase::addDatabase("QSQLITE");
 
     // Set the path to your SQLite database file
-    db.setDatabaseName("C:/Users/sakar/OneDrive/Documents/GitHub/EndSemProject-1/mind_your_money/database_Mind_your_Money.db");
+    db.setDatabaseName("C:/Users/Hp Victus/Desktop/End sem project/EndSemProject-1/mind_your_money/database_Mind_your_Money.db");
 
     // Attempt to open the database
     if (!db.open()) {
@@ -274,15 +274,15 @@ void MainWindow::on_btnNextForgot_clicked()
     QString Email = ui->txtFEmail->text();
     QString Phone = ui->txtFPhone->text();
 
-
+    // Check if fields are empty
     if (Email.isEmpty() || Phone.isEmpty()) {
         QMessageBox::warning(this, "Login Error", "Please enter both Email and Phone Number.");
         return;
     }
 
-    // Prepare the SQL query to check credentials
+    // Prepare the SQL query to check if the email and phone exist
     QSqlQuery query(db);
-    query.prepare("SELECT UserID, FirstName, LastName FROM User WHERE Email = :Email AND Phone = :Phone");
+    query.prepare("SELECT UserID FROM User WHERE Email = :Email AND Phone = :Phone");
     query.bindValue(":Email", Email);
     query.bindValue(":Phone", Phone);
 
@@ -292,24 +292,15 @@ void MainWindow::on_btnNextForgot_clicked()
         return;
     }
 
-    // If a matching record is found, login the user
+    // Check if a matching record is found
     if (query.next()) {
         loggedInUserID = query.value("UserID").toInt();  // Store logged-in user's ID
-        QString firstName = query.value("FirstName").toString();
-        QString lastName = query.value("LastName").toString();
-
-        // Display a welcome message
-        QMessageBox::information(this, "Change your password", "Welcome, " + firstName + " " + lastName + "!");
-
-        // Navigate to the next page (Assuming index 4 is the Dashboard/Home)
-        ui->stackedWidget->setCurrentIndex(3);
-
-        // Set user's name on the dashboard (if applicable)
-        ui->labelUserName->setText(firstName);
+        ui->stackedWidget->setCurrentIndex(4);          // Navigate to the next page
+    } else {
+        QMessageBox::warning(this, "Login Failed", "Invalid Email or Phone Number.");
     }
-    else {
-        QMessageBox::warning(this, "Login Failed", "Invalid Email or Password.");
-    }
+
+
 }
 //Expense SignUP: code done
 void MainWindow::on_btnSignUpSave_clicked()
@@ -757,52 +748,38 @@ void MainWindow::LineGraph()
 
 void MainWindow::on_pushButton_GraphsBarGraph_clicked()
 {
-    // Switch to the chart page
-    ui->stackedWidget->setCurrentIndex(7);
-
-    // Ensure a user is logged in
     if (loggedInUserID == -1) {
         QMessageBox::warning(this, "Error", "No user is logged in.");
         return;
     }
 
-    //assign categories
-    QStringList Categories;
-    Categories.append("Food");
-    Categories.append("Rent");
-    Categories.append("Stationery");
-    Categories.append("Utilities");
-    Categories.append("Others");
+    // Assign categories
+    QStringList Categories = {"Food", "Rent", "Stationery", "Utilities", "Others"};
 
-    //initialise variables
-    float food = 0.0;
-    float rent = 0.0;
-    float stationery = 0.0;
-    float utilities = 0.0;
-    float others = 0.0;
+    // Initialize variables
+    float food = 0.0f, rent = 0.0f, stationery = 0.0f, utilities = 0.0f, others = 0.0f;
     QDate currentDate = QDate::currentDate();
-    QDate firstDay = QDate(currentDate.year(),currentDate.month(),1);
+    QDate firstDay = QDate(currentDate.year(), currentDate.month(), 1);
     QDate iterDate = firstDay;
 
-    //loop to interate through each date
+    // Loop to iterate through each date
     while (iterDate <= currentDate) {
         // Query total expenses of each item
-        // Food, Rent, Stationery, Utilities, Others.
         QSqlQuery expenseQuery(db);
         expenseQuery.prepare(R"(
-            SELECT (IFNULL (Food,0)) as FoodExpense
-            SELECT (IFNULL (Rent,0)) as RentExpense
-            SELECT (IFNULL (Stationery,0)) as StationeryExpense
-            SELECT (IFNULL (Utilities,0)) as UtilitiesExpense
-            SELECT (IFNULL (Others,0)) as OthersExpense
-
-            FROM Expenses
-            WHERE user_id = :UserID AND Date = :Date
-        )");
+        SELECT
+            IFNULL(Food, 0) AS FoodExpense,
+            IFNULL(Rent, 0) AS RentExpense,
+            IFNULL(Stationery, 0) AS StationeryExpense,
+            IFNULL(Utilities, 0) AS UtilitiesExpense,
+            IFNULL(Others, 0) AS OthersExpense
+        FROM Expenses
+        WHERE user_id = :UserID AND Date = :Date
+    )");
         expenseQuery.bindValue(":UserID", loggedInUserID);
         expenseQuery.bindValue(":Date", iterDate.toString("yyyy-MM-dd"));
 
-        //sum and entry data
+        // Sum and entry data
         if (expenseQuery.exec() && expenseQuery.next()) {
             food += expenseQuery.value("FoodExpense").toFloat();
             rent += expenseQuery.value("RentExpense").toFloat();
@@ -815,57 +792,50 @@ void MainWindow::on_pushButton_GraphsBarGraph_clicked()
         iterDate = iterDate.addDays(1);
     }
 
-    // create a bar set that contains the summed data of each category
-    QBarSet *barSet = new QBarSet("Bar Graph here lol");
+    // Create a bar set that contains the summed data of each category
+    QBarSet *barSet = new QBarSet("Expense Breakdown");
     barSet->append(food);
     barSet->append(rent);
     barSet->append(stationery);
     barSet->append(utilities);
     barSet->append(others);
 
-    // Create the bar series and add the bar set to it.
+    // Create the bar series and add the bar set to it
     QBarSeries *series = new QBarSeries();
     series->append(barSet);
     series->setLabelsVisible(true);
     series->setLabelsFormat("Rs @value");
     series->setLabelsPosition(QAbstractBarSeries::LabelsCenter);
 
-    // Create the chart, add the series, and configure chart options.
+    // Create the chart, add the series, and configure chart options
     QChart *chart = new QChart();
     chart->addSeries(series);
     chart->setTitle("Expense Breakdown for " + QDate::currentDate().toString("yyyy-MM"));
     chart->setAnimationOptions(QChart::SeriesAnimations);
 
-    // Configure the X-axis with the category labels.
+    // Configure the X-axis with the category labels
     QBarCategoryAxis *axisX = new QBarCategoryAxis();
     axisX->append(Categories);
     chart->addAxis(axisX, Qt::AlignBottom);
     series->attachAxis(axisX);
 
-    // Calculate the maximum expense to set the Y-axis range.
-    // float maxExpense = 0.0f;
-    // for (float value : *barSet)
-    //     if (value > maxExpense)
-    //         maxExpense = value;
+    // Calculate the maximum expense to set the Y-axis range
+    float maxExpense = std::max({food, rent, stationery, utilities, others});
 
-
-    //temp fix
-    float maxExpense = 10000;
-
-    // Add 20% buffer for visibility.
+    // Add 20% buffer for visibility
     QValueAxis *axisY = new QValueAxis();
     axisY->setTitleText("Amount Spent in Rs");
-    axisY->setRange(0, 1.2*maxExpense);
+    axisY->setRange(0, 1.2 * maxExpense);
     axisY->setTickCount(5);
     axisY->setMinorTickCount(2);
     chart->addAxis(axisY, Qt::AlignLeft);
     series->attachAxis(axisY);
 
-    // Create a chart view, set anti-aliasing, and display the chart.
+    // Create a chart view, set anti-aliasing, and display the chart
     QChartView *chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
 
-    // Clear any previous chart from the 'bargraph' widget, then add the new chart view.
+    // Clear any previous chart from the 'bargraph' widget, then add the new chart view
     QLayout *layout = ui->bargraph->layout();
     if (!layout) {
         layout = new QVBoxLayout(ui->bargraph);
@@ -878,48 +848,46 @@ void MainWindow::on_pushButton_GraphsBarGraph_clicked()
         delete item;
     }
     layout->addWidget(chartView);
-
+    ui->stackedWidget->setCurrentIndex(7);
     qDebug() << "Graph updated successfully!";
+
 }
 
 void MainWindow::PieChart(){
-    //Ensure a user is logged in
-    if (loggedInUserID == -1){
-        QMessageBox::warning(this,"Error","No user is currently logged in.");
+    if (loggedInUserID == -1) {
+        QMessageBox::warning(this, "Error", "No user is logged in.");
         return;
     }
 
-    //initialise variables
-    QPieSeries *series = new QPieSeries();
-    float food = 0.0;
-    float rent = 0.0;
-    float stationery = 0.0;
-    float utilities = 0.0;
-    float others = 0.0;
+    // Assign categories
+    QStringList Categories = {"Food", "Rent", "Stationery", "Utilities", "Others"};
+
+    // Initialize variables
+    float food = 0.0f, rent = 0.0f, stationery = 0.0f, utilities = 0.0f, others = 0.0f;
     QDate currentDate = QDate::currentDate();
-    QDate firstDay = QDate(currentDate.year(),currentDate.month(),1);
+    QDate firstDay = QDate(currentDate.year(), currentDate.month(), 1);
     QDate iterDate = firstDay;
 
-    //loop to interate through each date
+    // Loop to iterate through each date
     while (iterDate <= currentDate) {
         // Query total expenses of each item
-        // Food, Rent, Stationery, Utilities, Others.
         QSqlQuery expenseQuery(db);
         expenseQuery.prepare(R"(
-            SELECT (IFNULL (Food,0)) as FoodExpense
-            SELECT (IFNULL (Rent,0)) as RentExpense
-            SELECT (IFNULL (Stationery,0)) as StationeryExpense
-            SELECT (IFNULL (Utilities,0)) as UtilitiesExpense
-            SELECT (IFNULL (Others,0)) as OthersExpense
-            FROM Expenses
-            WHERE user_id = :UserID AND Date = :Date
-        )");
+        SELECT
+            IFNULL(Food, 0) AS FoodExpense,
+            IFNULL(Rent, 0) AS RentExpense,
+            IFNULL(Stationery, 0) AS StationeryExpense,
+            IFNULL(Utilities, 0) AS UtilitiesExpense,
+            IFNULL(Others, 0) AS OthersExpense
+        FROM Expenses
+        WHERE user_id = :UserID AND Date = :Date
+    )");
         expenseQuery.bindValue(":UserID", loggedInUserID);
         expenseQuery.bindValue(":Date", iterDate.toString("yyyy-MM-dd"));
 
-        //sum and entry data
+        // Sum and entry data
         if (expenseQuery.exec() && expenseQuery.next()) {
-            food += expenseQuery.value("FoodExpense").toFloat()+1;
+            food += expenseQuery.value("FoodExpense").toFloat();
             rent += expenseQuery.value("RentExpense").toFloat();
             stationery += expenseQuery.value("StationeryExpense").toFloat();
             utilities += expenseQuery.value("UtilitiesExpense").toFloat();
@@ -930,123 +898,52 @@ void MainWindow::PieChart(){
         iterDate = iterDate.addDays(1);
     }
 
-    //after loop, add each data into the series
+    // Create a pie chart series
+    QPieSeries *series = new QPieSeries();
     series->append("Food", food);
     series->append("Rent", rent);
     series->append("Stationery", stationery);
-    series->append("Utilities",utilities);
+    series->append("Utilities", utilities);
     series->append("Others", others);
-    series->append("Test1",5);
-    series->append("Test2",6);
-    series->append("Test3",10);
 
-    //make a chart and add the series we just made to it
+    // Create the chart and configure its properties
     QChart *chart = new QChart();
     chart->addSeries(series);
-    chart->setTitle("PieChart");
-    chart->legend()->hide();
-    chart->setVisible(true);
+    chart->setTitle("Expense Breakdown for " + QDate::currentDate().toString("yyyy-MM"));
+    chart->setAnimationOptions(QChart::SeriesAnimations);
+    chart->legend()->setVisible(true);
 
-    //make the chart viewable
-    QChartView *chartview = new QChartView(chart);
-    chartview->setRenderHint(QPainter::Antialiasing);
-    chartview->setVisible(true);
-
-    //make slices of the pie chart
-    QPieSlice *foodSlice = series->slices().at(0);
-    QPieSlice *rentSlice = series->slices().at(1);
-    QPieSlice *stationerySlice = series->slices().at(2);
-    QPieSlice *utilitiesSlice = series->slices().at(3);
-    QPieSlice *othersSlice = series->slices().at(4);
-
-    //modify slices data
-    foodSlice->setLabelVisible(true);
-    foodSlice->setBrush(Qt::green);
-
-    rentSlice->setLabelVisible(true);
-    rentSlice->setBrush(Qt::blue);
-
-    stationerySlice->setLabelVisible(true);
-    stationerySlice->setBrush(Qt::yellow);
-
-    utilitiesSlice->setLabelVisible(true);
-    utilitiesSlice->setBrush(Qt::cyan);
-
-    othersSlice->setLabelVisible(true);
-    othersSlice->setBrush(Qt::gray);
-
-    QPieSlice *test1Slice = series->slices().at(5);
-
-    test1Slice->setLabelVisible(true);
-    test1Slice->setBrush(Qt::red);
-
-    //display the pie chart
-    QLayout *layout = ui->PieChart->layout();
-    if (!layout) {
-        layout = new QVBoxLayout(ui->PieChart);
-        ui->PieChart->setLayout(layout);
+    // Customize pie slices
+    for (QPieSlice *slice : series->slices()) {
+        slice->setLabelVisible(true);
     }
 
-    //clear any previous graph
+    // Assign colors to slices
+    series->slices().at(0)->setBrush(Qt::green);    // Food
+    series->slices().at(1)->setBrush(Qt::blue);     // Rent
+    series->slices().at(2)->setBrush(Qt::yellow);   // Stationery
+    series->slices().at(3)->setBrush(Qt::cyan);     // Utilities
+    series->slices().at(4)->setBrush(Qt::gray);     // Others
+
+    // Create a chart view and set properties
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+
+    // Clear any previous chart from the 'piechart' widget, then add the new chart view
+    QLayout *layout = ui->piechart->layout();
+    if (!layout) {
+        layout = new QVBoxLayout(ui->piechart);
+        ui->piechart->setLayout(layout);
+    }
     QLayoutItem *item;
     while ((item = layout->takeAt(0)) != nullptr) {
         if (QWidget *widget = item->widget())
             widget->deleteLater();
         delete item;
     }
+    layout->addWidget(chartView);
 
-    layout->addWidget(chartview);
-}
-
-void MainWindow::checkFinances(){
-    //check total money spent
-    //display a warning on the home page if money spent is greater than 1.2*(categoryBudget/days in current month)
-    //display a congratulatory message   if money spent is less than 0.8*(categoryBudget/days in current month)
-    //disregard rent
-
-    //Ensure a user is logged in
-    if (loggedInUserID == -1){
-        QMessageBox::warning(this,"Error","No user is currently logged in.");
-        return;
-    }
-
-    //init variables
-    float food = 0.0;
-    float stationery = 0.0;
-    float utilities = 0.0;
-    float others = 0.0;
-    QDate currentDate = QDate::currentDate();
-    QDate firstDay = QDate(currentDate.year(),currentDate.month(),1);
-    QDate iterDate = firstDay;
-
-    //loop to interate through each date
-    while (iterDate <= currentDate) {
-        // Query total expenses of each item
-        // Food, Rent, Stationery, Utilities, Others.
-        QSqlQuery expenseQuery(db);
-        expenseQuery.prepare(R"(
-            SELECT IFNULL (Food,0) as FoodExpense
-            SELECT (IFNULL (Stationery,0)) as StationeryExpense
-            SELECT (IFNULL (Utilities,0)) as UtilitiesExpense
-            SELECT (IFNULL (Others,0)) as OthersExpense
-
-            FROM Expenses
-            WHERE user_id = :UserID AND Date = :Date
-        )");
-        expenseQuery.bindValue(":UserID", loggedInUserID);
-        expenseQuery.bindValue(":Date", iterDate.toString("yyyy-MM-dd"));
-
-        //sum and entry data
-        if (expenseQuery.exec() && expenseQuery.next()) {
-            food += expenseQuery.value("FoodExpense").toFloat();
-            stationery += expenseQuery.value("StationeryExpense").toFloat();
-            utilities += expenseQuery.value("UtilitiesExpense").toFloat();
-            others += expenseQuery.value("OthersExpense").toFloat();
-        }
-
-        // Move to the next day
-        iterDate = iterDate.addDays(1);
-    }
+    qDebug() << "Pie chart updated successfully!";
 
 
 
