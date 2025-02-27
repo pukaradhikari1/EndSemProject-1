@@ -127,7 +127,6 @@ public:
     QLabel *date;
     QLabel *labelUserName;
     QPushButton *btnLogout;
-    QLabel *name;
     QPushButton *Exit5;
     QWidget *PieChart;
     QHBoxLayout *horizontalLayout_8;
@@ -147,16 +146,17 @@ public:
     QWidget *page_7;
     QFrame *bargraph;
     QHBoxLayout *horizontalLayout_2;
-    QPushButton *btnPrevGraphToWelcome;
+    QPushButton *btn_BarGraphPrev;
     QPushButton *Exit7;
     QLabel *label_30;
     QWidget *page_10;
     QLabel *label_29;
-    QPushButton *Exit9;
+    QPushButton *Exit8;
     QWidget *lineGraphWidget;
     QHBoxLayout *horizontalLayout_14;
     QPushButton *btnLHome;
     QPushButton *pushButton_LineGraphPrev;
+    QComboBox *LineGraphComboBox;
     QWidget *page_8;
     QLabel *label_23;
     QPushButton *btn_ExpenseReportHome;
@@ -186,10 +186,10 @@ public:
     QHBoxLayout *horizontalLayout_44;
     QLabel *Category_11;
     QLabel *others;
-    QPushButton *Exit10;
+    QPushButton *Exit9;
     QWidget *page_11;
     QLabel *label_27;
-    QPushButton *Exit11;
+    QPushButton *Exit10;
     QPushButton *pushButton_GraphsPrev;
     QPushButton *pushButton_GraphsBarGraph;
     QPushButton *pushButton_GraphsLineGraph;
@@ -612,7 +612,7 @@ public:
         page_3->setObjectName("page_3");
         label_10 = new QLabel(page_3);
         label_10->setObjectName("label_10");
-        label_10->setGeometry(QRect(40, 30, 181, 51));
+        label_10->setGeometry(QRect(20, 60, 151, 51));
         QFont font4;
         font4.setPointSize(24);
         font4.setBold(true);
@@ -683,15 +683,12 @@ public:
 
         labelUserName = new QLabel(page_3);
         labelUserName->setObjectName("labelUserName");
-        labelUserName->setGeometry(QRect(250, 20, 171, 51));
-        labelUserName->setFont(font);
+        labelUserName->setGeometry(QRect(170, 60, 171, 51));
+        labelUserName->setFont(font4);
         btnLogout = new QPushButton(page_3);
         btnLogout->setObjectName("btnLogout");
         btnLogout->setGeometry(QRect(730, 560, 191, 41));
         btnLogout->setFont(font5);
-        name = new QLabel(page_3);
-        name->setObjectName("name");
-        name->setGeometry(QRect(300, 310, 151, 41));
         Exit5 = new QPushButton(page_3);
         Exit5->setObjectName("Exit5");
         Exit5->setGeometry(QRect(900, 0, 41, 24));
@@ -782,10 +779,10 @@ public:
         bargraph->setGeometry(QRect(20, 70, 891, 521));
         horizontalLayout_2 = new QHBoxLayout(bargraph);
         horizontalLayout_2->setObjectName("horizontalLayout_2");
-        btnPrevGraphToWelcome = new QPushButton(page_7);
-        btnPrevGraphToWelcome->setObjectName("btnPrevGraphToWelcome");
-        btnPrevGraphToWelcome->setGeometry(QRect(10, 600, 93, 29));
-        btnPrevGraphToWelcome->setFont(font5);
+        btn_BarGraphPrev = new QPushButton(page_7);
+        btn_BarGraphPrev->setObjectName("btn_BarGraphPrev");
+        btn_BarGraphPrev->setGeometry(QRect(10, 600, 93, 29));
+        btn_BarGraphPrev->setFont(font5);
         Exit7 = new QPushButton(page_7);
         Exit7->setObjectName("Exit7");
         Exit7->setGeometry(QRect(900, 0, 41, 24));
@@ -808,18 +805,18 @@ public:
         font7.setPointSize(10);
         font7.setBold(true);
         label_29->setFont(font7);
-        Exit9 = new QPushButton(page_10);
-        Exit9->setObjectName("Exit9");
-        Exit9->setGeometry(QRect(900, 0, 41, 24));
-        Exit9->setFont(font2);
-        Exit9->setStyleSheet(QString::fromUtf8("QPushButton\n"
+        Exit8 = new QPushButton(page_10);
+        Exit8->setObjectName("Exit8");
+        Exit8->setGeometry(QRect(900, 0, 41, 24));
+        Exit8->setFont(font2);
+        Exit8->setStyleSheet(QString::fromUtf8("QPushButton\n"
 "{\n"
 "	color:black;\n"
 "	background-color:red;\n"
 "}"));
         lineGraphWidget = new QWidget(page_10);
         lineGraphWidget->setObjectName("lineGraphWidget");
-        lineGraphWidget->setGeometry(QRect(30, 60, 881, 541));
+        lineGraphWidget->setGeometry(QRect(30, 70, 881, 531));
         horizontalLayout_14 = new QHBoxLayout(lineGraphWidget);
         horizontalLayout_14->setObjectName("horizontalLayout_14");
         btnLHome = new QPushButton(page_10);
@@ -833,6 +830,14 @@ public:
         pushButton_LineGraphPrev->setObjectName("pushButton_LineGraphPrev");
         pushButton_LineGraphPrev->setGeometry(QRect(30, 610, 83, 29));
         pushButton_LineGraphPrev->setFont(font8);
+        LineGraphComboBox = new QComboBox(page_10);
+        LineGraphComboBox->addItem(QString());
+        LineGraphComboBox->addItem(QString());
+        LineGraphComboBox->addItem(QString());
+        LineGraphComboBox->addItem(QString());
+        LineGraphComboBox->setObjectName("LineGraphComboBox");
+        LineGraphComboBox->setGeometry(QRect(40, 20, 72, 24));
+        LineGraphComboBox->setFont(font2);
         stackedWidget->addWidget(page_10);
         page_8 = new QWidget();
         page_8->setObjectName("page_8");
@@ -954,11 +959,11 @@ public:
 
         horizontalLayout_44->addWidget(others);
 
-        Exit10 = new QPushButton(page_8);
-        Exit10->setObjectName("Exit10");
-        Exit10->setGeometry(QRect(900, 0, 41, 24));
-        Exit10->setFont(font2);
-        Exit10->setStyleSheet(QString::fromUtf8("QPushButton\n"
+        Exit9 = new QPushButton(page_8);
+        Exit9->setObjectName("Exit9");
+        Exit9->setGeometry(QRect(900, 0, 41, 24));
+        Exit9->setFont(font2);
+        Exit9->setStyleSheet(QString::fromUtf8("QPushButton\n"
 "{\n"
 "	color:black;\n"
 "	background-color:red;\n"
@@ -969,11 +974,11 @@ public:
         label_27 = new QLabel(page_11);
         label_27->setObjectName("label_27");
         label_27->setGeometry(QRect(10, 0, 931, 71));
-        Exit11 = new QPushButton(page_11);
-        Exit11->setObjectName("Exit11");
-        Exit11->setGeometry(QRect(900, 0, 41, 24));
-        Exit11->setFont(font2);
-        Exit11->setStyleSheet(QString::fromUtf8("QPushButton\n"
+        Exit10 = new QPushButton(page_11);
+        Exit10->setObjectName("Exit10");
+        Exit10->setGeometry(QRect(900, 0, 41, 24));
+        Exit10->setFont(font2);
+        Exit10->setStyleSheet(QString::fromUtf8("QPushButton\n"
 "{\n"
 "	color:black;\n"
 "	background-color:red;\n"
@@ -1006,7 +1011,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(4);
+        stackedWidget->setCurrentIndex(7);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1075,7 +1080,6 @@ public:
         date->setText(QString());
         labelUserName->setText(QString());
         btnLogout->setText(QCoreApplication::translate("MainWindow", "Log out", nullptr));
-        name->setText(QString());
         Exit5->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
         label_16->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:36pt;\">Expenditure</span></p></body></html>", nullptr));
         label_17->setText(QCoreApplication::translate("MainWindow", "Amount", nullptr));
@@ -1091,13 +1095,18 @@ public:
         btnPrevExpenseWelcomeUser->setText(QCoreApplication::translate("MainWindow", "Prev", nullptr));
         btnSaveExpense->setText(QCoreApplication::translate("MainWindow", "Save", nullptr));
         Exit6->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
-        btnPrevGraphToWelcome->setText(QCoreApplication::translate("MainWindow", "Back", nullptr));
+        btn_BarGraphPrev->setText(QCoreApplication::translate("MainWindow", "Prev", nullptr));
         Exit7->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
         label_30->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:36pt;\">Bar Graph</span></p></body></html>", nullptr));
         label_29->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:36pt;\">Line Graph</span></p></body></html>", nullptr));
-        Exit9->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
+        Exit8->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
         btnLHome->setText(QCoreApplication::translate("MainWindow", "Home", nullptr));
         pushButton_LineGraphPrev->setText(QCoreApplication::translate("MainWindow", "Prev", nullptr));
+        LineGraphComboBox->setItemText(0, QCoreApplication::translate("MainWindow", "Total", nullptr));
+        LineGraphComboBox->setItemText(1, QCoreApplication::translate("MainWindow", "Food", nullptr));
+        LineGraphComboBox->setItemText(2, QCoreApplication::translate("MainWindow", "Stationery", nullptr));
+        LineGraphComboBox->setItemText(3, QCoreApplication::translate("MainWindow", "Others", nullptr));
+
         label_23->setText(QCoreApplication::translate("MainWindow", "Expense Report", nullptr));
         btn_ExpenseReportHome->setText(QCoreApplication::translate("MainWindow", "Home", nullptr));
         RemainingBudget->setText(QCoreApplication::translate("MainWindow", "RS.", nullptr));
@@ -1114,9 +1123,9 @@ public:
         stationery->setText(QCoreApplication::translate("MainWindow", "RS.", nullptr));
         Category_11->setText(QCoreApplication::translate("MainWindow", "Others", nullptr));
         others->setText(QCoreApplication::translate("MainWindow", "RS.", nullptr));
-        Exit10->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
+        Exit9->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
         label_27->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:36pt;\">Graphs</span></p></body></html>", nullptr));
-        Exit11->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
+        Exit10->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
         pushButton_GraphsPrev->setText(QCoreApplication::translate("MainWindow", "Prev", nullptr));
         pushButton_GraphsBarGraph->setText(QCoreApplication::translate("MainWindow", "Bar Graph", nullptr));
         pushButton_GraphsLineGraph->setText(QCoreApplication::translate("MainWindow", "Line Graph", nullptr));

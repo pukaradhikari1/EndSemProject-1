@@ -60,8 +60,6 @@ private slots:
 
     void on_btnEPush_clicked();
 
-    void on_btnPrevGraphToWelcome_clicked();
-
 
     void on_btnNext_clicked();
 
@@ -76,6 +74,7 @@ private slots:
     void on_Exit7_clicked();
     void on_Exit8_clicked();
     void on_Exit9_clicked();
+    void on_Exit10_clicked();
 
     void on_btnLHome_clicked();
 
@@ -83,9 +82,6 @@ private slots:
 
     void on_btnSignUpBack_clicked();
 
-    void on_Exit11_clicked();
-
-    void on_Exit10_clicked();
 
     void on_pushButton_GraphsBarGraph_clicked();
 
@@ -98,9 +94,17 @@ private slots:
     void PieChart();
     void LineGraph();
 
-
+    void checkFinances();
 
     void on_ChangePassword_clicked();
+
+    void LineGraphFood();
+    void LineGraphStationery();
+    void LineGraphOthers();
+
+    void on_LineGraphComboBox_currentIndexChanged(int index);
+
+    void on_btn_BarGraphPrev_clicked();
 
 private:
     int currentUserID = -1;

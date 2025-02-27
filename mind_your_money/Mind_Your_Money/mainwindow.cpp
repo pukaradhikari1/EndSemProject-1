@@ -91,17 +91,18 @@ void MainWindow::on_btnSignUpPrev_clicked()
 void MainWindow::on_btnPrevExpenseWelcomeUser_clicked()
 {
     //Updating the home page
-    displayRemainingBudget();
     ui->stackedWidget->setCurrentIndex(5);
+    PieChart();
 }
 
 void MainWindow::on_btnHome_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(0);
-}
-void MainWindow::on_btnPrevGraphToWelcome_clicked()
-{
     ui->stackedWidget->setCurrentIndex(5);
+}
+
+void MainWindow::on_btn_BarGraphPrev_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(10);
 }
 //log out button done
 void MainWindow::on_btnLogout_clicked()
@@ -115,6 +116,7 @@ void MainWindow::on_btnLogout_clicked()
 void MainWindow::on_btnStats_clicked()
 {
     ui->stackedWidget->setCurrentIndex(9);
+    displayRemainingBudget();
 }
 
 void MainWindow::on_btnReset_clicked()
@@ -130,6 +132,122 @@ void MainWindow::on_btnReset_clicked()
 void MainWindow::on_btnEnterExpense_clicked()
 {
     ui->stackedWidget->setCurrentIndex(6);
+}
+
+void MainWindow::on_btnLHome_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(5);
+}
+
+void MainWindow::on_btn_ExpenseReportHome_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(5);
+}
+
+void MainWindow::on_btnSignUpBack_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(1);
+}
+
+void MainWindow::on_btnPrevForgot_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+}
+
+
+void MainWindow::on_pushButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(5);
+}
+
+
+void MainWindow::on_btnEPush_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(4);
+}
+
+//exit buttons
+void MainWindow::on_Exit0_clicked()
+{
+    QApplication::quit();
+}
+
+void MainWindow::on_Exit1_clicked()
+{
+    QApplication::quit();
+}
+
+
+void MainWindow::on_Exit2_clicked()
+{
+    QApplication::quit();
+}
+
+
+void MainWindow::on_Exit3_clicked()
+{
+    QApplication::quit();
+}
+
+
+void MainWindow::on_Exit4_clicked()
+{
+    QApplication::quit();
+}
+
+
+void MainWindow::on_Exit5_clicked()
+{
+    QApplication::quit();
+}
+
+
+void MainWindow::on_Exit6_clicked()
+{
+    QApplication::quit();
+}
+
+
+void MainWindow::on_Exit7_clicked()
+{
+    QApplication::quit();
+}
+
+
+void MainWindow::on_Exit8_clicked()
+{
+    QApplication::quit();
+}
+
+void MainWindow::on_Exit9_clicked()
+{
+    QApplication::quit();
+}
+
+void MainWindow::on_Exit10_clicked()
+{
+    QApplication::quit();
+}
+
+void MainWindow::on_pushButton_GraphsLineGraph_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(8);
+    LineGraph();
+}
+
+void MainWindow::on_pushButton_GraphsPrev_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(5);
+}
+
+void MainWindow::on_pushButton_LineGraphPrev_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(10);
+}
+
+void MainWindow::on_ChangePassword_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(4);
 }
 
 void MainWindow::on_btnChangePassword_clicked()
@@ -150,7 +268,6 @@ void MainWindow::on_btnChangePassword_clicked()
    }
 
 }
-
 
 void MainWindow::on_btnNextForgot_clicked()
 {
@@ -194,25 +311,6 @@ void MainWindow::on_btnNextForgot_clicked()
         QMessageBox::warning(this, "Login Failed", "Invalid Email or Password.");
     }
 }
-
-
-void MainWindow::on_btnPrevForgot_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(0);
-}
-
-
-void MainWindow::on_pushButton_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(5);
-}
-
-
-void MainWindow::on_btnEPush_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(4);
-}
-
 //Expense SignUP: code done
 void MainWindow::on_btnSignUpSave_clicked()
 {
@@ -373,7 +471,7 @@ void MainWindow::on_btnNext_clicked()
     // Navigate to the next page in the UI
     ui->stackedWidget->setCurrentIndex(2);  // Assuming the next page is at index 2
 }
-//Save Expense button.
+
 void MainWindow::on_btnSaveExpense_clicked()
 {
     if (loggedInUserID == -1) {
@@ -460,7 +558,6 @@ void MainWindow::on_btnSaveExpense_clicked()
     ui->ExpenseName->setCurrentIndex(0);
 }
 
-
 //User login button: code done
 void MainWindow::on_btnLogin_clicked()
 {
@@ -494,7 +591,6 @@ void MainWindow::on_btnLogin_clicked()
             ui->stackedWidget->setCurrentIndex(5);  // Navigate to dashboard
             ui->labelUserName->setText(firstName);
             // Set the first name to the label
-            displayRemainingBudget();
             ui->txtEmail->clear();
             ui->txtPassword->clear();
         } else {
@@ -508,9 +604,6 @@ void MainWindow::on_btnLogin_clicked()
 
 }
 
-
-
-//Bar Graph: code done
 void MainWindow::on_btnGraph_clicked()
 {
     ui->stackedWidget->setCurrentIndex(10);
@@ -560,74 +653,6 @@ void MainWindow::displayRemainingBudget()
     }
 }
 
-
-
-
-
-
-
-//exit buttons
-void MainWindow::on_Exit0_clicked()
-{
-    QApplication::quit();
-}
-
-void MainWindow::on_Exit1_clicked()
-{
-    QApplication::quit();
-}
-
-
-void MainWindow::on_Exit2_clicked()
-{
-    QApplication::quit();
-}
-
-
-void MainWindow::on_Exit3_clicked()
-{
-    QApplication::quit();
-}
-
-
-void MainWindow::on_Exit4_clicked()
-{
-    QApplication::quit();
-}
-
-
-void MainWindow::on_Exit5_clicked()
-{
-    QApplication::quit();
-}
-
-
-void MainWindow::on_Exit6_clicked()
-{
-    QApplication::quit();
-}
-
-
-void MainWindow::on_Exit7_clicked()
-{
-    QApplication::quit();
-}
-
-
-void MainWindow::on_Exit8_clicked()
-{
-    QApplication::quit();
-}
-
-
-
-
-void MainWindow::on_Exit9_clicked()
-{
-    QApplication::quit();
-}
-
-
 void MainWindow::LineGraph()
 {
     // Ensure a user is logged in
@@ -647,8 +672,6 @@ void MainWindow::LineGraph()
         QMessageBox::critical(this, "Error", "Failed to retrieve monthly budget.");
         return;
     }
-
-    ui->stackedWidget->setCurrentIndex(8);
 
     // Prepare the line series
     QLineSeries *series = new QLineSeries();
@@ -716,7 +739,7 @@ void MainWindow::LineGraph()
     QChartView *chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
 
-    // Assuming you have a widget or layout named "lineGraphWidget" in your UI for displaying the line graph.
+    // Display the line graph
     QLayout *layout = ui->lineGraphWidget->layout();
     if (!layout) {
         layout = new QVBoxLayout(ui->lineGraphWidget);
@@ -731,39 +754,6 @@ void MainWindow::LineGraph()
     }
     layout->addWidget(chartView);
 }
-
-
-
-
-void MainWindow::on_btnLHome_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(5);
-}
-
-
-void MainWindow::on_btn_ExpenseReportHome_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(5);
-}
-
-
-void MainWindow::on_btnSignUpBack_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(1);
-}
-
-
-void MainWindow::on_Exit11_clicked()
-{
-    QApplication::quit();
-}
-
-
-void MainWindow::on_Exit10_clicked()
-{
-    QApplication::quit();
-}
-
 
 void MainWindow::on_pushButton_GraphsBarGraph_clicked()
 {
@@ -892,24 +882,6 @@ void MainWindow::on_pushButton_GraphsBarGraph_clicked()
     qDebug() << "Graph updated successfully!";
 }
 
-
-void MainWindow::on_pushButton_GraphsLineGraph_clicked()
-{
-    LineGraph();
-}
-
-
-void MainWindow::on_pushButton_GraphsPrev_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(5);
-}
-
-
-void MainWindow::on_pushButton_LineGraphPrev_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(10);
-}
-
 void MainWindow::PieChart(){
     //Ensure a user is logged in
     if (loggedInUserID == -1){
@@ -939,7 +911,6 @@ void MainWindow::PieChart(){
             SELECT (IFNULL (Stationery,0)) as StationeryExpense
             SELECT (IFNULL (Utilities,0)) as UtilitiesExpense
             SELECT (IFNULL (Others,0)) as OthersExpense
-
             FROM Expenses
             WHERE user_id = :UserID AND Date = :Date
         )");
@@ -948,7 +919,7 @@ void MainWindow::PieChart(){
 
         //sum and entry data
         if (expenseQuery.exec() && expenseQuery.next()) {
-            food += expenseQuery.value("FoodExpense").toFloat();
+            food += expenseQuery.value("FoodExpense").toFloat()+1;
             rent += expenseQuery.value("RentExpense").toFloat();
             stationery += expenseQuery.value("StationeryExpense").toFloat();
             utilities += expenseQuery.value("UtilitiesExpense").toFloat();
@@ -1004,7 +975,7 @@ void MainWindow::PieChart(){
     othersSlice->setLabelVisible(true);
     othersSlice->setBrush(Qt::gray);
 
-    QPieSlice *test1Slice = series->slices().at(4);
+    QPieSlice *test1Slice = series->slices().at(5);
 
     test1Slice->setLabelVisible(true);
     test1Slice->setBrush(Qt::red);
@@ -1027,8 +998,387 @@ void MainWindow::PieChart(){
     layout->addWidget(chartview);
 }
 
-void MainWindow::on_ChangePassword_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(4);
+void MainWindow::checkFinances(){
+    //check total money spent
+    //display a warning on the home page if money spent is greater than 1.2*(categoryBudget/days in current month)
+    //display a congratulatory message   if money spent is less than 0.8*(categoryBudget/days in current month)
+    //disregard rent
+
+    //Ensure a user is logged in
+    if (loggedInUserID == -1){
+        QMessageBox::warning(this,"Error","No user is currently logged in.");
+        return;
+    }
+
+    //init variables
+    float food = 0.0;
+    float stationery = 0.0;
+    float utilities = 0.0;
+    float others = 0.0;
+    QDate currentDate = QDate::currentDate();
+    QDate firstDay = QDate(currentDate.year(),currentDate.month(),1);
+    QDate iterDate = firstDay;
+
+    //loop to interate through each date
+    while (iterDate <= currentDate) {
+        // Query total expenses of each item
+        // Food, Rent, Stationery, Utilities, Others.
+        QSqlQuery expenseQuery(db);
+        expenseQuery.prepare(R"(
+            SELECT IFNULL (Food,0) as FoodExpense
+            SELECT (IFNULL (Stationery,0)) as StationeryExpense
+            SELECT (IFNULL (Utilities,0)) as UtilitiesExpense
+            SELECT (IFNULL (Others,0)) as OthersExpense
+
+            FROM Expenses
+            WHERE user_id = :UserID AND Date = :Date
+        )");
+        expenseQuery.bindValue(":UserID", loggedInUserID);
+        expenseQuery.bindValue(":Date", iterDate.toString("yyyy-MM-dd"));
+
+        //sum and entry data
+        if (expenseQuery.exec() && expenseQuery.next()) {
+            food += expenseQuery.value("FoodExpense").toFloat();
+            stationery += expenseQuery.value("StationeryExpense").toFloat();
+            utilities += expenseQuery.value("UtilitiesExpense").toFloat();
+            others += expenseQuery.value("OthersExpense").toFloat();
+        }
+
+        // Move to the next day
+        iterDate = iterDate.addDays(1);
+    }
+
+
+
+
 }
+
+
+
+void MainWindow::LineGraphFood()
+{
+    // Ensure a user is logged in
+    if (loggedInUserID == -1) {
+        QMessageBox::warning(this, "Error", "No user is currently logged in.");
+        return;
+    }
+
+    // Retrieve the allocated monthly budget from the Budget table
+    float initialFoodBudget = 0.0;
+    QSqlQuery budgetQuery(db);
+    budgetQuery.prepare("SELECT Food FROM Budget WHERE user_id = :UserID");
+    budgetQuery.bindValue(":UserID", loggedInUserID);
+    if (budgetQuery.exec() && budgetQuery.next()) {
+        initialFoodBudget = budgetQuery.value("Food").toFloat();
+    } else {
+        QMessageBox::critical(this, "Error", "Failed to retrieve monthly food budget.");
+        return;
+    }
+
+    // Prepare the line series
+    QLineSeries *series = new QLineSeries();
+    series->setName("Remaining Food Budget");
+
+    // Get current date and determine the first day of the month
+    QDate currentDate = QDate::currentDate();
+    QDate firstDay = QDate(currentDate.year(), currentDate.month(), 1);
+    float remainingBudget = initialFoodBudget;
+
+    // Iterate day by day from the start of the month until today
+    QDate iterDate = firstDay;
+    while (iterDate <= currentDate) {
+        // Query total expenses for the day.
+        // This assumes your Expenses table stores expenses per category in columns:
+        // Food, Rent, Stationery, Utilities, Others.
+        QSqlQuery expenseQuery(db);
+        expenseQuery.prepare(R"(
+            SELECT (IFNULL(Food,0)) as DailyExpense
+            FROM Expenses
+            WHERE user_id = :UserID AND Date = :Date
+        )");
+        expenseQuery.bindValue(":UserID", loggedInUserID);
+        expenseQuery.bindValue(":Date", iterDate.toString("yyyy-MM-dd"));
+
+        float dailyExpense = 0.0;
+        if (expenseQuery.exec() && expenseQuery.next()) {
+            dailyExpense = expenseQuery.value("DailyExpense").toFloat();
+        }
+
+        // Subtract daily expense from the remaining budget
+        remainingBudget -= dailyExpense;
+        if (remainingBudget < 0)
+            remainingBudget = 0; // avoid negative budget
+
+        // Use QDateTime for the x-axis; convert iterDate to QDateTime at midnight.
+        QDateTime dateTime(iterDate, QTime(0, 0));
+        series->append(dateTime.toMSecsSinceEpoch(), remainingBudget);
+
+        // Move to the next day
+        iterDate = iterDate.addDays(1);
+    }
+
+    // Create a chart and add the series
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    chart->setTitle("Budget Tracking Over the Month");
+
+    // Configure the x-axis as a date/time axis
+    QDateTimeAxis *axisX = new QDateTimeAxis;
+    axisX->setFormat("dd MMM");
+    axisX->setTitleText("Date");
+    axisX->setTickCount(currentDate.day() + 1);
+    chart->addAxis(axisX, Qt::AlignBottom);
+    series->attachAxis(axisX);
+
+    // Configure the y-axis
+    QValueAxis *axisY = new QValueAxis;
+    axisY->setTitleText("Remaining Budget (Rs)");
+    axisY->setRange(0, initialFoodBudget);
+    chart->addAxis(axisY, Qt::AlignLeft);
+    series->attachAxis(axisY);
+
+    // Create a ChartView with the chart
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+
+    // Display the line graph
+    QLayout *layout = ui->lineGraphWidget->layout();
+    if (!layout) {
+        layout = new QVBoxLayout(ui->lineGraphWidget);
+        ui->lineGraphWidget->setLayout(layout);
+    }
+    // Clear any previous graph widget
+    QLayoutItem *item;
+    while ((item = layout->takeAt(0)) != nullptr) {
+        if (QWidget *widget = item->widget())
+            widget->deleteLater();
+        delete item;
+    }
+    layout->addWidget(chartView);
+}
+
+void MainWindow::LineGraphStationery()
+{
+    // Ensure a user is logged in
+    if (loggedInUserID == -1) {
+        QMessageBox::warning(this, "Error", "No user is currently logged in.");
+        return;
+    }
+
+    // Retrieve the allocated monthly budget from the Budget table
+    float initialStationeryBudget = 0.0;
+    QSqlQuery budgetQuery(db);
+    budgetQuery.prepare("SELECT Stationery FROM Budget WHERE user_id = :UserID");
+    budgetQuery.bindValue(":UserID", loggedInUserID);
+    if (budgetQuery.exec() && budgetQuery.next()) {
+        initialStationeryBudget = budgetQuery.value("Stationery").toFloat();
+    } else {
+        QMessageBox::critical(this, "Error", "Failed to retrieve monthly Stationery budget.");
+        return;
+    }
+
+    // Prepare the line series
+    QLineSeries *series = new QLineSeries();
+    series->setName("Remaining Stationery Budget");
+
+    // Get current date and determine the first day of the month
+    QDate currentDate = QDate::currentDate();
+    QDate firstDay = QDate(currentDate.year(), currentDate.month(), 1);
+    float remainingBudget = initialStationeryBudget;
+
+    // Iterate day by day from the start of the month until today
+    QDate iterDate = firstDay;
+    while (iterDate <= currentDate) {
+        // Query total expenses for the day.
+        // This assumes your Expenses table stores expenses per category in columns:
+        // Food, Rent, Stationery, Utilities, Others.
+        QSqlQuery expenseQuery(db);
+        expenseQuery.prepare(R"(
+            SELECT (IFNULL(Stationery,0)) as DailyExpense
+            FROM Expenses
+            WHERE user_id = :UserID AND Date = :Date
+        )");
+        expenseQuery.bindValue(":UserID", loggedInUserID);
+        expenseQuery.bindValue(":Date", iterDate.toString("yyyy-MM-dd"));
+
+        float dailyExpense = 0.0;
+        if (expenseQuery.exec() && expenseQuery.next()) {
+            dailyExpense = expenseQuery.value("DailyExpense").toFloat();
+        }
+
+        // Subtract daily expense from the remaining budget
+        remainingBudget -= dailyExpense;
+        if (remainingBudget < 0)
+            remainingBudget = 0; // avoid negative budget
+
+        // Use QDateTime for the x-axis; convert iterDate to QDateTime at midnight.
+        QDateTime dateTime(iterDate, QTime(0, 0));
+        series->append(dateTime.toMSecsSinceEpoch(), remainingBudget);
+
+        // Move to the next day
+        iterDate = iterDate.addDays(1);
+    }
+
+    // Create a chart and add the series
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    chart->setTitle("Budget Tracking Over the Month");
+
+    // Configure the x-axis as a date/time axis
+    QDateTimeAxis *axisX = new QDateTimeAxis;
+    axisX->setFormat("dd MMM");
+    axisX->setTitleText("Date");
+    axisX->setTickCount(currentDate.day() + 1);
+    chart->addAxis(axisX, Qt::AlignBottom);
+    series->attachAxis(axisX);
+
+    // Configure the y-axis
+    QValueAxis *axisY = new QValueAxis;
+    axisY->setTitleText("Remaining Budget (Rs)");
+    axisY->setRange(0, initialStationeryBudget);
+    chart->addAxis(axisY, Qt::AlignLeft);
+    series->attachAxis(axisY);
+
+    // Create a ChartView with the chart
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+
+    // Display the line graph
+    QLayout *layout = ui->lineGraphWidget->layout();
+    if (!layout) {
+        layout = new QVBoxLayout(ui->lineGraphWidget);
+        ui->lineGraphWidget->setLayout(layout);
+    }
+    // Clear any previous graph widget
+    QLayoutItem *item;
+    while ((item = layout->takeAt(0)) != nullptr) {
+        if (QWidget *widget = item->widget())
+            widget->deleteLater();
+        delete item;
+    }
+    layout->addWidget(chartView);
+}
+
+void MainWindow::LineGraphOthers()
+{
+    // Ensure a user is logged in
+    if (loggedInUserID == -1) {
+        QMessageBox::warning(this, "Error", "No user is currently logged in.");
+        return;
+    }
+
+    // Retrieve the allocated monthly budget from the Budget table
+    float initialOthersBudget = 0.0;
+    QSqlQuery budgetQuery(db);
+    budgetQuery.prepare("SELECT Others FROM Budget WHERE user_id = :UserID");
+    budgetQuery.bindValue(":UserID", loggedInUserID);
+    if (budgetQuery.exec() && budgetQuery.next()) {
+        initialOthersBudget = budgetQuery.value("Others").toFloat();
+    } else {
+        QMessageBox::critical(this, "Error", "Failed to retrieve monthly budget for \"others\".");
+        return;
+    }
+
+    ui->stackedWidget->setCurrentIndex(8);
+
+    // Prepare the line series
+    QLineSeries *series = new QLineSeries();
+    series->setName("Remaining Others Budget");
+
+    // Get current date and determine the first day of the month
+    QDate currentDate = QDate::currentDate();
+    QDate firstDay = QDate(currentDate.year(), currentDate.month(), 1);
+    float remainingBudget = initialOthersBudget;
+
+    // Iterate day by day from the start of the month until today
+    QDate iterDate = firstDay;
+    while (iterDate <= currentDate) {
+        // Query total expenses for the day.
+        // This assumes your Expenses table stores expenses per category in columns:
+        // Food, Rent, Stationery, Utilities, Others.
+        QSqlQuery expenseQuery(db);
+        expenseQuery.prepare(R"(
+            SELECT (IFNULL(Others,0)) as DailyExpense
+            FROM Expenses
+            WHERE user_id = :UserID AND Date = :Date
+        )");
+        expenseQuery.bindValue(":UserID", loggedInUserID);
+        expenseQuery.bindValue(":Date", iterDate.toString("yyyy-MM-dd"));
+
+        float dailyExpense = 0.0;
+        if (expenseQuery.exec() && expenseQuery.next()) {
+            dailyExpense = expenseQuery.value("DailyExpense").toFloat();
+        }
+
+        // Subtract daily expense from the remaining budget
+        remainingBudget -= dailyExpense;
+        if (remainingBudget < 0)
+            remainingBudget = 0; // avoid negative budget
+
+        // Use QDateTime for the x-axis; convert iterDate to QDateTime at midnight.
+        QDateTime dateTime(iterDate, QTime(0, 0));
+        series->append(dateTime.toMSecsSinceEpoch(), remainingBudget);
+
+        // Move to the next day
+        iterDate = iterDate.addDays(1);
+    }
+
+    // Create a chart and add the series
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    chart->setTitle("Budget Tracking Over the Month");
+
+    // Configure the x-axis as a date/time axis
+    QDateTimeAxis *axisX = new QDateTimeAxis;
+    axisX->setFormat("dd MMM");
+    axisX->setTitleText("Date");
+    axisX->setTickCount(currentDate.day() + 1);
+    chart->addAxis(axisX, Qt::AlignBottom);
+    series->attachAxis(axisX);
+
+    // Configure the y-axis
+    QValueAxis *axisY = new QValueAxis;
+    axisY->setTitleText("Remaining Budget (Rs)");
+    axisY->setRange(0, initialOthersBudget);
+    chart->addAxis(axisY, Qt::AlignLeft);
+    series->attachAxis(axisY);
+
+    // Create a ChartView with the chart
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+
+    // Display the line graph
+    QLayout *layout = ui->lineGraphWidget->layout();
+    if (!layout) {
+        layout = new QVBoxLayout(ui->lineGraphWidget);
+        ui->lineGraphWidget->setLayout(layout);
+    }
+    // Clear any previous graph widget
+    QLayoutItem *item;
+    while ((item = layout->takeAt(0)) != nullptr) {
+        if (QWidget *widget = item->widget())
+            widget->deleteLater();
+        delete item;
+    }
+    layout->addWidget(chartView);
+}
+
+
+void MainWindow::on_LineGraphComboBox_currentIndexChanged(int index)
+{
+    if(index==0){
+        LineGraph();
+    }
+    if(index==1){
+        LineGraphFood();
+    }
+    if(index==2){
+        LineGraphStationery();
+    }
+    if(index==3){
+        LineGraphOthers();
+    }
+}
+
+
 
