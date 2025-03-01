@@ -4,6 +4,7 @@
 #include <QSqlDatabase>
 #include <QFile>
 #include <QSqlQuery>
+#include<QSqlQueryModel>
 #include <QSqlError>
 #include <QUuid>
 #include<QMessageBox>
@@ -47,7 +48,7 @@ bool MainWindow::openDatabase()
     db = QSqlDatabase::addDatabase("QSQLITE");
 
     // Set the path to your SQLite database file
-    db.setDatabaseName("C:/Users/Hp Victus/Desktop/End sem project/EndSemProject-1/mind_your_money/database_Mind_your_Money.db");
+    db.setDatabaseName("F:/Startingqt/Second sem project/EndSemProject-1/mind_your_money/database_Mind_your_Money.db");
 
     // Attempt to open the database
     if (!db.open()) {
@@ -580,7 +581,7 @@ void MainWindow::on_btnLogin_clicked()
 
             QMessageBox::information(this, "Login Successful", "Welcome, " + firstName + " " + lastName + "!");
             ui->stackedWidget->setCurrentIndex(5);  // Navigate to dashboard
-            ui->labelUserName->setText(firstName);
+            ui->labelUserName->setText("Welcome "+ firstName);
             // Set the first name to the label
             ui->txtEmail->clear();
             ui->txtPassword->clear();
@@ -643,7 +644,7 @@ void MainWindow::displayRemainingBudget()
         QMessageBox::critical(this, "Database Error", "Failed to fetch remaining budget: " + query.lastError().text());
     }
 }
-
+//Line Graph Code
 void MainWindow::LineGraph()
 {
     // Ensure a user is logged in
@@ -745,7 +746,7 @@ void MainWindow::LineGraph()
     }
     layout->addWidget(chartView);
 }
-
+//Bar Graph Code
 void MainWindow::on_pushButton_GraphsBarGraph_clicked()
 {
     if (loggedInUserID == -1) {
@@ -852,7 +853,7 @@ void MainWindow::on_pushButton_GraphsBarGraph_clicked()
     qDebug() << "Graph updated successfully!";
 
 }
-
+//Pie Chart Code
 void MainWindow::PieChart(){
     if (loggedInUserID == -1) {
         QMessageBox::warning(this, "Error", "No user is logged in.");
@@ -1276,6 +1277,80 @@ void MainWindow::on_LineGraphComboBox_currentIndexChanged(int index)
         LineGraphOthers();
     }
 }
+//View Daily Expense table
+void MainWindow::on_btnDailyExpense_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(11); // Switch to the expense page
+
+    QSqlQueryModel *model = new QSqlQueryModel(this);
+
+    QString currentMonth = QDate::currentDate().toString("yyyy-MM");
+    int userId = loggedInUserID;
+
+    // Extract only the day from the date column
+    QString queryStr = QString(
+                           "SELECT strftime('%d', Date) AS 'Day', Food, Rent, Stationery, Utilities, Others, Total "
+                           "FROM Expenses "
+                           "WHERE user_id = %1 AND strftime('%Y-%m', Date) = '%2' "
+                           "ORDER BY Date ASC"
+                           ).arg(userId).arg(currentMonth);
+
+    model->setQuery(queryStr, db);
+
+    if (model->lastError().isValid()) {
+        qDebug() << "Query error:" << model->lastError().text();
+        return;
+    }
+
+    ui->tableView->setModel(model);
+
+    // Remove row numbers (vertical header)
+    ui->tableView->verticalHeader()->setVisible(false);
+
+    // Apply alternating row colors
+    ui->tableView->setAlternatingRowColors(true);
+    ui->tableView->setStyleSheet(
+        "QTableView { background-color: #f9f9f9; alternate-background-color: #e6e6e6; border: 2px solid #ccc; }"
+        );
+
+    // Adjust column width
+    ui->tableView->resizeColumnsToContents();
+
+    // Center-align headers
+    QFont font;
+    font.setBold(true);
+    font.setPointSize(10);
+    ui->tableView->horizontalHeader()->setFont(font);
+    ui->tableView->horizontalHeader()->setStyleSheet(
+        "QHeaderView::section { background-color: #0078D7; color: white; padding: 6px; }"
+        );
+    ui->tableView->horizontalHeader()->setDefaultAlignment(Qt::AlignCenter);
+
+    // Center-align all table cells
+    for (int i = 0; i < model->columnCount(); ++i) {
+        ui->tableView->setColumnWidth(i, 100); // Adjust column width
+    }
+
+    ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
+
+    // Set the title for the month
+    ui->labelHeader->setText("Expenses for the month of " + QDate::currentDate().toString("MMMM yyyy"));
+    ui->labelHeader->setAlignment(Qt::AlignCenter);
+    ui->labelHeader->setStyleSheet("font-size: 14px; font-weight: bold; color: #333;");
+}
 
 
+
+
+
+
+
+
+void MainWindow::on_btn_ExpenseReportHome_2_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(5);
+
+}
 

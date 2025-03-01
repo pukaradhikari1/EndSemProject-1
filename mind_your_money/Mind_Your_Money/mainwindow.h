@@ -106,6 +106,10 @@ private slots:
 
     void on_btn_BarGraphPrev_clicked();
 
+    void on_btnDailyExpense_clicked();
+
+    void on_btn_ExpenseReportHome_2_clicked();
+
 private:
     int currentUserID = -1;
     QSqlDatabase db;  // Define database object as a member
