@@ -1370,8 +1370,7 @@ void MainWindow::on_btnDailyExpense_clicked()
 
     // Set the title for the month
     ui->labelHeader->setText("Expenses for the month of " + QDate::currentDate().toString("MMMM yyyy"));
-    ui->labelHeader->setAlignment(Qt::AlignCenter);
-    ui->labelHeader->setStyleSheet("font-size: 14px; font-weight: bold; color: #333;");
+
 
 }
 

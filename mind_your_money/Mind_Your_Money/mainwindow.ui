@@ -33,7 +33,7 @@
      <enum>Qt::LayoutDirection::LeftToRight</enum>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QLabel" name="label">
@@ -1953,8 +1953,8 @@ background-color:rgb(45, 71, 72);
      <widget class="QTableView" name="tableView">
       <property name="geometry">
        <rect>
-        <x>120</x>
-        <y>50</y>
+        <x>90</x>
+        <y>70</y>
         <width>711</width>
         <height>531</height>
        </rect>
@@ -1988,11 +1988,17 @@ background-color:rgb(45, 71, 72);
      <widget class="QLabel" name="labelHeader">
       <property name="geometry">
        <rect>
-        <x>260</x>
+        <x>80</x>
         <y>20</y>
-        <width>471</width>
-        <height>20</height>
+        <width>731</width>
+        <height>41</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>30</pointsize>
+        <bold>true</bold>
+       </font>
       </property>
       <property name="text">
        <string/>
