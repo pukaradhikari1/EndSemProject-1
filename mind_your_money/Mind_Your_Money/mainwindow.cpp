@@ -62,16 +62,17 @@ bool MainWindow::openDatabase()
 
 MainWindow::~MainWindow()
 {
-    db.close();  // Close the database connection when MainWindow is destroyed
+     // Close the database connection when MainWindow is destroyed
+    db.close();
     delete ui;
 }
 
 void MainWindow::updateDateTime()
 {
-    // Get the current date and time
+
     QString currentDateTime = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
 
-    // Display it in the Qlabel The label name is date
+
     ui->date->setText(currentDateTime);
 }
 
@@ -348,14 +349,13 @@ void MainWindow::on_btnSignUpSave_clicked()
         return;
     }
 
-    // Prepare the query to insert the data into the Budget table
     QSqlQuery qry(db);
     qry.prepare(R"(
         INSERT INTO Budget (user_id, MonthlyBudget, Rent, Food, Utilities, Stationery, Others)
         VALUES (:UserID, :MonthlyBudget, :URent, :UFood, :UUtilities, :UStationery, :UOthers)
     )");
 
-    // Bind values to the placeholders
+
     qry.bindValue(":UserID", loggedInUserID);
     qry.bindValue(":MonthlyBudget", MonthlyBudget);
     qry.bindValue(":UFood", UFood);
@@ -364,7 +364,7 @@ void MainWindow::on_btnSignUpSave_clicked()
     qry.bindValue(":UStationery", UStationery);
     qry.bindValue(":UOthers", UOthers);
 
-    // Debugging: Log the prepared query and bound values
+
     qDebug() << "Prepared query: " << qry.lastQuery();
     qDebug() << "Bound values:";
     qDebug() << "Food: " << UFood;
@@ -1280,11 +1280,10 @@ void MainWindow::on_LineGraphComboBox_currentIndexChanged(int index)
 //View Daily Expense table
 void MainWindow::on_btnDailyExpense_clicked()
 {
-    // Switch to the expense page
-    // Switch to the expense page
+
     ui->stackedWidget->setCurrentIndex(11);
 
-    // Check if database is open
+
     if (!db.isOpen()) {
         qDebug() << "Database is not open!";
         return;
@@ -1315,7 +1314,7 @@ void MainWindow::on_btnDailyExpense_clicked()
         return;
     }
 
-    // Query with corrected date sorting
+
     QString queryStr = QString(
                            "SELECT CAST(strftime('%d', Date) AS INTEGER) AS 'Day', Food, Rent, Stationery, Utilities, Others, Total "
                            "FROM Expenses "
@@ -1323,7 +1322,7 @@ void MainWindow::on_btnDailyExpense_clicked()
                            "ORDER BY Date ASC"
                            ).arg(userId).arg(currentMonth);
 
-    qDebug() << "Executing query: " << queryStr; // Debugging log
+    qDebug() << "Executing query: " << queryStr;
 
     model->setQuery(queryStr, db);
 
@@ -1332,7 +1331,7 @@ void MainWindow::on_btnDailyExpense_clicked()
         return;
     }
 
-    // Check if model has rows
+
     if (model->rowCount() == 0) {
         qDebug() << "Query executed successfully but no rows returned.";
     }
