@@ -134,6 +134,12 @@
            <bold>true</bold>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+
+background-colou:blue;
+}</string>
+         </property>
          <property name="text">
           <string>SignUp</string>
          </property>
@@ -147,6 +153,12 @@
            <bold>true</bold>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+
+background-colou:blue;
+}</string>
+         </property>
          <property name="text">
           <string>ForgotPassword</string>
          </property>
@@ -159,6 +171,12 @@
            <pointsize>20</pointsize>
            <bold>true</bold>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+
+background-colou:blue;
+}</string>
          </property>
          <property name="text">
           <string>Login</string>
@@ -344,6 +362,12 @@
            <bold>true</bold>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+
+background-colou:blue;
+}</string>
+         </property>
          <property name="text">
           <string>Back</string>
          </property>
@@ -357,6 +381,12 @@
            <bold>true</bold>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+
+background-colou:blue;
+}</string>
+         </property>
          <property name="text">
           <string>Reset</string>
          </property>
@@ -364,6 +394,18 @@
        </item>
        <item>
         <widget class="QPushButton" name="btnNext">
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+
+background-colou:blue;
+}</string>
+         </property>
          <property name="text">
           <string>Next</string>
          </property>
@@ -527,6 +569,18 @@
        </property>
        <item>
         <widget class="QPushButton" name="btnSignUpBack">
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+
+background-colou:blue;
+}</string>
+         </property>
          <property name="text">
           <string>Back</string>
          </property>
@@ -539,6 +593,12 @@
            <pointsize>20</pointsize>
            <bold>true</bold>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+
+background-colou:blue;
+}</string>
          </property>
          <property name="text">
           <string>Save</string>
@@ -667,6 +727,12 @@
            <bold>true</bold>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+
+background-colou:blue;
+}</string>
+         </property>
          <property name="text">
           <string>Prev</string>
          </property>
@@ -679,6 +745,12 @@
            <pointsize>20</pointsize>
            <bold>true</bold>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+
+background-colou:blue;
+}</string>
          </property>
          <property name="text">
           <string>Next</string>
@@ -822,6 +894,12 @@
            <bold>true</bold>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+
+background-colou:blue;
+}</string>
+         </property>
          <property name="text">
           <string>Home</string>
          </property>
@@ -834,6 +912,12 @@
            <pointsize>20</pointsize>
            <bold>true</bold>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+
+background-colou:blue;
+}</string>
          </property>
          <property name="text">
           <string>Change</string>
@@ -865,6 +949,12 @@
            <bold>true</bold>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+
+background-colou:blue;
+}</string>
+         </property>
          <property name="text">
           <string>Enter Expense</string>
          </property>
@@ -877,6 +967,12 @@
            <pointsize>20</pointsize>
            <bold>true</bold>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+
+background-colou:blue;
+}</string>
          </property>
          <property name="text">
           <string>Graphs</string>
@@ -891,6 +987,12 @@
            <bold>true</bold>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+
+background-colou:blue;
+}</string>
+         </property>
          <property name="text">
           <string>Daily Expenditure</string>
          </property>
@@ -903,6 +1005,12 @@
            <pointsize>20</pointsize>
            <bold>true</bold>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+
+background-colou:blue;
+}</string>
          </property>
          <property name="text">
           <string>Stats</string>
@@ -1003,6 +1111,12 @@ color:red;
         <pointsize>15</pointsize>
         <bold>true</bold>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+
+background-colou:blue;
+}</string>
       </property>
       <property name="text">
        <string>Log out</string>
@@ -1164,6 +1278,12 @@ color:red;
            <bold>true</bold>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+
+background-colou:blue;
+}</string>
+         </property>
          <property name="text">
           <string>Prev</string>
          </property>
@@ -1176,6 +1296,12 @@ color:red;
            <pointsize>20</pointsize>
            <bold>true</bold>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+
+background-colou:blue;
+}</string>
          </property>
          <property name="text">
           <string>Save</string>
@@ -1228,15 +1354,21 @@ color:red;
        <rect>
         <x>10</x>
         <y>600</y>
-        <width>93</width>
-        <height>29</height>
+        <width>101</width>
+        <height>41</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>15</pointsize>
+        <pointsize>20</pointsize>
         <bold>true</bold>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+
+background-colou:blue;
+}</string>
       </property>
       <property name="text">
        <string>Prev</string>
@@ -1342,17 +1474,23 @@ color:red;
      <widget class="QPushButton" name="btnLHome">
       <property name="geometry">
        <rect>
-        <x>830</x>
+        <x>812</x>
         <y>610</y>
-        <width>83</width>
-        <height>29</height>
+        <width>101</width>
+        <height>41</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>15</pointsize>
+        <pointsize>20</pointsize>
         <bold>true</bold>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+
+background-colou:blue;
+}</string>
       </property>
       <property name="text">
        <string>Home</string>
@@ -1363,15 +1501,22 @@ color:red;
        <rect>
         <x>30</x>
         <y>610</y>
-        <width>83</width>
-        <height>29</height>
+        <width>91</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>15</pointsize>
+        <pointsize>20</pointsize>
         <bold>true</bold>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+
+background-colou:blue;
+}
+</string>
       </property>
       <property name="text">
        <string>Prev</string>
@@ -1442,6 +1587,12 @@ color:red;
         <width>111</width>
         <height>41</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+
+background-colou:blue;
+}</string>
       </property>
       <property name="text">
        <string>Home</string>
@@ -1729,6 +1880,12 @@ color:red;
         <bold>true</bold>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+
+background-colou:blue;
+}</string>
+      </property>
       <property name="text">
        <string>Prev</string>
       </property>
@@ -1754,6 +1911,12 @@ color:red;
            <bold>true</bold>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+
+background-colou:blue;
+}</string>
+         </property>
          <property name="text">
           <string>Bar Graph</string>
          </property>
@@ -1766,6 +1929,13 @@ color:red;
            <pointsize>20</pointsize>
            <bold>true</bold>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+
+background-colou:blue;
+}
+</string>
          </property>
          <property name="text">
           <string>Line Graph</string>

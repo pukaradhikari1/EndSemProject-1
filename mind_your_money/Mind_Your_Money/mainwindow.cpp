@@ -1376,12 +1376,6 @@ void MainWindow::on_btnDailyExpense_clicked()
 }
 
 
-
-
-
-
-
-
 void MainWindow::on_btn_ExpenseReportHome_2_clicked()
 {
     ui->stackedWidget->setCurrentIndex(5);
