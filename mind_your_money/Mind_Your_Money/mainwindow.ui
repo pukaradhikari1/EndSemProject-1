@@ -33,7 +33,7 @@
      <enum>Qt::LayoutDirection::LeftToRight</enum>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QLabel" name="label">
@@ -137,7 +137,7 @@
          <property name="styleSheet">
           <string notr="true">QPushButton{
 
-background-colou:blue;
+background-color:rgb(45, 71, 72);
 }</string>
          </property>
          <property name="text">
@@ -156,7 +156,7 @@ background-colou:blue;
          <property name="styleSheet">
           <string notr="true">QPushButton{
 
-background-colou:blue;
+background-color:rgb(45, 71, 72);
 }</string>
          </property>
          <property name="text">
@@ -175,7 +175,7 @@ background-colou:blue;
          <property name="styleSheet">
           <string notr="true">QPushButton{
 
-background-colou:blue;
+background-color:rgb(45, 71, 72);
 }</string>
          </property>
          <property name="text">
@@ -365,7 +365,7 @@ background-colou:blue;
          <property name="styleSheet">
           <string notr="true">QPushButton{
 
-background-colou:blue;
+background-color:rgb(45, 71, 72);
 }</string>
          </property>
          <property name="text">
@@ -384,7 +384,7 @@ background-colou:blue;
          <property name="styleSheet">
           <string notr="true">QPushButton{
 
-background-colou:blue;
+background-color:rgb(45, 71, 72);
 }</string>
          </property>
          <property name="text">
@@ -403,7 +403,7 @@ background-colou:blue;
          <property name="styleSheet">
           <string notr="true">QPushButton{
 
-background-colou:blue;
+background-color:rgb(45, 71, 72);
 }</string>
          </property>
          <property name="text">
@@ -572,13 +572,13 @@ background-colou:blue;
          <property name="font">
           <font>
            <pointsize>20</pointsize>
-           <bold>false</bold>
+           <bold>true</bold>
           </font>
          </property>
          <property name="styleSheet">
           <string notr="true">QPushButton{
 
-background-colou:blue;
+background-color:rgb(45, 71, 72);
 }</string>
          </property>
          <property name="text">
@@ -597,7 +597,7 @@ background-colou:blue;
          <property name="styleSheet">
           <string notr="true">QPushButton{
 
-background-colou:blue;
+background-color:rgb(45, 71, 72);
 }</string>
          </property>
          <property name="text">
@@ -641,7 +641,7 @@ background-colou:blue;
         <x>130</x>
         <y>140</y>
         <width>771</width>
-        <height>137</height>
+        <height>131</height>
        </rect>
       </property>
       <layout class="QFormLayout" name="formLayout_3">
@@ -730,7 +730,7 @@ background-colou:blue;
          <property name="styleSheet">
           <string notr="true">QPushButton{
 
-background-colou:blue;
+background-color:rgb(45, 71, 72);
 }</string>
          </property>
          <property name="text">
@@ -749,7 +749,7 @@ background-colou:blue;
          <property name="styleSheet">
           <string notr="true">QPushButton{
 
-background-colou:blue;
+background-color:rgb(45, 71, 72);
 }</string>
          </property>
          <property name="text">
@@ -897,7 +897,7 @@ background-colou:blue;
          <property name="styleSheet">
           <string notr="true">QPushButton{
 
-background-colou:blue;
+background-color:rgb(45, 71, 72);
 }</string>
          </property>
          <property name="text">
@@ -916,7 +916,7 @@ background-colou:blue;
          <property name="styleSheet">
           <string notr="true">QPushButton{
 
-background-colou:blue;
+background-color:rgb(45, 71, 72);
 }</string>
          </property>
          <property name="text">
@@ -952,7 +952,7 @@ background-colou:blue;
          <property name="styleSheet">
           <string notr="true">QPushButton{
 
-background-colou:blue;
+background-color:rgb(45, 71, 72);
 }</string>
          </property>
          <property name="text">
@@ -971,7 +971,7 @@ background-colou:blue;
          <property name="styleSheet">
           <string notr="true">QPushButton{
 
-background-colou:blue;
+background-color:rgb(45, 71, 72);
 }</string>
          </property>
          <property name="text">
@@ -990,7 +990,7 @@ background-colou:blue;
          <property name="styleSheet">
           <string notr="true">QPushButton{
 
-background-colou:blue;
+background-color:rgb(45, 71, 72);
 }</string>
          </property>
          <property name="text">
@@ -1009,7 +1009,7 @@ background-colou:blue;
          <property name="styleSheet">
           <string notr="true">QPushButton{
 
-background-colou:blue;
+background-color:rgb(45, 71, 72);
 }</string>
          </property>
          <property name="text">
@@ -1115,7 +1115,7 @@ color:red;
       <property name="styleSheet">
        <string notr="true">QPushButton{
 
-background-colou:blue;
+background-color:rgb(45, 71, 72);
 }</string>
       </property>
       <property name="text">
@@ -1281,7 +1281,7 @@ background-colou:blue;
          <property name="styleSheet">
           <string notr="true">QPushButton{
 
-background-colou:blue;
+background-color:rgb(45, 71, 72);
 }</string>
          </property>
          <property name="text">
@@ -1300,7 +1300,7 @@ background-colou:blue;
          <property name="styleSheet">
           <string notr="true">QPushButton{
 
-background-colou:blue;
+background-color:rgb(45, 71, 72);
 }</string>
          </property>
          <property name="text">
@@ -1367,7 +1367,7 @@ background-colou:blue;
       <property name="styleSheet">
        <string notr="true">QPushButton{
 
-background-colou:blue;
+background-color:rgb(45, 71, 72);
 }</string>
       </property>
       <property name="text">
@@ -1489,7 +1489,7 @@ background-colou:blue;
       <property name="styleSheet">
        <string notr="true">QPushButton{
 
-background-colou:blue;
+background-color:rgb(45, 71, 72);
 }</string>
       </property>
       <property name="text">
@@ -1499,8 +1499,8 @@ background-colou:blue;
      <widget class="QPushButton" name="pushButton_LineGraphPrev">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>610</y>
+        <x>20</x>
+        <y>620</y>
         <width>91</width>
         <height>31</height>
        </rect>
@@ -1514,9 +1514,8 @@ background-colou:blue;
       <property name="styleSheet">
        <string notr="true">QPushButton{
 
-background-colou:blue;
-}
-</string>
+background-color:rgb(45, 71, 72);
+}</string>
       </property>
       <property name="text">
        <string>Prev</string>
@@ -1588,10 +1587,16 @@ background-colou:blue;
         <height>41</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+        <bold>false</bold>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QPushButton{
 
-background-colou:blue;
+background-color:rgb(45, 71, 72);
 }</string>
       </property>
       <property name="text">
@@ -1883,7 +1888,7 @@ color:red;
       <property name="styleSheet">
        <string notr="true">QPushButton{
 
-background-colou:blue;
+background-color:rgb(45, 71, 72);
 }</string>
       </property>
       <property name="text">
@@ -1914,7 +1919,7 @@ background-colou:blue;
          <property name="styleSheet">
           <string notr="true">QPushButton{
 
-background-colou:blue;
+background-color:rgb(45, 71, 72);
 }</string>
          </property>
          <property name="text">
@@ -1933,9 +1938,8 @@ background-colou:blue;
          <property name="styleSheet">
           <string notr="true">QPushButton{
 
-background-colou:blue;
-}
-</string>
+background-color:rgb(45, 71, 72);
+}</string>
          </property>
          <property name="text">
           <string>Line Graph</string>
@@ -1964,6 +1968,18 @@ background-colou:blue;
         <width>111</width>
         <height>41</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+
+background-color:rgb(45, 71, 72);
+}</string>
       </property>
       <property name="text">
        <string>Home</string>
