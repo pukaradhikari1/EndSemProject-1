@@ -11,6 +11,7 @@
 #include <QDateTime>
 #include <QTimer>
 #include<string>
+#include<QPixmap>
 
 
 //Global Variables
@@ -23,6 +24,12 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    QPixmap pix(":/img/image/S.png");
+    if (pix.isNull()) {
+        qDebug() << "Failed to load image!";
+    } else {
+        ui->Image->setPixmap(pix.scaled(200, 200, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    }
     if (!openDatabase()) {
         QMessageBox::critical(this, "Database Error", "Failed to connect to the database. Please check the connection settings.");
         return;  // Exit if the database connection fails
@@ -80,11 +87,32 @@ void MainWindow::updateDateTime()
 //Navigation buttons:
 void MainWindow::on_btnSignup_clicked()
 {
+
+    QPixmap pix1(":/img/image/SP.png");
+    if (pix1.isNull()) {
+        qDebug() << "Failed to load image!";
+    } else {
+        ui->SImage->setPixmap(pix1.scaled(200, 200, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    }
+    if (!openDatabase()) {
+        QMessageBox::critical(this, "Database Error", "Failed to connect to the database. Please check the connection settings.");
+        return;  // Exit if the database connection fails
+    }
+
+
+
+
     ui->stackedWidget->setCurrentIndex(1);
 }
 void MainWindow::on_btnForgot_clicked()
 {
     ui->stackedWidget->setCurrentIndex(3);
+    QPixmap Pix(":/img/image/F.png");
+    if (Pix.isNull()) {
+        qDebug() << "Failed to load image!";
+    } else {
+        ui->FImage->setPixmap(Pix.scaled(200, 200, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    }
 }
 void MainWindow::on_btnSignUpPrev_clicked()
 {
