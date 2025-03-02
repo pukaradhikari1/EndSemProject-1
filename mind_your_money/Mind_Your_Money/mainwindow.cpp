@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->setFixedSize(this->size());
 
     QPixmap pix(":/img/image/S.png");
     if (pix.isNull()) {
@@ -127,7 +128,7 @@ void MainWindow::on_btnPrevExpenseWelcomeUser_clicked()
 
 void MainWindow::on_btnHome_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(5);
+    ui->stackedWidget->setCurrentIndex(0);
 }
 
 void MainWindow::on_btn_BarGraphPrev_clicked()
@@ -282,20 +283,44 @@ void MainWindow::on_ChangePassword_clicked()
 
 void MainWindow::on_btnChangePassword_clicked()
 {
-    QString Password=ui->txtCPassword->text();
-    QString CmPassword=ui->txtCmPassword->text();
-    if(Password==CmPassword)
-    {
-        QSqlQuery query(db);
-        query.prepare("SELECT UserID, Password FROM User WHERE Password = :Password");
-        query.bindValue(":Password", Password);
-        QMessageBox::information(this,"info","Password has been changed");
+    QString newPassword = ui->txtCPassword->text();
+    QString confirmPassword = ui->txtCmPassword->text();
 
-   }
-   else
-   {
-       QMessageBox::warning(this, "Invalid Input", "Password doesnt match");
-   }
+    if (newPassword.isEmpty() || confirmPassword.isEmpty()) {
+        QMessageBox::warning(this, "Invalid Input", "Password fields cannot be empty.");
+        return;
+    }
+
+    if (newPassword != confirmPassword) {
+        QMessageBox::warning(this, "Invalid Input", "Passwords do not match.");
+        return;
+    }
+
+
+
+
+    int userId = loggedInUserID;
+
+    if (userId == -1) {
+        QMessageBox::critical(this, "Error", "User not found. Please log in again.");
+        return;
+    }
+
+    QSqlQuery query(db);
+    query.prepare("UPDATE Users SET Password = :Password WHERE id = :userId");
+    query.bindValue(":Password",confirmPassword);
+    query.bindValue(":userId", userId);
+
+    if (query.exec()) {
+        QMessageBox::information(this, "Success", "Password has been changed successfully.");
+        ui->txtCPassword->clear();
+        ui->txtCmPassword->clear();
+        ui->stackedWidget->setCurrentIndex(0);
+    } else {
+        QMessageBox::critical(this, "Error", "Failed to update the password. Please try again.");
+    }
+
+
 
 }
 
@@ -312,9 +337,9 @@ void MainWindow::on_btnNextForgot_clicked()
 
     // Prepare the SQL query to check if the email and phone exist
     QSqlQuery query(db);
-    query.prepare("SELECT UserID FROM User WHERE Email = :Email AND Phone = :Phone");
-    query.bindValue(":Email", Email);
-    query.bindValue(":Phone", Phone);
+    query.prepare("SELECT id FROM Users WHERE Email = ? AND Phone = ?");
+    query.addBindValue(Email);
+    query.addBindValue(Phone);
 
     // Execute the query
     if (!query.exec()) {
@@ -324,11 +349,17 @@ void MainWindow::on_btnNextForgot_clicked()
 
     // Check if a matching record is found
     if (query.next()) {
-        loggedInUserID = query.value("UserID").toInt();  // Store logged-in user's ID
-        ui->stackedWidget->setCurrentIndex(4);          // Navigate to the next page
+        int userId = query.value(0).toInt();
+        loggedInUserID = userId;
+        ui->txtFEmail->clear();
+        ui->txtFPhone->clear();
+        ui->stackedWidget->setCurrentIndex(4);
+
     } else {
+
         QMessageBox::warning(this, "Login Failed", "Invalid Email or Phone Number.");
     }
+
 
 
 }

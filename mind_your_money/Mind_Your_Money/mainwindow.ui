@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>945</width>
-    <height>707</height>
+    <width>1027</width>
+    <height>723</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,9 +17,9 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>20</y>
-      <width>941</width>
+      <x>30</x>
+      <y>0</y>
+      <width>971</width>
       <height>681</height>
      </rect>
     </property>
@@ -33,7 +33,7 @@
      <enum>Qt::LayoutDirection::LeftToRight</enum>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QLabel" name="label">
@@ -821,7 +821,7 @@ background-color:rgb(45, 71, 72);
        </rect>
       </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string/>
       </property>
      </widget>
     </widget>
@@ -1381,7 +1381,7 @@ background-color:rgb(45, 71, 72);
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>70</y>
+        <y>50</y>
         <width>891</width>
         <height>521</height>
        </rect>
@@ -1392,7 +1392,7 @@ background-color:rgb(45, 71, 72);
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>600</y>
+        <y>590</y>
         <width>101</width>
         <height>41</height>
        </rect>
@@ -1443,9 +1443,9 @@ background-color:rgb(45, 71, 72);
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>0</y>
+        <y>-20</y>
         <width>941</width>
-        <height>61</height>
+        <height>71</height>
        </rect>
       </property>
       <property name="text">
@@ -1458,9 +1458,9 @@ background-color:rgb(45, 71, 72);
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-10</y>
+        <y>-20</y>
         <width>931</width>
-        <height>81</height>
+        <height>71</height>
        </rect>
       </property>
       <property name="font">
@@ -1502,8 +1502,8 @@ background-color:rgb(45, 71, 72);
      <widget class="QWidget" name="lineGraphWidget" native="true">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>70</y>
+        <x>20</x>
+        <y>50</y>
         <width>881</width>
         <height>531</height>
        </rect>
@@ -1513,8 +1513,8 @@ background-color:rgb(45, 71, 72);
      <widget class="QPushButton" name="btnLHome">
       <property name="geometry">
        <rect>
-        <x>812</x>
-        <y>610</y>
+        <x>800</x>
+        <y>590</y>
         <width>101</width>
         <height>41</height>
        </rect>
@@ -1539,9 +1539,9 @@ background-color:rgb(45, 71, 72);
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>620</y>
+        <y>600</y>
         <width>91</width>
-        <height>31</height>
+        <height>41</height>
        </rect>
       </property>
       <property name="font">
@@ -1564,7 +1564,7 @@ background-color:rgb(45, 71, 72);
       <property name="geometry">
        <rect>
         <x>40</x>
-        <y>20</y>
+        <y>0</y>
         <width>101</width>
         <height>41</height>
        </rect>
@@ -2051,7 +2051,7 @@ background-color:rgb(45, 71, 72);
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>945</width>
+     <width>1027</width>
      <height>25</height>
     </rect>
    </property>
