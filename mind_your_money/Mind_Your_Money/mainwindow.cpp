@@ -48,7 +48,7 @@ bool MainWindow::openDatabase()
     db = QSqlDatabase::addDatabase("QSQLITE");
 
     // Set the path to your SQLite database file
-    db.setDatabaseName("F:/Startingqt/Second sem project/EndSemProject-1/mind_your_money/database_Mind_your_Money.db");
+    db.setDatabaseName("C:/Users/Hp Victus/Desktop/End Sem Project/EndSemProject-1/mind_your_money/database_Mind_your_Money.db");
 
     // Attempt to open the database
     if (!db.open()) {
@@ -1280,28 +1280,64 @@ void MainWindow::on_LineGraphComboBox_currentIndexChanged(int index)
 //View Daily Expense table
 void MainWindow::on_btnDailyExpense_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(11); // Switch to the expense page
+    // Switch to the expense page
+    // Switch to the expense page
+    ui->stackedWidget->setCurrentIndex(11);
+
+    // Check if database is open
+    if (!db.isOpen()) {
+        qDebug() << "Database is not open!";
+        return;
+    }
+
+    // Ensure we delete the old model if it exists
+    if (ui->tableView->model()) {
+        delete ui->tableView->model();
+    }
 
     QSqlQueryModel *model = new QSqlQueryModel(this);
-
     QString currentMonth = QDate::currentDate().toString("yyyy-MM");
     int userId = loggedInUserID;
 
-    // Extract only the day from the date column
+    // Debugging: Check if there is data for this month
+    QSqlQuery checkQuery(db);
+    checkQuery.prepare("SELECT COUNT(*) FROM Expenses WHERE user_id = ? AND strftime('%Y-%m', Date) = ?");
+    checkQuery.addBindValue(userId);
+    checkQuery.addBindValue(currentMonth);
+
+    if (!checkQuery.exec()) {
+        qDebug() << "Error executing count query:" << checkQuery.lastError().text();
+        return;
+    }
+
+    if (checkQuery.next() && checkQuery.value(0).toInt() == 0) {
+        qDebug() << "No expenses found for the current month.";
+        return;
+    }
+
+    // Query with corrected date sorting
     QString queryStr = QString(
-                           "SELECT strftime('%d', Date) AS 'Day', Food, Rent, Stationery, Utilities, Others, Total "
+                           "SELECT CAST(strftime('%d', Date) AS INTEGER) AS 'Day', Food, Rent, Stationery, Utilities, Others, Total "
                            "FROM Expenses "
                            "WHERE user_id = %1 AND strftime('%Y-%m', Date) = '%2' "
                            "ORDER BY Date ASC"
                            ).arg(userId).arg(currentMonth);
 
+    qDebug() << "Executing query: " << queryStr; // Debugging log
+
     model->setQuery(queryStr, db);
 
     if (model->lastError().isValid()) {
-        qDebug() << "Query error:" << model->lastError().text();
+        qDebug() << "Query failed: " << model->lastError().text();
         return;
     }
 
+    // Check if model has rows
+    if (model->rowCount() == 0) {
+        qDebug() << "Query executed successfully but no rows returned.";
+    }
+
+    // Set model to table
     ui->tableView->setModel(model);
 
     // Remove row numbers (vertical header)
@@ -1311,10 +1347,12 @@ void MainWindow::on_btnDailyExpense_clicked()
     ui->tableView->setAlternatingRowColors(true);
     ui->tableView->setStyleSheet(
         "QTableView { background-color: #f9f9f9; alternate-background-color: #e6e6e6; border: 2px solid #ccc; }"
+        "QTableView::item:selected { background-color: #ffcc99; }"
         );
 
     // Adjust column width
     ui->tableView->resizeColumnsToContents();
+    ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     // Center-align headers
     QFont font;
@@ -1326,11 +1364,7 @@ void MainWindow::on_btnDailyExpense_clicked()
         );
     ui->tableView->horizontalHeader()->setDefaultAlignment(Qt::AlignCenter);
 
-    // Center-align all table cells
-    for (int i = 0; i < model->columnCount(); ++i) {
-        ui->tableView->setColumnWidth(i, 100); // Adjust column width
-    }
-
+    // Set table properties
     ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
@@ -1339,6 +1373,7 @@ void MainWindow::on_btnDailyExpense_clicked()
     ui->labelHeader->setText("Expenses for the month of " + QDate::currentDate().toString("MMMM yyyy"));
     ui->labelHeader->setAlignment(Qt::AlignCenter);
     ui->labelHeader->setStyleSheet("font-size: 14px; font-weight: bold; color: #333;");
+
 }
 
 
