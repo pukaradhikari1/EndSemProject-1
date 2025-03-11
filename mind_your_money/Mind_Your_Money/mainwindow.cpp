@@ -33,19 +33,19 @@ MainWindow::MainWindow(QWidget *parent)
     }
     if (!openDatabase()) {
         QMessageBox::critical(this, "Database Error", "Failed to connect to the database. Please check the connection settings.");
-        return;  // Exit if the database connection fails
+        return;
     }
 
-    // Create a QTimer to update the date and time
+
     QTimer *timer = new QTimer(this);
 
-    // Connect the timer's timeout signal to the updateDateTime slot
+
     connect(timer, &QTimer::timeout, this, &MainWindow::updateDateTime);
 
-    // Start the timer with an interval of 1 second
+
     timer->start(1000);
 
-    // Set the initial date and time
+    //updates date
     updateDateTime();
 
 }
@@ -55,13 +55,13 @@ bool MainWindow::openDatabase()
     // Add the SQLite database driver
     db = QSqlDatabase::addDatabase("QSQLITE");
 
-    // Set the path to your SQLite database file
+
     db.setDatabaseName("C:/Users/Hp Victus/Desktop/End Sem Project/EndSemProject-1/mind_your_money/database_Mind_your_Money.db");
 
-    // Attempt to open the database
+
     if (!db.open()) {
         qDebug() << "Error while connecting to the database: " << db.lastError().text();
-        return false;  // Return false if the connection fails
+        return false;
     }
 
     qDebug() << "Database is connected successfully!";
@@ -70,7 +70,7 @@ bool MainWindow::openDatabase()
 
 MainWindow::~MainWindow()
 {
-     // Close the database connection when MainWindow is destroyed
+
     db.close();
     delete ui;
 }
@@ -79,8 +79,6 @@ void MainWindow::updateDateTime()
 {
 
     QString currentDateTime = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
-
-
     ui->date->setText(currentDateTime);
 }
 
@@ -97,7 +95,7 @@ void MainWindow::on_btnSignup_clicked()
     }
     if (!openDatabase()) {
         QMessageBox::critical(this, "Database Error", "Failed to connect to the database. Please check the connection settings.");
-        return;  // Exit if the database connection fails
+        return;
     }
 
 
@@ -329,25 +327,25 @@ void MainWindow::on_btnNextForgot_clicked()
     QString Email = ui->txtFEmail->text();
     QString Phone = ui->txtFPhone->text();
 
-    // Check if fields are empty
+
     if (Email.isEmpty() || Phone.isEmpty()) {
         QMessageBox::warning(this, "Login Error", "Please enter both Email and Phone Number.");
         return;
     }
 
-    // Prepare the SQL query to check if the email and phone exist
+
     QSqlQuery query(db);
     query.prepare("SELECT id FROM Users WHERE Email = ? AND Phone = ?");
     query.addBindValue(Email);
     query.addBindValue(Phone);
 
-    // Execute the query
+
     if (!query.exec()) {
         QMessageBox::critical(this, "Database Error", "Failed to execute query: " + query.lastError().text());
         return;
     }
 
-    // Check if a matching record is found
+
     if (query.next()) {
         int userId = query.value(0).toInt();
         loggedInUserID = userId;
@@ -371,12 +369,12 @@ void MainWindow::on_btnSignUpSave_clicked()
         return;
     }
 
-    if (loggedInUserID == -1) {  // Ensure a user is logged in
+    if (loggedInUserID == -1) {
         QMessageBox::critical(this, "Error", "No user is currently logged in.");
         return;
     }
 
-    // Read the values from the input fields
+
     float MonthlyBudget = ui->txtMonthlyBudget->text().toFloat();
     float PFood = ui->txtPFood->text().toFloat();
     float PRent = ui->txtPRent->text().toFloat();
@@ -390,14 +388,14 @@ void MainWindow::on_btnSignUpSave_clicked()
     else{
         POthers=0;
     }
-    // Calculate the actual amounts for each category that the user has given
+    //changing into the amount from %age
     float UFood = MonthlyBudget * PFood / 100;
     float URent = MonthlyBudget * PRent / 100;
     float UUtilities = (MonthlyBudget * PUtilities) / 100;
     float UStationery = MonthlyBudget * PStationery / 100;
     float UOthers = MonthlyBudget * POthers / 100;
 
-    // Validate the inputs
+
     if (MonthlyBudget <= 0 || PFood <= 0 || PRent <= 0 || PUtilities <= 0 || PStationery <= 0) {
         QMessageBox::warning(this, "Invalid Input", "Ensure every field is filled.");
         return;
@@ -433,13 +431,13 @@ void MainWindow::on_btnSignUpSave_clicked()
     qDebug() << "Others: " << UOthers;
     qDebug() << "MonthlyBudget: " << MonthlyBudget;
 
-    // Execute the query
+
     if (qry.exec()) {
         QMessageBox::information(this, "Success", "Budget saved successfully!\nPlease Login to enter expenses!");
 
-        ui->stackedWidget->setCurrentIndex(0); // Sending back to login page after signing up
+        ui->stackedWidget->setCurrentIndex(0);
 
-        // Clear the input fields
+
         ui->txtPFood->clear();
         ui->txtPRent->clear();
         ui->txtPUtilities->clear();
@@ -451,9 +449,9 @@ void MainWindow::on_btnSignUpSave_clicked()
     }
 }
 
-// User Signup code: code done
-void MainWindow::on_btnNext_clicked()
-{
+
+    void MainWindow::on_btnNext_clicked()
+    {
     if (!db.isOpen()) {
         QMessageBox::critical(this, "Database Error", "Database is not open. Please check the connection.");
         return;
@@ -462,16 +460,16 @@ void MainWindow::on_btnNext_clicked()
     QString FirstName = ui->txtFirstName->text();
     QString LastName = ui->txtLastName->text();
     QString Email = ui->txtEmailA->text();
-    QString Phone = ui->txtPhone->text();  // Phone as QString
+    QString Phone = ui->txtPhone->text();
     QString Password = ui->txtPasswords->text();
 
-    // Input validation
+
     if (FirstName.isEmpty() || LastName.isEmpty() || Email.isEmpty() || Password.isEmpty()) {
         QMessageBox::warning(this, "Invalid Input", "Please fill in all required fields.");
         return;
     }
 
-    // Prepare SQL query to insert new user
+
     QSqlQuery qry(db);
     qry.prepare(R"(
         INSERT INTO Users (FirstName, LastName, Email, Phone, Password)
@@ -481,10 +479,10 @@ void MainWindow::on_btnNext_clicked()
     qry.bindValue(":FirstName", FirstName);
     qry.bindValue(":LastName", LastName);
     qry.bindValue(":Email", Email);
-    qry.bindValue(":Phone", Phone.isEmpty() ? QVariant() : Phone); // Handle optional Phone as NULL if empty
-    qry.bindValue(":Password", Password); // Consider hashing the password for security
+    qry.bindValue(":Phone", Phone.isEmpty() ? QVariant() : Phone);
+    qry.bindValue(":Password", Password);
 
-    // Debugging: Log the prepared query and bound values
+
     qDebug() << "Prepared query: " << qry.lastQuery();
     qDebug() << "Bound values:";
     qDebug() << "FirstName: " << FirstName;
@@ -494,7 +492,7 @@ void MainWindow::on_btnNext_clicked()
     qDebug() << "Password: " << Password;
 
     if (qry.exec()) {
-        // Success message
+
         QMessageBox::information(this, "Success", "User registered successfully!");
 
         // Clear the input fields
@@ -504,13 +502,13 @@ void MainWindow::on_btnNext_clicked()
         ui->txtPhone->clear();
         ui->txtPasswords->clear();
 
-        // Retrieve the UserID of the newly added user
+
         QSqlQuery getUserIdQuery(db);
         if (getUserIdQuery.exec("SELECT last_insert_rowid()")) {
             if (getUserIdQuery.next()) {
                 int userID = getUserIdQuery.value(0).toInt();
                 qDebug() << "New UserID:" << userID;
-                loggedInUserID = userID;  // Store the UserID for the logged-in user
+                loggedInUserID = userID;
             }
         } else {
             qDebug() << "Failed to retrieve UserID:" << getUserIdQuery.lastError().text();
@@ -519,8 +517,8 @@ void MainWindow::on_btnNext_clicked()
         QMessageBox::critical(this, "Database Error", "Failed to register user: " + qry.lastError().text());
     }
 
-    // Navigate to the next page in the UI
-    ui->stackedWidget->setCurrentIndex(2);  // Assuming the next page is at index 2
+
+    ui->stackedWidget->setCurrentIndex(2);
 }
 
 void MainWindow::on_btnSaveExpense_clicked()
@@ -543,7 +541,7 @@ void MainWindow::on_btnSaveExpense_clicked()
 
     QString currentDate = QDate::currentDate().toString("yyyy-MM-dd");
 
-    // Check if a row for today exists
+
     QSqlQuery checkQuery(db);
     checkQuery.prepare(R"(
         SELECT Food, Rent, Stationery, Utilities, Others
@@ -559,7 +557,7 @@ void MainWindow::on_btnSaveExpense_clicked()
     }
 
     if (checkQuery.next()) {
-        // Row exists: Update existing record
+
         int columnIndex = checkQuery.record().indexOf(category);
         float existingCategoryAmount = checkQuery.value(columnIndex).toFloat();
         float newCategoryAmount = existingCategoryAmount + amount;
@@ -609,7 +607,7 @@ void MainWindow::on_btnSaveExpense_clicked()
     ui->ExpenseName->setCurrentIndex(0);
 }
 
-//User login button: code done
+
 void MainWindow::on_btnLogin_clicked()
 {
     QString Email = ui->txtEmail->text();
@@ -632,16 +630,16 @@ void MainWindow::on_btnLogin_clicked()
 
     if (query.next()) {
         QString storedPassword = query.value("Password").toString();
-        // Here, compare the entered password with the stored (hashed) password
-        if (Password == storedPassword) {  // Replace this with password hash comparison in real scenarios
-            loggedInUserID = query.value("id").toInt();  // loggedInUserID is globally defined
+
+        if (Password == storedPassword) {
+            loggedInUserID = query.value("id").toInt();
             QString firstName = query.value("FirstName").toString();
             QString lastName = query.value("LastName").toString();
 
             QMessageBox::information(this, "Login Successful", "Welcome, " + firstName + " " + lastName + "!");
-            ui->stackedWidget->setCurrentIndex(5);  // Navigate to dashboard
+            ui->stackedWidget->setCurrentIndex(5);
             ui->labelUserName->setText("Welcome "+ firstName);
-            // Set the first name to the label
+
             ui->txtEmail->clear();
             ui->txtPassword->clear();
         } else {
@@ -692,7 +690,7 @@ void MainWindow::displayRemainingBudget()
         float RemainingStationery = query.value("RemainingStationery").toFloat();
         float RemainingOthers = query.value("RemainingOthers").toFloat();
 
-        // Update UI labels
+
         ui->RemainingBudget->setText(QString::number(RemainingMonthlyBudget, 'f', 2));
         ui->rent->setText(QString::number(RemainingRent, 'f', 2));
         ui->food->setText(QString::number(RemainingFood, 'f', 2));
@@ -706,13 +704,13 @@ void MainWindow::displayRemainingBudget()
 //Line Graph Code
 void MainWindow::LineGraph()
 {
-    // Ensure a user is logged in
+
     if (loggedInUserID == -1) {
         QMessageBox::warning(this, "Error", "No user is currently logged in.");
         return;
     }
 
-    // Retrieve the allocated monthly budget from the Budget table
+
     float initialBudget = 0.0;
     QSqlQuery budgetQuery(db);
     budgetQuery.prepare("SELECT MonthlyBudget FROM Budget WHERE user_id = :UserID");
@@ -736,9 +734,7 @@ void MainWindow::LineGraph()
     // Iterate day by day from the start of the month until today
     QDate iterDate = firstDay;
     while (iterDate <= currentDate) {
-        // Query total expenses for the day.
-        // This assumes your Expenses table stores expenses per category in columns:
-        // Food, Rent, Stationery, Utilities, Others.
+
         QSqlQuery expenseQuery(db);
         expenseQuery.prepare(R"(
             SELECT (IFNULL(Food,0) + IFNULL(Rent,0) + IFNULL(Stationery,0) + IFNULL(Utilities,0) + IFNULL(Others,0)) as DailyExpense
@@ -1218,13 +1214,13 @@ void MainWindow::LineGraphStationery()
 
 void MainWindow::LineGraphOthers()
 {
-    // Ensure a user is logged in
+
     if (loggedInUserID == -1) {
         QMessageBox::warning(this, "Error", "No user is currently logged in.");
         return;
     }
 
-    // Retrieve the allocated monthly budget from the Budget table
+
     float initialOthersBudget = 0.0;
     QSqlQuery budgetQuery(db);
     budgetQuery.prepare("SELECT Others FROM Budget WHERE user_id = :UserID");
@@ -1250,9 +1246,7 @@ void MainWindow::LineGraphOthers()
     // Iterate day by day from the start of the month until today
     QDate iterDate = firstDay;
     while (iterDate <= currentDate) {
-        // Query total expenses for the day.
-        // This assumes your Expenses table stores expenses per category in columns:
-        // Food, Rent, Stationery, Utilities, Others.
+
         QSqlQuery expenseQuery(db);
         expenseQuery.prepare(R"(
             SELECT (IFNULL(Others,0)) as DailyExpense
@@ -1276,16 +1270,16 @@ void MainWindow::LineGraphOthers()
         QDateTime dateTime(iterDate, QTime(0, 0));
         series->append(dateTime.toMSecsSinceEpoch(), remainingBudget);
 
-        // Move to the next day
+
         iterDate = iterDate.addDays(1);
     }
 
-    // Create a chart and add the series
+
     QChart *chart = new QChart();
     chart->addSeries(series);
     chart->setTitle("Budget Tracking Over the Month");
 
-    // Configure the x-axis as a date/time axis
+
     QDateTimeAxis *axisX = new QDateTimeAxis;
     axisX->setFormat("dd MMM");
     axisX->setTitleText("Date");
@@ -1319,8 +1313,7 @@ void MainWindow::LineGraphOthers()
     }
     layout->addWidget(chartView);
 }
-
-
+//choose the line graph for the section of expenses
 void MainWindow::on_LineGraphComboBox_currentIndexChanged(int index)
 {
     if(index==0){
@@ -1348,7 +1341,7 @@ void MainWindow::on_btnDailyExpense_clicked()
         return;
     }
 
-    // Ensure we delete the old model if it exists
+    // Ensuring we delete the old model if it exists
     if (ui->tableView->model()) {
         delete ui->tableView->model();
     }
@@ -1375,12 +1368,11 @@ void MainWindow::on_btnDailyExpense_clicked()
 
 
     QString queryStr = QString(
-                           "SELECT CAST(strftime('%d', Date) AS INTEGER) AS 'Day', Food, Rent, Stationery, Utilities, Others, Total "
+                           "SELECT strftime('%m/%d', Date) AS Date, Food, Rent, Stationery, Utilities, Others, Total "
                            "FROM Expenses "
                            "WHERE user_id = %1 AND strftime('%Y-%m', Date) = '%2' "
                            "ORDER BY Date ASC"
                            ).arg(userId).arg(currentMonth);
-
     qDebug() << "Executing query: " << queryStr;
 
     model->setQuery(queryStr, db);

@@ -33,7 +33,7 @@
      <enum>Qt::LayoutDirection::LeftToRight</enum>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QLabel" name="label">
@@ -176,6 +176,11 @@ background-color:rgb(45, 71, 72);
           <string notr="true">QPushButton{
 
 background-color:rgb(45, 71, 72);
+}
+QPushButton:Hover
+{
+
+background-color:rgb(255, 0, 0);
 }</string>
          </property>
          <property name="text">
@@ -956,7 +961,12 @@ background-color:rgb(45, 71, 72);
           <string notr="true">QPushButton{
 
 background-color:rgb(45, 71, 72);
-}</string>
+}
+QPushButton-pressed{
+
+background-color:red;
+}
+</string>
          </property>
          <property name="text">
           <string>Change</string>
